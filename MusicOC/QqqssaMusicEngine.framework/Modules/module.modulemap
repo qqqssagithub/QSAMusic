@@ -1,0 +1,10 @@
+framework module QqqssaMusicEngine {
+  umbrella header "QqqssaMusicEngine.h"
+
+  export *
+  module * { export * }
+}
+
+module QqqssaMusicEngine.Swift {
+    header "QqqssaMusicEngine-Swift.h"
+}
