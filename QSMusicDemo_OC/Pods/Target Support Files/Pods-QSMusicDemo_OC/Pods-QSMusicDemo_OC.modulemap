@@ -1,0 +1,6 @@
+framework module Pods_QSMusicDemo_OC {
+  umbrella header "Pods-QSMusicDemo_OC-umbrella.h"
+
+  export *
+  module * { export * }
+}

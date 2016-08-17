@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+    <entity name="QSMusicSongDatas" representedClassName="QSMusicSongDatas" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lrclink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pic_radio" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="versions" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="QSMusicSongDatas" positionX="-63" positionY="-18" width="128" height="133"/>
+    </elements>
+</model>

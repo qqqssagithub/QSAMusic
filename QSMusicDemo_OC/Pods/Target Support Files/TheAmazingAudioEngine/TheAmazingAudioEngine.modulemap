@@ -1,0 +1,6 @@
+framework module TheAmazingAudioEngine {
+  umbrella header "TheAmazingAudioEngine-umbrella.h"
+
+  export *
+  module * { export * }
+}

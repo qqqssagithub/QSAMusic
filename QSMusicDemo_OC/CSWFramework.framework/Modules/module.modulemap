@@ -1,0 +1,6 @@
+framework module CSWFramework {
+  umbrella header "CSWFramework.h"
+
+  export *
+  module * { export * }
+}

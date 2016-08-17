@@ -1,0 +1,55 @@
+//
+//  QSMusicHeader.pch
+//  QSMusicDemo_OC
+//
+//  Created by 陈少文 on 16/7/30.
+//  Copyright © 2016年 qqqssa. All rights reserved.
+//
+
+#ifndef QSMusicHeader_pch
+#define QSMusicHeader_pch
+
+#import <QSMusicEngine/QSMusicEngine.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <pop/POP.h>
+#import <CSWFramework/CSWFramework.h>
+#import <MagicalRecord/MagicalRecord.h>
+#import <TheAmazingAudioEngine/TheAmazingAudioEngine.h> 
+#import <TheAmazingAudioEngine/AEParametricEqFilter.h>
+#import "QSMusicRootViewController.h"
+#import "QSMusicSongListView.h"
+#import "QSMusicPublicBigHeaderView.h"
+#import "QSMusicPlayerDelegate.h"
+#import "TingEVAPlayView.h"
+#import "PlayView.h"
+#import "LrcTableView.h"
+#import "QSMusicSongDatas.h"
+#import "QSMusicEQPlayer.h"
+
+
+#define IflyMSCAppID @"57b055b5"
+
+#define QSMusicKeyWindow           [UIApplication sharedApplication].keyWindow
+#define QSMusicRootVC              (QSMusicRootViewController *)QSMusicKeyWindow.rootViewController
+#define QSMusicRootVC_View         (UIView *)QSMusicRootVC.view
+#define QSMusicRootVC_rootBackView (UIView *)((QSMusicRootViewController *)QSMusicRootVC).rootBackView
+
+//屏幕尺寸
+#define QSMUSICSCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
+#define QSMUSICSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define QSMUSICSCREEN_SIZE   [UIScreen mainScreen].bounds.size
+#define QSMUSICSCREEN_RECT   [UIScreen mainScreen].bounds
+
+//颜色
+#define QSMusicColorRGB(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#define QSMusicRandomColor QSMusicColorRGB(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+#define QSMusicLightBlueColor [UIColor colorWithRed:0.16 green:0.72 blue:1.0 alpha:1.0]
+#define QSMusicLightGray [UIColor colorWithWhite:0.9 alpha:1.0]
+
+//字体大小
+#define QSMusicFont_8  [UIFont systemFontOfSize:8.0]
+#define QSMusicFont_10 [UIFont systemFontOfSize:10.0]
+#define QSMusicFont_12 [UIFont systemFontOfSize:12.0]
+#define QSMusicFont_14 [UIFont systemFontOfSize:14.0]
+
+#endif /* QSMusicHeader_pch */
