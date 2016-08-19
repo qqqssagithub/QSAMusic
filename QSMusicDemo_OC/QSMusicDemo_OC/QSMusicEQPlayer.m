@@ -162,12 +162,24 @@
 }
 
 - (void)playPrevious {
-    NSInteger index = _currentPlayIndex - 1;
+    NSInteger index;
+    if (_currentPlayIndex == 0) {
+        NSArray *dataArr = [QSMusicSongDatas MR_findAll];
+        index = dataArr.count - 1;
+    } else {
+        index = _currentPlayIndex - 1;
+    }
     [self platerWithIndex:index];
 }
 
 - (void)playNext {
-    NSInteger index = _currentPlayIndex + 1;
+    NSArray *dataArr = [QSMusicSongDatas MR_findAll];
+    NSInteger index;
+    if (_currentPlayIndex == dataArr.count - 1) {
+        index = 0;
+    } else {
+        index = _currentPlayIndex + 1;
+    }
     [self platerWithIndex:index];
 }
 

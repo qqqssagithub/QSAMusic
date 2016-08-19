@@ -19,7 +19,12 @@
     }
     _title.text = title;
     if ([_indexStr isEqualToString:@"search"]) {
-        _publishtime.text = [NSString stringWithFormat:@"%@ (%@)", data[@"author"], data[@"publishtime"]];
+        NSString *title = data[@"author"];
+        NSRange rang = [title rangeOfString:@"</em>"];
+        if (rang.location != NSNotFound) {
+            title = [NSString stringWithFormat:@"%@ - %@",  [title substringWithRange:NSMakeRange(4, rang.location - 4)], [title substringFromIndex:rang.location + rang.length]];
+        }
+        _publishtime.text = [NSString stringWithFormat:@"%@ (%@)", title, data[@"publishtime"]];
     } else {
         _publishtime.text = data[@"publishtime"];
     }
