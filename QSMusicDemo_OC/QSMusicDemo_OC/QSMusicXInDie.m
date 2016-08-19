@@ -106,6 +106,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [CSWProgressView showWithPrompt:@"专辑加载中"];
     [QSMusicPlayer requestSingleWithAlbumId:_dataArr[indexPath.row][@"album_id"] response:^(NSDictionary * _Nonnull albumInfo, NSArray<NSDictionary *> * _Nonnull songList) {
+        NSLog(@"album_id:%@", _dataArr[indexPath.row][@"album_id"]);
         [CSWProgressView disappear];
         QSMusicPublicBigHeaderView *view = [QSMusicPublicBigHeaderView sharedQSMusicPublicBigHeaderView];
         __block typeof(view) blockView = view;
@@ -173,4 +174,13 @@
 //    }
 //}
 
+#pragma mark - 测试模块代码
+- (void)down:(void(^)(NSDictionary *re))ts {
+    [QSMusicPlayer requestSingleWithAlbumId:@"269107012" response:^(NSDictionary * _Nonnull albumInfo, NSArray<NSDictionary *> * _Nonnull songList) {
+        if (ts) {
+            ts(albumInfo);
+        }
+    }];
+}
+#pragma mark
 @end

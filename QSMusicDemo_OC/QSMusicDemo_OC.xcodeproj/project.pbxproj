@@ -134,7 +134,29 @@
 		89ED8C261D5E43C7009EC298 /* QSMusicSearchLeftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89ED8C241D5E43C7009EC298 /* QSMusicSearchLeftTableViewCell.xib */; };
 		89ED8C2A1D5E43D8009EC298 /* QSMusicSearchRightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89ED8C281D5E43D8009EC298 /* QSMusicSearchRightTableViewCell.m */; };
 		89ED8C2B1D5E43D8009EC298 /* QSMusicSearchRightTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89ED8C291D5E43D8009EC298 /* QSMusicSearchRightTableViewCell.xib */; };
+		89FD89A51D673458000DD1BC /* QSMusicDemo_OCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FD89A41D673458000DD1BC /* QSMusicDemo_OCTests.m */; };
+		89FD89B31D673486000DD1BC /* QSMusicDemo_OCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FD89B21D673486000DD1BC /* QSMusicDemo_OCUITests.m */; };
+		89FD89FA1D6742CD000DD1BC /* CSWFarmeworkTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FD89F91D6742CD000DD1BC /* CSWFarmeworkTest.m */; };
+		89FD89FB1D674379000DD1BC /* CSWFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8922A0CD1D55F995005CCB3E /* CSWFramework.framework */; };
+		89FD89FC1D674535000DD1BC /* QSMusicEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892CD0401D609EFA005EECB1 /* QSMusicEngine.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		89FD89A71D673458000DD1BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89E890EF1D4C8A3000E2A9A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89E890F61D4C8A3000E2A9A9;
+			remoteInfo = QSMusicDemo_OC;
+		};
+		89FD89B51D673486000DD1BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89E890EF1D4C8A3000E2A9A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89E890F61D4C8A3000E2A9A9;
+			remoteInfo = QSMusicDemo_OC;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8923A3A71D4DE682008F4E6F /* Embed Frameworks */ = {
@@ -324,6 +346,13 @@
 		89ED8C271D5E43D8009EC298 /* QSMusicSearchRightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSMusicSearchRightTableViewCell.h; sourceTree = "<group>"; };
 		89ED8C281D5E43D8009EC298 /* QSMusicSearchRightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSMusicSearchRightTableViewCell.m; sourceTree = "<group>"; };
 		89ED8C291D5E43D8009EC298 /* QSMusicSearchRightTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QSMusicSearchRightTableViewCell.xib; sourceTree = "<group>"; };
+		89FD89A21D673458000DD1BC /* QSMusicDemo_OCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QSMusicDemo_OCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		89FD89A41D673458000DD1BC /* QSMusicDemo_OCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSMusicDemo_OCTests.m; sourceTree = "<group>"; };
+		89FD89A61D673458000DD1BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89FD89B01D673486000DD1BC /* QSMusicDemo_OCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QSMusicDemo_OCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		89FD89B21D673486000DD1BC /* QSMusicDemo_OCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSMusicDemo_OCUITests.m; sourceTree = "<group>"; };
+		89FD89B41D673486000DD1BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89FD89F91D6742CD000DD1BC /* CSWFarmeworkTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSWFarmeworkTest.m; sourceTree = "<group>"; };
 		974D549DCB50C8E2B53FEF8D /* Pods-QSMusicDemo_OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSMusicDemo_OC.release.xcconfig"; path = "Pods/Target Support Files/Pods-QSMusicDemo_OC/Pods-QSMusicDemo_OC.release.xcconfig"; sourceTree = "<group>"; };
 		BCEC9E209C8CCF37DC8AD3B9 /* Pods_QSMusicDemo_OC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QSMusicDemo_OC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97A4F6F452DE6CE877B5C7E /* Pods-QSMusicDemo_OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSMusicDemo_OC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QSMusicDemo_OC/Pods-QSMusicDemo_OC.debug.xcconfig"; sourceTree = "<group>"; };
@@ -343,6 +372,22 @@
 				8922A0D21D560EBD005CCB3E /* MediaPlayer.framework in Frameworks */,
 				8922A0CE1D55F995005CCB3E /* CSWFramework.framework in Frameworks */,
 				2400C68A35D560B36944A6EE /* Pods_QSMusicDemo_OC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89FD899F1D673458000DD1BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89FD89FC1D674535000DD1BC /* QSMusicEngine.framework in Frameworks */,
+				89FD89FB1D674379000DD1BC /* CSWFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89FD89AD1D673486000DD1BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +674,8 @@
 			isa = PBXGroup;
 			children = (
 				89E890F91D4C8A3000E2A9A9 /* QSMusicDemo_OC */,
+				89FD89A31D673458000DD1BC /* QSMusicDemo_OCTests */,
+				89FD89B11D673486000DD1BC /* QSMusicDemo_OCUITests */,
 				89E890F81D4C8A3000E2A9A9 /* Products */,
 				D499A032291295A78DFE574E /* Pods */,
 				7D9A46C53B9C4A0E773BCF7F /* Frameworks */,
@@ -639,6 +686,8 @@
 			isa = PBXGroup;
 			children = (
 				89E890F71D4C8A3000E2A9A9 /* QSMusicDemo_OC.app */,
+				89FD89A21D673458000DD1BC /* QSMusicDemo_OCTests.xctest */,
+				89FD89B01D673486000DD1BC /* QSMusicDemo_OCUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -777,6 +826,25 @@
 			name = GeShouSearchResultView;
 			sourceTree = "<group>";
 		};
+		89FD89A31D673458000DD1BC /* QSMusicDemo_OCTests */ = {
+			isa = PBXGroup;
+			children = (
+				89FD89A41D673458000DD1BC /* QSMusicDemo_OCTests.m */,
+				89FD89F91D6742CD000DD1BC /* CSWFarmeworkTest.m */,
+				89FD89A61D673458000DD1BC /* Info.plist */,
+			);
+			path = QSMusicDemo_OCTests;
+			sourceTree = "<group>";
+		};
+		89FD89B11D673486000DD1BC /* QSMusicDemo_OCUITests */ = {
+			isa = PBXGroup;
+			children = (
+				89FD89B21D673486000DD1BC /* QSMusicDemo_OCUITests.m */,
+				89FD89B41D673486000DD1BC /* Info.plist */,
+			);
+			path = QSMusicDemo_OCUITests;
+			sourceTree = "<group>";
+		};
 		D499A032291295A78DFE574E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -810,6 +878,42 @@
 			productReference = 89E890F71D4C8A3000E2A9A9 /* QSMusicDemo_OC.app */;
 			productType = "com.apple.product-type.application";
 		};
+		89FD89A11D673458000DD1BC /* QSMusicDemo_OCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89FD89AB1D673459000DD1BC /* Build configuration list for PBXNativeTarget "QSMusicDemo_OCTests" */;
+			buildPhases = (
+				89FD899E1D673458000DD1BC /* Sources */,
+				89FD899F1D673458000DD1BC /* Frameworks */,
+				89FD89A01D673458000DD1BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89FD89A81D673458000DD1BC /* PBXTargetDependency */,
+			);
+			name = QSMusicDemo_OCTests;
+			productName = QSMusicDemo_OCTests;
+			productReference = 89FD89A21D673458000DD1BC /* QSMusicDemo_OCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		89FD89AF1D673486000DD1BC /* QSMusicDemo_OCUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89FD89B71D673486000DD1BC /* Build configuration list for PBXNativeTarget "QSMusicDemo_OCUITests" */;
+			buildPhases = (
+				89FD89AC1D673486000DD1BC /* Sources */,
+				89FD89AD1D673486000DD1BC /* Frameworks */,
+				89FD89AE1D673486000DD1BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89FD89B61D673486000DD1BC /* PBXTargetDependency */,
+			);
+			name = QSMusicDemo_OCUITests;
+			productName = QSMusicDemo_OCUITests;
+			productReference = 89FD89B01D673486000DD1BC /* QSMusicDemo_OCUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -822,6 +926,14 @@
 					89E890F61D4C8A3000E2A9A9 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = M74R8V6A4D;
+					};
+					89FD89A11D673458000DD1BC = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 89E890F61D4C8A3000E2A9A9;
+					};
+					89FD89AF1D673486000DD1BC = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 89E890F61D4C8A3000E2A9A9;
 					};
 				};
 			};
@@ -839,6 +951,8 @@
 			projectRoot = "";
 			targets = (
 				89E890F61D4C8A3000E2A9A9 /* QSMusicDemo_OC */,
+				89FD89A11D673458000DD1BC /* QSMusicDemo_OCTests */,
+				89FD89AF1D673486000DD1BC /* QSMusicDemo_OCUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -918,6 +1032,20 @@
 				89C11E371D5ED1EE00695678 /* ci1.png in Resources */,
 				8922A0FA1D562B7B005CCB3E /* 2_1@2x.png in Resources */,
 				891E18A21D5ADA9200984183 /* search@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89FD89A01D673458000DD1BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89FD89AE1D673486000DD1BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1025,7 +1153,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89FD899E1D673458000DD1BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89FD89FA1D6742CD000DD1BC /* CSWFarmeworkTest.m in Sources */,
+				89FD89A51D673458000DD1BC /* QSMusicDemo_OCTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89FD89AC1D673486000DD1BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89FD89B31D673486000DD1BC /* QSMusicDemo_OCUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		89FD89A81D673458000DD1BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89E890F61D4C8A3000E2A9A9 /* QSMusicDemo_OC */;
+			targetProxy = 89FD89A71D673458000DD1BC /* PBXContainerItemProxy */;
+		};
+		89FD89B61D673486000DD1BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89E890F61D4C8A3000E2A9A9 /* QSMusicDemo_OC */;
+			targetProxy = 89FD89B51D673486000DD1BC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		89E891031D4C8A3000E2A9A9 /* Main.storyboard */ = {
@@ -1182,6 +1340,60 @@
 			};
 			name = Release;
 		};
+		89FD89A91D673459000DD1BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = QSMusicDemo_OCTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.qqqssa.QSMusicDemo-OCTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QSMusicDemo_OC.app/QSMusicDemo_OC";
+			};
+			name = Debug;
+		};
+		89FD89AA1D673459000DD1BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = QSMusicDemo_OCTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.qqqssa.QSMusicDemo-OCTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QSMusicDemo_OC.app/QSMusicDemo_OC";
+			};
+			name = Release;
+		};
+		89FD89B81D673486000DD1BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = QSMusicDemo_OCUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.qqqssa.QSMusicDemo-OCUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = QSMusicDemo_OC;
+			};
+			name = Debug;
+		};
+		89FD89B91D673486000DD1BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = QSMusicDemo_OCUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.qqqssa.QSMusicDemo-OCUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = QSMusicDemo_OC;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1202,6 +1414,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		89FD89AB1D673459000DD1BC /* Build configuration list for PBXNativeTarget "QSMusicDemo_OCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89FD89A91D673459000DD1BC /* Debug */,
+				89FD89AA1D673459000DD1BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		89FD89B71D673486000DD1BC /* Build configuration list for PBXNativeTarget "QSMusicDemo_OCUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89FD89B81D673486000DD1BC /* Debug */,
+				89FD89B91D673486000DD1BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

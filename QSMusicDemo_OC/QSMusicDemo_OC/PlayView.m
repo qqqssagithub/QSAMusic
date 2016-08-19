@@ -206,7 +206,6 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
 
 #pragma mark - 进度、音量调节
 - (IBAction)onProgressChanged:(id)sender {
-    
     if(!((UISlider *)sender).tracking && ((UISlider *)sender).isTouchInside) {
         if (_isLoad) {
             QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];

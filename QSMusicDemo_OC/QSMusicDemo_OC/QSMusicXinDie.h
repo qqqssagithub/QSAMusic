@@ -15,4 +15,11 @@
 
 + (instancetype)sharedQSMusicXinDie;
 
+/**
+ *  测试模块
+ *
+ *  @param ts
+ */
+- (void)down:(void(^)(NSDictionary *re))ts;
+
 @end
