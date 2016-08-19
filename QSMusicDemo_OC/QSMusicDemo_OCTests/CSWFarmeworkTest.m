@@ -39,8 +39,8 @@
 
 //歌单测试
 - (void)testExample {
-    [[QSMusicXinDie sharedQSMusicXinDie] down:^(NSDictionary *re) {
-        NSLog(@"123123123:%@", re);
+    [[QSMusicXinDie sharedQSMusicXinDie] requestSingleWithAlbumId:@"269107012" response:^(NSDictionary *albumInfo, NSArray *songList) {
+        NSLog(@"请求完成");
         NOTIFY
     }];
     WAIT

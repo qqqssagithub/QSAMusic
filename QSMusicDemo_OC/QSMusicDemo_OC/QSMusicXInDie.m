@@ -104,28 +104,41 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *album_id = _dataArr[indexPath.row][@"album_id"];
+    [self requestSingleWithAlbumId:album_id response:^(NSDictionary *albumInfo, NSArray *songList) {
+        [self updateWithAlbumInfo:albumInfo songList:songList];
+    }];
+}
+
+- (void)requestSingleWithAlbumId:(NSString *)albumId response:(void(^)(NSDictionary *albumInfo, NSArray *songList))completion {
     [CSWProgressView showWithPrompt:@"专辑加载中"];
-    [QSMusicPlayer requestSingleWithAlbumId:_dataArr[indexPath.row][@"album_id"] response:^(NSDictionary * _Nonnull albumInfo, NSArray<NSDictionary *> * _Nonnull songList) {
-        NSLog(@"album_id:%@", _dataArr[indexPath.row][@"album_id"]);
+    [QSMusicPlayer requestSingleWithAlbumId:albumId response:^(NSDictionary * _Nonnull albumInfo, NSArray<NSDictionary *> * _Nonnull songList) {
+        NSLog(@"album_id:%@", albumId);
         [CSWProgressView disappear];
-        QSMusicPublicBigHeaderView *view = [QSMusicPublicBigHeaderView sharedQSMusicPublicBigHeaderView];
-        __block typeof(view) blockView = view;
-        UIView *rootBackView = QSMusicRootVC_rootBackView;
-        view.bcakBlock = ^{
-            [UIView animateWithDuration:0.3 animations:^{
-                rootBackView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-                blockView.frame = CGRectMake(QSMUSICSCREEN_WIDTH, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);
-            } completion:^(BOOL finished) {
-                [blockView.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-                [blockView removeFromSuperview];
-            }];
-        };
-        [view updateWithHeaderInfo:albumInfo songList:songList];
-        [QSMusicRootVC_View addSubview:view];
+        if (completion) {
+            completion(albumInfo, songList);
+        }
+    }];
+}
+
+- (void)updateWithAlbumInfo:(NSDictionary *)albumInfo songList:(NSArray *)songList {
+    QSMusicPublicBigHeaderView *view = [QSMusicPublicBigHeaderView sharedQSMusicPublicBigHeaderView];
+    __block typeof(view) blockView = view;
+    UIView *rootBackView = QSMusicRootVC_rootBackView;
+    view.bcakBlock = ^{
         [UIView animateWithDuration:0.3 animations:^{
-            rootBackView.transform = CGAffineTransformMakeScale(0.7, 0.7);
-            view.frame = QSMUSICSCREEN_RECT;
+            rootBackView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            blockView.frame = CGRectMake(QSMUSICSCREEN_WIDTH, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);
+        } completion:^(BOOL finished) {
+            [blockView.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+            [blockView removeFromSuperview];
         }];
+    };
+    [view updateWithHeaderInfo:albumInfo songList:songList];
+    [QSMusicRootVC_View addSubview:view];
+    [UIView animateWithDuration:0.3 animations:^{
+        rootBackView.transform = CGAffineTransformMakeScale(0.7, 0.7);
+        view.frame = QSMUSICSCREEN_RECT;
     }];
 }
 
@@ -174,13 +187,4 @@
 //    }
 //}
 
-#pragma mark - 测试模块代码
-- (void)down:(void(^)(NSDictionary *re))ts {
-    [QSMusicPlayer requestSingleWithAlbumId:@"269107012" response:^(NSDictionary * _Nonnull albumInfo, NSArray<NSDictionary *> * _Nonnull songList) {
-        if (ts) {
-            ts(albumInfo);
-        }
-    }];
-}
-#pragma mark
 @end

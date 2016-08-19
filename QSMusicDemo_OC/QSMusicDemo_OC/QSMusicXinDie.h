@@ -15,11 +15,6 @@
 
 + (instancetype)sharedQSMusicXinDie;
 
-/**
- *  测试模块
- *
- *  @param ts
- */
-- (void)down:(void(^)(NSDictionary *re))ts;
+- (void)requestSingleWithAlbumId:(NSString *)albumId response:(void(^)(NSDictionary *albumInfo, NSArray *songList))completion;
 
 @end
