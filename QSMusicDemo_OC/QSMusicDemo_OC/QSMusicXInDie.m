@@ -47,9 +47,17 @@
     [QSMusicPlayer newSingleListWithLimit:_limit responseClosure:^(NSArray * _Nonnull dataArr) {
         if (dataArr.count == 0) {
             [CSWAlertView initWithTitle:@"提示" message:@"刷新失败，请检查网络" cancelButtonTitle:@"确定"];
+            UINib *nib = [UINib nibWithNibName:@"QSMusicNetFailedView" bundle:nil];
+            QSMusicNetFailedView *view = [nib instantiateWithOwner:nil options:nil][0];
+            view.frame = CGRectMake(0, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT - 64 -33);
+            [_collectionView addSubview:view];
+            view.reload = ^{
+                [self requestData];
+            };
+        } else {
+            _dataArr = dataArr;
+            [_collectionView reloadData];
         }
-        _dataArr = dataArr;
-        [_collectionView reloadData];
     }];
 }
 

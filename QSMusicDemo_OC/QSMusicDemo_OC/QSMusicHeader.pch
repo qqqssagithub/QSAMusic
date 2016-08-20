@@ -25,6 +25,7 @@
 #import "LrcTableView.h"
 #import "QSMusicSongDatas.h"
 #import "QSMusicEQPlayer.h"
+#import "QSMusicNetFailedView.h"
 
 
 #define IflyMSCAppID @"57b055b5"

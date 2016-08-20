@@ -178,9 +178,9 @@
         [PlayView sharedPlayView].totalTime.text = [NSString stringWithFormat:@"%02ld:%02ld", total/60, total%60];
         UISlider *oneSlider = [PlayView sharedPlayView].audioSlider;
         if(!oneSlider.tracking) {
-            if (fabs(time / player.duration - oneSlider.value) > 0.1 && oneSlider.value <= 0.99) {
-                return;
-            }
+//            if (fabs(time / player.duration - oneSlider.value) > 0.1 && oneSlider.value <= 0.99) {
+//                return;
+//            }
             oneSlider.value = time / player.duration;
         }
     } else {

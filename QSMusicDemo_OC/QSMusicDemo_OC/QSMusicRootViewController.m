@@ -33,8 +33,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //添加网络监控
+    [self addNetworkReachability];
     //载入所有界面
     [self initView];
+}
+
+- (void)addNetworkReachability {
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager startMonitoring];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkReachabilityStatusChange) name:AFNetworkingReachabilityDidChangeNotification object:nil];
+}
+
+- (void)networkReachabilityStatusChange {
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    if (manager.networkReachabilityStatus == 2) {
+        [CSWFlashingAlertView initWithMessage:@"当前为WiFi网络\n可以尽情畅游在音乐的海洋中"];
+    }
+    if (manager.networkReachabilityStatus == 1) {
+        [CSWFlashingAlertView initWithMessage:@"当前为3G/4G网络\n加载新音乐会耗费手机流量"];
+    }
+    if (manager.networkReachabilityStatus == 0) {
+        [CSWFlashingAlertView initWithMessage:@"网络断开连接，请检查网络连接"];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

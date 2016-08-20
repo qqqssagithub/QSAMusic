@@ -37,8 +37,19 @@
 - (void)requestData {
     _titleArr = @[@"新歌榜", @"热歌榜", @"欧美金曲", @"King榜", @"原创榜", @"华语金曲", @"金典老歌", @"网络歌曲", @"影视金曲", @"情歌对唱", @"Billboard", @"摇滚"];
     [QSMusicPlayer getRankingList:^(NSArray * _Nonnull dataArr) {
-        _dataArr = dataArr;
-        [_tableView reloadData];
+        if (dataArr.count == 0) {
+            [CSWAlertView initWithTitle:@"提示" message:@"刷新失败，请检查网络" cancelButtonTitle:@"确定"];
+            UINib *nib = [UINib nibWithNibName:@"QSMusicNetFailedView" bundle:nil];
+            QSMusicNetFailedView *view = [nib instantiateWithOwner:nil options:nil][0];
+            view.frame = CGRectMake(0, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT - 64 -33);
+            [_tableView addSubview:view];
+            view.reload = ^{
+                [self requestData];
+            };
+        } else {
+            _dataArr = dataArr;
+            [_tableView reloadData];
+        }
     }];
 }
 
