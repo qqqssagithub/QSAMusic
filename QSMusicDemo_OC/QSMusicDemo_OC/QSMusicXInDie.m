@@ -133,7 +133,7 @@
     QSMusicPublicBigHeaderView *view = [QSMusicPublicBigHeaderView sharedQSMusicPublicBigHeaderView];
     __block typeof(view) blockView = view;
     UIView *rootBackView = QSMusicRootVC_rootBackView;
-    view.bcakBlock = ^{
+    view.backBlock = ^{
         [UIView animateWithDuration:0.3 animations:^{
             rootBackView.transform = CGAffineTransformMakeScale(1.0, 1.0);
             blockView.frame = CGRectMake(QSMUSICSCREEN_WIDTH, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);

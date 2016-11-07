@@ -29,7 +29,6 @@
         
         sharedQSMusicPublicBigHeaderView.tempHeaderView = [[CSWBlurBackgroundView alloc] initWithFrame:CGRectMake(0, 0, QSMUSICSCREEN_WIDTH, 70) color:blackColor];
         //sharedQSMusicPublicBigHeaderView.tempHeaderView.backgroundColor = [UIColor redColor];
-        sharedQSMusicPublicBigHeaderView.tempHeaderView.alpha = 0.0;
         sharedQSMusicPublicBigHeaderView.tempHeaderLabel = [[UILabel alloc] init];
         sharedQSMusicPublicBigHeaderView.tempHeaderLabel.frame = CGRectMake(0, 0, QSMUSICSCREEN_WIDTH - 100, 30);
         sharedQSMusicPublicBigHeaderView.tempHeaderLabel.textAlignment = 1;
@@ -48,8 +47,8 @@
 }
 
 - (void)back {
-    if (_bcakBlock) {
-        _bcakBlock();
+    if (_backBlock) {
+        _backBlock();
     }
 }
 

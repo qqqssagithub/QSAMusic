@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/QSMusicEngine-Swift.h</key>
 		<data>
-		y/ewLHLyScE3BH7fTR4rbj6MoX4=
+		iVBgwQGvpmrLsCWggOCymBn5bPc=
 		</data>
 		<key>Headers/QSMusicEngine.h</key>
 		<data>
@@ -14,15 +14,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		gcJNjia9mMpSgbG49FBXcY8BrhI=
+		zusp1aRH2U6sYKEJIfn8DoQhj/A=
 		</data>
-		<key>Modules/QSMusicEngine.swiftmodule/arm64.swiftdoc</key>
+		<key>Modules/QSMusicEngine.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		s25cewG/BtT9vAvuRyC7CrPlJ1k=
+		ZoA/VrfQkB5y0DLdEDQgihNebcg=
 		</data>
-		<key>Modules/QSMusicEngine.swiftmodule/arm64.swiftmodule</key>
+		<key>Modules/QSMusicEngine.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		ZdZB2OqI5Bg4yWMrmIdgc9S3HuU=
+		cNr3Np80LdJUr6104FC1QhKN3t8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -35,11 +35,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			y/ewLHLyScE3BH7fTR4rbj6MoX4=
+			iVBgwQGvpmrLsCWggOCymBn5bPc=
 			</data>
 			<key>hash2</key>
 			<data>
-			tJ7iZEsYLSxbztt/hzy7PFKC7/YBb4QlreOrhMmo5LY=
+			D0NyZHA7gJqkfNUDQFGOBfHgnYMOyx5Gexmn8/b/y+Q=
 			</data>
 		</dict>
 		<key>Headers/QSMusicEngine.h</key>
@@ -53,26 +53,26 @@
 			ocTQDSR2fUvyhHgaPZ7+f7EirEe4CBoC64u3GLLGlik=
 			</data>
 		</dict>
-		<key>Modules/QSMusicEngine.swiftmodule/arm64.swiftdoc</key>
+		<key>Modules/QSMusicEngine.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			s25cewG/BtT9vAvuRyC7CrPlJ1k=
+			ZoA/VrfQkB5y0DLdEDQgihNebcg=
 			</data>
 			<key>hash2</key>
 			<data>
-			h8rDP7f+Lie1gec0wAH3H5XiddL6Q0IVVE8b3pgyMy4=
+			kJ1yLnLSsEkNb+vNo2d5Zi/vIzO7nWR279T2M0vEt9c=
 			</data>
 		</dict>
-		<key>Modules/QSMusicEngine.swiftmodule/arm64.swiftmodule</key>
+		<key>Modules/QSMusicEngine.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZdZB2OqI5Bg4yWMrmIdgc9S3HuU=
+			cNr3Np80LdJUr6104FC1QhKN3t8=
 			</data>
 			<key>hash2</key>
 			<data>
-			G37DF6REif7yxlwcj0738n3TOCYjhLEMNhILhtoT4HE=
+			bRBKC0HvbKePkcHPRGoZvT3TwQpR3qec5Xo/mC4ETDc=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

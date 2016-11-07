@@ -50,6 +50,7 @@
     _superView = view;
     _infoLabel.text = headerInfo[@"info"];
     _headerInfo = headerInfo;
+    _superView.tempHeaderLabel.text = _headerInfo[@"title"];
     _dataArr = list;
     [_tableView reloadData];
 }
@@ -122,14 +123,9 @@
         return;
     }
     
-    QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-    if (play.audioController.running) {
-        [play pause];
-    }
-    
     [QSMusicPlayerDelegate sharedQSMusicPlayerDelegate].playStyle = @"Ordinary";
     [[QSMusicPlayerDelegate sharedQSMusicPlayerDelegate] openPlayPoint];
-    [PlayView sharedPlayView].isLoad = NO;
+    //[PlayView sharedPlayView].isLoad = NO;
     [[PlayView sharedPlayView] updataListWithData:_dataArr];
     [PlayView sharedPlayView].currentIndex = indexPath.row;
     
@@ -152,17 +148,21 @@
             _infoLabel.alpha = 0.0;
             _superView.topImgVOcclusionView.alpha = 0.0;
         }];
+        _superView.tempHeaderView.alpha = 1.0;
+        _superView.tempHeaderLabel.alpha = 1.0;
     }
-    if (scrollView.contentOffset.y >= 140) {
-        [UIView animateWithDuration:0.3 animations:^{
-            _superView.tempHeaderView.alpha = 1.0;
-        }];
-        _superView.tempHeaderLabel.text = _headerInfo[@"title"];
-    } else {
-        [UIView animateWithDuration:0.3 animations:^{
-            _superView.tempHeaderView.alpha = 0.0;
-        }];
+    if (scrollView.contentOffset.y <= - 5) {
+        _superView.tempHeaderView.alpha = 0.0;
+        _superView.tempHeaderLabel.alpha = 0.0;
     }
+    
+//    if (scrollView.contentOffset.y >= 140) {
+//        
+//        
+//    } else {
+//            _superView.tempHeaderView.alpha = 0.0;
+//            _superView.tempHeaderLabel.alpha = 0.0;
+//    }
 }
 
 @end

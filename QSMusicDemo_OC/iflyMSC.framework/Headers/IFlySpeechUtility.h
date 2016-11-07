@@ -17,7 +17,7 @@
  */
 typedef NS_ENUM(NSUInteger,IFlyEngineMode){
     /**
-     *  云端使用MSC，本地优先使用语记
+     *  云端使用MSC，本地优先使用语音+
      */
     IFlyEngineModeAuto = 0,
     /**
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger,IFlyEngineMode){
      */
     IFlyEngineModeMsc,
     /**
-     *  本地只使用语记(受平台限制，云端无法使用语记）
+     *  本地只使用语音+(受平台限制，云端无法使用语音+）
      */
     IFlyEngineModePlus,
 };
@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger,IFlyEngineMode){
  */
 typedef NS_ENUM(NSUInteger,IFlySpeechPlusServiceType){
     /**
-     *  打开语记主界面
+     *  打开语音+主界面
      */
     IFlySpeechPlusServiceTypeNone=0,
     /**
@@ -133,39 +133,39 @@ typedef NS_ENUM(NSUInteger,IFlySpeechPlusServiceType){
 @end
 
 /**
- *  讯飞语记类别
+ *  讯飞语音+类别
  */
 @interface IFlySpeechUtility (SpeechPlus)
 
 /**
- *  检查讯飞语记是否安装
+ *  检查讯飞语音+是否安装
  *
  *  @return 已安装返回YES，否则返回NO
  */
 + (BOOL)checkServiceInstalled;
 
 /**
- *  获取讯飞语记下载地址进行下载，安装完成后即可使用服务。
+ *  获取讯飞语音+下载地址进行下载，安装完成后即可使用服务。
  *  下载地址需要通过[[UIApplication sharedApplication] openUrl:]打开
  *
- *  @return 讯飞语记在App Store下载地址
+ *  @return 讯飞语音+在App Store下载地址
  */
 + (NSString *)componentUrl;
 
 
 /**
  *  注意：此接口废弃，不再需要使用
- *  处理语记使用URL启动第三方应用程序时传递的数据
+ *  处理语音+使用URL启动第三方应用程序时传递的数据
  *  需要在 application:openURL:sourceApplication:annotation:或者application:handleOpenURL中调用。
  *
- *  @param url 语记启动第三方应用程序时传递过来的URL
+ *  @param url 语音+启动第三方应用程序时传递过来的URL
  *
  *  @return 成功返回YES，失败返回NO。
  */
 - (BOOL)handleOpenURL:(NSURL *)url iOS_EXCLUSIVE;
 
 /**
- *  打开讯飞语记获取相应类型服务，0表示打开主界面
+ *  打开讯飞语音+获取相应类型服务，0表示打开主界面
  *
  *  @param serviceType 服务类型
  *

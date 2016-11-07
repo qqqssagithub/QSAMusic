@@ -90,11 +90,6 @@
 }
 
 - (void)carousel:(__unused iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
-    QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-    if (play.audioController.running) {
-        [play pause];
-    }
-    
     [QSMusicPlayerDelegate sharedQSMusicPlayerDelegate].playStyle = @"EVA";
     [[QSMusicPlayerDelegate sharedQSMusicPlayerDelegate] openPlayPoint];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

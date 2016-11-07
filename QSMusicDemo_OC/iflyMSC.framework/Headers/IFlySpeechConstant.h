@@ -269,7 +269,6 @@
  *  合成录音保存路径
  *
  *  @return 合成录音保存路径key
- *  @注意 只需要设置文件名则可，会自动拼接到IFlySetting setLogFilePath接口设置的目录后
  */
 +(NSString*)TTS_AUDIO_PATH;
 
@@ -616,7 +615,7 @@
  */
 +(NSString*)ISE_TRACK_TYPE;
 
-#pragma mark -  语记SDK业务key
+#pragma mark -  语音+业务key
 /**
  *  本地所有资源
  *

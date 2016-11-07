@@ -13,15 +13,12 @@
 - (IBAction)buttonAction:(UIButton *)sender {
     switch (sender.tag) {
         case 0:
-            NSLog(@"0");
             [CSWAlertView initWithTitle:@"提示" message:@"功能完善中， 敬请期待" cancelButtonTitle:@"确定"];
             break;
         case 1:
-            NSLog(@"1");
             [CSWAlertView initWithTitle:@"提示" message:@"功能完善中， 敬请期待" cancelButtonTitle:@"确定"];
             break;
         case 2:
-            NSLog(@"2");
             [CSWAlertView initWithTitle:@"提示" message:@"功能完善中， 敬请期待" cancelButtonTitle:@"确定"];
             break;
         default:

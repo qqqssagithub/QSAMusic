@@ -8,7 +8,6 @@
 
 #import "QSMusicRemoteEvent.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import "QSMusicEQPlayer.h"
 
 // 滑动方向
 typedef NS_ENUM(NSInteger, CameraMoveDirection) {
@@ -83,12 +82,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
     _style = style;
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         _direction	= kCameraMoveDirectionNone;								// 无方向
-        if ([PlayView sharedPlayView].isLoad) {
-            QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-            _curtime = play.currentTime;
-        } else {
-            _curtime = QSMusicPlayer.currentTimes;
-        }
+        _curtime = QSMusicPlayer.currentTimes;
     }
     if (recognizer.state == UIGestureRecognizerStateChanged) {
         CGPoint translation = [recognizer translationInView:view];         // 事实移动位置 增量
@@ -104,15 +98,8 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
             musicPlayer.volume = currentVolume;
         }  else if (_direction == 3) { //Right
             _curtime += 2.0;
-            if ([PlayView sharedPlayView].isLoad) {
-                QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-                if (_curtime > play.duration) {
-                    _curtime = play.duration;
-                }
-            } else {
-                if (_curtime > QSMusicPlayer.duration) {
-                    _curtime = QSMusicPlayer.duration;
-                }
+            if (_curtime > QSMusicPlayer.duration) {
+                _curtime = QSMusicPlayer.duration;
             }
             NSInteger second = _curtime;
             [self cycleModeWithTitle:[NSString stringWithFormat:@"快进>> %02ld:%02ld", second/60, second%60]];
@@ -127,12 +114,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
     }
     if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
         if (_direction == 3 || _direction == 4) {
-            if ([PlayView sharedPlayView].isLoad) {
-                QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-                [play playAtTime:_curtime];
-            } else {
-                [QSMusicPlayer playAtTime:_curtime];
-            }
+            [QSMusicPlayer playAtTime:_curtime];
         }
     }
 }

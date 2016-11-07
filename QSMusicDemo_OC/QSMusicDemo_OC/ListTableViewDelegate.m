@@ -7,7 +7,6 @@
 //
 
 #import "ListTableViewDelegate.h"
-#import "QSMusicEQPlayer.h"
 
 @interface ListTableViewDelegate () <UITableViewDelegate, UITableViewDataSource>
 
@@ -66,12 +65,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([PlayView sharedPlayView].isLoad == YES) {
-        QSMusicEQPlayer *eqPlayer = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-        [eqPlayer platerWithIndex:indexPath.row];
-    } else {
-        [QSMusicPlayer playAtIndex:indexPath.row];
-    }
+    [QSMusicPlayer playAtIndex:indexPath.row];
 }
 
 @end

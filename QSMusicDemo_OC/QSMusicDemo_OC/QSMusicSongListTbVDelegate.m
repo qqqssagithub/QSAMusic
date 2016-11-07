@@ -12,7 +12,6 @@
 #import "QSMusicSearchResultView.h"
 #import "QSMusicSearchLeftTableViewCell.h"
 #import "QSMusicSongDatas.h"
-#import "QSMusicEQPlayer.h"
 
 @interface QSMusicSongListTbVDelegate ()
 
@@ -169,24 +168,7 @@
                 _supView.transform = CGAffineTransformMakeScale(0.7, 0.7);
             }];
         }];
-    } else if ([_indexStr isEqualToString:@"load"]) {
-        [QSMusicPlayerDelegate sharedQSMusicPlayerDelegate].playStyle = @"Ordinary";
-        [[QSMusicPlayerDelegate sharedQSMusicPlayerDelegate] openPlayPoint];
-        [PlayView sharedPlayView].isLoad = YES;
-        NSArray *modelArr = [QSMusicSongDatas MR_findAll];
-        [[PlayView sharedPlayView] updataListWithData:modelArr];
-        [PlayView sharedPlayView].currentIndex = indexPath.row;
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            QSMusicEQPlayer *eqPlayer = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-            [eqPlayer platerWithIndex:indexPath.row];
-        });
     } else {
-        
-        QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-        if (play.audioController.running) {
-            [play pause];
-        }
         
         [QSMusicPlayerDelegate sharedQSMusicPlayerDelegate].playStyle = @"EVA";
         [[QSMusicPlayerDelegate sharedQSMusicPlayerDelegate] openPlayPoint];

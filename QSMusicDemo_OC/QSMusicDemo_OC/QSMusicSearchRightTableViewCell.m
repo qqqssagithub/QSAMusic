@@ -13,6 +13,7 @@
 - (void)updateWithData:(NSDictionary *)data {
     [_imgV sd_setImageWithURL:[NSURL URLWithString:data[@"pic_small"]]];
     NSString *title = data[@"title"];
+    _albumId = data[@"album_id"];
     NSRange rang = [title rangeOfString:@"</em>"];
     if (rang.location != NSNotFound) {
         title = [NSString stringWithFormat:@"%@ - %@",  [title substringWithRange:NSMakeRange(4, rang.location - 4)], [title substringFromIndex:rang.location + rang.length]];

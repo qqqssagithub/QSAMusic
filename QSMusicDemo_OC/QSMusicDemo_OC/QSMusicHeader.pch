@@ -14,7 +14,7 @@
 #import <pop/POP.h>
 #import <CSWFramework/CSWFramework.h>
 #import <MagicalRecord/MagicalRecord.h>
-#import <TheAmazingAudioEngine/TheAmazingAudioEngine.h> 
+#import <TheAmazingAudioEngine/TheAmazingAudioEngine.h>
 #import <TheAmazingAudioEngine/AEParametricEqFilter.h>
 #import "QSMusicRootViewController.h"
 #import "QSMusicSongListView.h"
@@ -24,7 +24,6 @@
 #import "PlayView.h"
 #import "LrcTableView.h"
 #import "QSMusicSongDatas.h"
-#import "QSMusicEQPlayer.h"
 #import "QSMusicNetFailedView.h"
 
 

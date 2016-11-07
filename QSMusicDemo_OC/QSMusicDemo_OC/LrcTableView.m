@@ -8,7 +8,6 @@
 
 #import "LrcTableView.h"
 #import "LrcTableViewCell.h"
-#import "QSMusicEQPlayer.h"
 
 @interface LrcTableView ()
 
@@ -131,12 +130,7 @@
         NSString *minute = [timeStr substringWithRange:NSMakeRange(0, 2)];
         NSString *second = [timeStr substringWithRange:NSMakeRange(3, 2)];
         NSTimeInterval curtime = [minute integerValue] *60 + [second integerValue];
-        if ([PlayView sharedPlayView].isLoad) {
-            QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-            [play playAtTime:curtime];
-        } else {
-            [QSMusicPlayer playAtTime:curtime];
-        }
+        [QSMusicPlayer playAtTime:curtime];
     }
 }
 

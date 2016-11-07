@@ -18,7 +18,7 @@
 
 @property (nonatomic) UIView *supView;
 
-@property (nonatomic) void (^bcakBlock)(void);
+@property (nonatomic) void (^backBlock)(void);
 
 + (instancetype)sharedQSMusicPublicBigHeaderView;
 

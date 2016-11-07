@@ -13,6 +13,7 @@
 #import "QSMusicSearchTbVHeaderView.h"
 #import <iflyMSC/IFlyMSC.h>
 #import "QSMusicIFlytekDataHelper.h"
+#import "QSMusicSearchResultView.h"
 
 @interface QSMusicSearch () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, IFlyRecognizerViewDelegate>
 
@@ -262,12 +263,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         NSArray *dataArr = _data[@"song_info"][@"song_list"];
-        
-        QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-        if (play.audioController.running) {
-            [play pause];
-        }
-        
+
         [QSMusicPlayerDelegate sharedQSMusicPlayerDelegate].playStyle = @"Ordinary";
         [[QSMusicPlayerDelegate sharedQSMusicPlayerDelegate] openPlayPoint];
         [PlayView sharedPlayView].isLoad = NO;
@@ -279,7 +275,57 @@
             [QSMusicPlayer playAtIndex:indexPath.row];
         });
     } else if (indexPath.section == 1) {
-        
+        [CSWProgressView showWithPrompt:@"加载中"];
+        QSMusicSongListTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [QSMusicPlayer getSearchDataWithKeyword:cell.title.text pageSize:10 responseClosure:^(NSDictionary * _Nonnull data) {
+            [CSWProgressView disappear];
+            UINib *nib = [UINib nibWithNibName:@"QSMusicSearchResultView" bundle:nil];
+            QSMusicSearchResultView *view = [[nib instantiateWithOwner:nil options:nil] firstObject];
+            view.frame = CGRectMake(QSMUSICSCREEN_WIDTH, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);
+            [view reloadDataWithData:data];
+            __block typeof(view) blockView = view;
+            UIView *rootBackView = QSMusicRootVC_rootBackView;
+            view.backBlock = ^{
+                [UIView animateWithDuration:0.3 animations:^{
+                    blockView.frame = CGRectMake(QSMUSICSCREEN_WIDTH, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);
+                    rootBackView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                } completion:^(BOOL finished) {
+                    [blockView removeFromSuperview];
+                }];
+            };
+            [QSMusicRootVC_View addSubview:view];
+            [UIView animateWithDuration:0.3 animations:^{
+                view.frame = QSMUSICSCREEN_RECT;
+                rootBackView.transform = CGAffineTransformMakeScale(0.7, 0.7);
+            }];
+        }];
+    } else {
+        [CSWProgressView showWithPrompt:@"专辑加载中"];
+        QSMusicSearchRightTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [QSMusicPlayer requestSingleWithAlbumId:cell.albumId response:^(NSDictionary * _Nonnull albumInfo, NSArray<NSDictionary *> * _Nonnull songList) {
+            [CSWProgressView disappear];
+            QSMusicPublicBigHeaderView *view = [QSMusicPublicBigHeaderView sharedQSMusicPublicBigHeaderView];
+            __block typeof(view) blockView = view;
+            UIView *rootBackView = QSMusicRootVC_rootBackView;
+            view.backBlock = ^{
+                [UIView animateWithDuration:0.3 animations:^{
+                    rootBackView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                    blockView.frame = CGRectMake(QSMUSICSCREEN_WIDTH, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);
+                } completion:^(BOOL finished) {
+                    [blockView.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                    [blockView removeFromSuperview];
+                }];
+            };
+            [view updateWithHeaderInfo:albumInfo songList:songList];
+            //[_rootViewController.view addSubview:view];
+            
+            [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:view];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                rootBackView.transform = CGAffineTransformMakeScale(0.7, 0.7);
+                view.frame = QSMUSICSCREEN_RECT;
+            }];
+        }];
     }
 }
 

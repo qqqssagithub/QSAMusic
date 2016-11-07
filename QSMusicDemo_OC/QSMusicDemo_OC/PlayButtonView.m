@@ -8,7 +8,6 @@
 
 #import "PlayButtonView.h"
 #import <AVFoundation/AVFoundation.h>
-#import "QSMusicEQPlayer.h"
 #import "PlayView.h"
 
 @implementation PlayButtonView
@@ -81,7 +80,6 @@
 
 //全部按钮的响应方法
 - (IBAction)buttonAction:(UIButton *)oneButton {
-    QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
     PlayView *view = [PlayView sharedPlayView];
     switch (oneButton.tag) {
         case 201:
@@ -92,21 +90,13 @@
             }
             break;
         case 202:
-            if (view.isLoad) {
-                [play playPrevious];
-            } else {
-                [QSMusicPlayer playPreviousIndex];
-            }
+            [QSMusicPlayer playPreviousIndex];
             break;
         case 203:
             [self isPlay];
             break;
         case 204:
-            if (view.isLoad) {
-                [play playNext];
-            } else {
-                [QSMusicPlayer playNextIndex];
-            }
+            [QSMusicPlayer playNextIndex];
             break;
         case 205: {
             _otherButton.enabled = NO;
@@ -142,28 +132,12 @@
 }
 
 - (void)isPlay {
-    QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-    PlayView *view = [PlayView sharedPlayView];
-    if (view.isLoad) {
-        if (play.audioController.running) {
-            [_playButton setImage:[UIImage imageNamed:@"bf"] forState:UIControlStateNormal];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [play pause];
-            });
-        } else {
-            [_playButton setImage:[UIImage imageNamed:@"zantingduan3"] forState:UIControlStateNormal];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [play play];
-            });
-        }
+    if ([QSMusicPlayer isPlaying]) {
+        [QSMusicPlayer pause];
+        [_playButton setImage:[UIImage imageNamed:@"bf"] forState:UIControlStateNormal];
     } else {
-        if ([QSMusicPlayer isPlaying]) {
-            [QSMusicPlayer pause];
-            [_playButton setImage:[UIImage imageNamed:@"bf"] forState:UIControlStateNormal];
-        } else {
-            [QSMusicPlayer play];
-            [_playButton setImage:[UIImage imageNamed:@"zantingduan3"] forState:UIControlStateNormal];
-        }
+        [QSMusicPlayer play];
+        [_playButton setImage:[UIImage imageNamed:@"zantingduan3"] forState:UIControlStateNormal];
     }
 }
 

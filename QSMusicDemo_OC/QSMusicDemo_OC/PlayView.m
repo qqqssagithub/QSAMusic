@@ -9,7 +9,6 @@
 #import "PlayView.h"
 #import "ListTableViewDelegate.h"
 #import "QSMusicRemoteEvent.h"
-#import "QSMusicEQPlayer.h"
 #import "QSMusicEQSetView.h"
 
 // 滑动方向
@@ -207,14 +206,8 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
 #pragma mark - 进度、音量调节
 - (IBAction)onProgressChanged:(id)sender {
     if(!((UISlider *)sender).tracking && ((UISlider *)sender).isTouchInside) {
-        if (_isLoad) {
-            QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-            NSTimeInterval curtime = play.duration * _audioSlider.value;
-            [[QSMusicEQPlayer sheardQSMusicEQPlayer] playAtTime:curtime];
-        } else {
-            NSTimeInterval curtime = QSMusicPlayer.duration * _audioSlider.value;
-            [QSMusicPlayer playAtTime:curtime];
-        }
+        NSTimeInterval curtime = QSMusicPlayer.duration * _audioSlider.value;
+        [QSMusicPlayer playAtTime:curtime];
     }
 }
 
@@ -230,23 +223,23 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
 }
 
 #pragma mark - eq
-- (IBAction)eqAction:(id)sender {
-    QSMusicEQPlayer *eqPlayer = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-    
-    UINib *nib = [UINib nibWithNibName:@"QSMusicEQSetView" bundle:nil];
-    QSMusicEQSetView *view = [nib instantiateWithOwner:nil options:nil][0];
-    view.frame = CGRectMake(QSMUSICSCREEN_WIDTH, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);
-    view.setDBBlock = ^(NSInteger index, double centerFrequency, double gain) {
-        [eqPlayer updateValueWithIndex:index centerFrequency:centerFrequency gain:gain];
-    };
-    view.setDBWithStyleBlock = ^(NSArray *style) {
-        [eqPlayer updateValueWithStyle:style];
-    };
-    [self addSubview:view];
-    [UIView animateWithDuration:0.3 animations:^{
-        view.frame = CGRectMake(0, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);
-    }];
-}
+//- (IBAction)eqAction:(id)sender {
+//    
+//    UINib *nib = [UINib nibWithNibName:@"QSMusicEQSetView" bundle:nil];
+//    QSMusicEQSetView *view = [nib instantiateWithOwner:nil options:nil][0];
+//    view.frame = CGRectMake(QSMUSICSCREEN_WIDTH, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);
+//    view.setDBBlock = ^(NSInteger index, double centerFrequency, double gain) {
+//        [eqPlayer updateValueWithIndex:index centerFrequency:centerFrequency gain:gain];
+//    };
+//    view.setDBWithStyleBlock = ^(NSArray *style) {
+//        [eqPlayer updateValueWithStyle:style];
+//    };
+//    [self addSubview:view];
+//    [UIView animateWithDuration:0.3 animations:^{
+//        view.frame = CGRectMake(0, 0, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_HEIGHT);
+//    }];
+//}
+
 #pragma mark
 
 - (void)drawRect:(CGRect)rect {

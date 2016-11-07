@@ -2,18 +2,17 @@
 //  IFlySpeechSynthesizer.h
 //  MSC
 //
-//  Created by 侯效林 on 16-4-22.
-//  Copyright (c) 2016年 iflytek. All rights reserved.
+//  Created by ypzhao on 13-3-21.
+//  Copyright (c) 2013年 iflytek. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "IFlySpeechSynthesizerDelegate.h"
 
-
 /*!
  *  语音合成
  */
-@interface IFlySpeechSynthesizer : NSObject 
+@interface IFlySpeechSynthesizer : NSObject
 
 /*!
  *  设置识别的委托对象

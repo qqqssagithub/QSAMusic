@@ -9,15 +9,17 @@
 #import "QSMusicPlayerDelegate.h"
 #import "QSMusicRemoteEvent.h"
 #import "QSMusicSongDatas.h"
-#import "QSMusicEQPlayer.h"
+#import <iflyMSC/IFlyMSC.h>
 
-@interface QSMusicPlayerDelegate () <QSMusicPlayerDelegate>
+@interface QSMusicPlayerDelegate () <QSMusicPlayerDelegate, IFlySpeechSynthesizerDelegate>
 
 @property (nonatomic) BOOL isOpen;                  //播放界面是否打开
 @property (nonatomic) CGPoint tempPoint;            //记录播放点展开前的位置
 @property (nonatomic) UIDynamicAnimator *animation; //物理动效
 
 @property (nonatomic) UIView *tempPlayViewBackView;
+
+@property (nonatomic) IFlySpeechSynthesizer *iFlySpeechSynthesizer;
 
 @end
 
@@ -86,7 +88,11 @@
             }
         }];
     }
-    [player enginePlay];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"VoicePrompt"]) {
+        [player enginePlay];
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"VoicePrompt"];
 }
 
 // 准备就绪失败, 不可以播放
@@ -219,6 +225,53 @@
 
 - (void)openPlayPoint {
     [self tapGR:nil];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"VoicePrompt"]) {
+        return;
+    }
+    
+
+    // 创建合成对象，为单例模式
+    _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance]; _iFlySpeechSynthesizer.delegate = self;
+    //设置语音合成的参数
+    //语速,取值范围 0~100
+    [_iFlySpeechSynthesizer setParameter:@"50" forKey:[IFlySpeechConstant SPEED]];
+    //音量;取值范围 0~100
+    [_iFlySpeechSynthesizer setParameter:@"50" forKey: [IFlySpeechConstant VOLUME]];
+    //发音人,默认为”xiaoyan”;可以设置的参数列表可参考个 性化发音人列表
+    [_iFlySpeechSynthesizer setParameter:@" xiaoyan " forKey: [IFlySpeechConstant VOICE_NAME]];
+    //音频采样率,目前支持的采样率有 16000 和 8000
+    [_iFlySpeechSynthesizer setParameter:@"8000" forKey: [IFlySpeechConstant SAMPLE_RATE]];
+    //asr_audio_path保存录音文件路径，如不再需要，设置value为nil表示取消，默认目录是documents
+    [_iFlySpeechSynthesizer setParameter:@" tts.pcm" forKey: [IFlySpeechConstant TTS_AUDIO_PATH]];
+    //启动合成会话
+    [_iFlySpeechSynthesizer startSpeaking:@"由于百度音乐最近对获取音乐的最后一级网址进行了AES加密, 所以目前只能播放同一首歌曲"];
+    
+    [CSWAlertView initWithTitle:@"提示" message:@"由于百度音乐最近对获取音乐的最后一级网址进行了AES加密, 所以目前只能播放同一首歌曲(梁静茹<偶阵雨>)" cancelButtonTitle:@"确实"];
+    
+    [CSWAlertView sharedCSWAlertView].cancelBlock = ^{
+        [QSMusicPlayer play];
+    };
+}
+
+//合成结束，此代理必须要实现
+- (void) onCompleted:(IFlySpeechError *) error{
+    
+}
+
+//合成开始
+- (void) onSpeakBegin{
+
+}
+
+//合成缓冲进度
+- (void) onBufferProgress:(int) progress message:(NSString *)msg{
+
+}
+
+//合成播放进度
+- (void) onSpeakProgress:(int) progress{
+
 }
 
 - (void)addAnimationAndGesture {

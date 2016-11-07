@@ -11,8 +11,9 @@
 @interface QSMusicSearchRightTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgV;
-@property (weak, nonatomic) IBOutlet UILabel *title;
-@property (weak, nonatomic) IBOutlet UILabel *publishtime;
+@property (weak, nonatomic) IBOutlet UILabel     *title;
+@property (weak, nonatomic) IBOutlet UILabel     *publishtime;
+@property (nonatomic)                NSString    *albumId;
 @property (nonatomic) NSString *indexStr;
 
 - (void)updateWithData:(NSDictionary *)data;

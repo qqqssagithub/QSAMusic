@@ -68,11 +68,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSArray *dataArr = _dataDic[@"song_list"];
     
-    QSMusicEQPlayer *play = [QSMusicEQPlayer sheardQSMusicEQPlayer];
-    if (play.audioController.running) {
-        [play pause];
-    }
-    
     [QSMusicPlayerDelegate sharedQSMusicPlayerDelegate].playStyle = @"Ordinary";
     [[QSMusicPlayerDelegate sharedQSMusicPlayerDelegate] openPlayPoint];
     [PlayView sharedPlayView].isLoad = NO;

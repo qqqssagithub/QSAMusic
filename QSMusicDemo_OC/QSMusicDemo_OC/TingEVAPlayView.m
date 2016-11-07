@@ -297,7 +297,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
     UILabel *top = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 20, 12)];
     top.text = @"进度";
     top.textColor = [UIColor redColor];
-    [top setFont:[UIFont systemFontOfSize:10.0]];
+    [top setFont:[UIFont systemFontOfSize:9.0]];
     [topImgV addSubview:top];
     UIImageView *bottomImgV = [[UIImageView alloc] initWithFrame:CGRectMake(QSMUSICSCREEN_WIDTH -70 -10, QSMUSICSCREEN_HEIGHT -68 -18, 40, 40)];
     bottomImgV.image = [UIImage imageNamed:@"2_2.png"];
@@ -305,7 +305,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
     UILabel *bottom = [[UILabel alloc] initWithFrame:CGRectMake(10, 21, 20, 12)];
     bottom.text = @"音量";
     bottom.textColor = [UIColor redColor];
-    [bottom setFont:[UIFont systemFontOfSize:10.0]];
+    [bottom setFont:[UIFont systemFontOfSize:9.0]];
     [bottomImgV addSubview:bottom];
     
     
