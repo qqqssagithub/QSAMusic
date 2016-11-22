@@ -18,7 +18,7 @@
 } while (0);
 
 #define NOTIFY \
-[[NSNotificationCenter defaultCenter]postNotificationName:@"RSBaseTest" object:nil];
+[[NSNotificationCenter defaultCenter] postNotificationName:@"RSBaseTest" object:nil];
 
 
 @interface CSWFarmeworkTest : XCTestCase

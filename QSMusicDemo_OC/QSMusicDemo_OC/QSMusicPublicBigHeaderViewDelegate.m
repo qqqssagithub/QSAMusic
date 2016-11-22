@@ -136,8 +136,14 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y <= 250 - QSMUSICSCREEN_WIDTH) {
-        _superView.topImgV.frame = CGRectMake(0, -scrollView.contentOffset.y + (250 - QSMUSICSCREEN_WIDTH), QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_WIDTH);
+    CGFloat offset;
+    if (QSMUSICSCREEN_WIDTH > 320)
+        offset = 250 - QSMUSICSCREEN_WIDTH + 100;
+    else
+        offset = 250 - QSMUSICSCREEN_WIDTH;
+    
+    if (scrollView.contentOffset.y <= offset) {
+        _superView.topImgV.frame = CGRectMake(0, -scrollView.contentOffset.y + offset, QSMUSICSCREEN_WIDTH, QSMUSICSCREEN_WIDTH);
         [UIView animateWithDuration:0.3 animations:^{
             _infoLabel.alpha = 1.0;
             _superView.topImgVOcclusionView.alpha = 1.0;
