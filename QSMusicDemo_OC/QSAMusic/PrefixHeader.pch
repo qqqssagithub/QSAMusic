@@ -1,0 +1,61 @@
+//
+//  PrefixHeader.pch
+//  QSAMusic
+//
+//  Created by 陈少文 on 17/4/25.
+//  Copyright © 2017年 qqqssa. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <QSAKit/QSAKit.h>
+#import "QSAMusic-Swift.h"
+
+/************弱引用*************/
+#pragma mark - 弱引用
+#define WeakSelf           __weak typeof(self)   weakSelf   = self
+#define WeakObject(object) __weak typeof(object) wealObject = object
+/************弱引用*************/
+
+/************打印宏*************/
+/*
+ __LINE__宏在预编译时会替换成当前的行号
+ 
+ __FUNCTION__宏在预编译时会替换成当前的函数名称
+ */
+#ifdef DEBUG
+# define GLog(fmt, ...) NSLog((@ "\n/---函数名:%s---/\n""/---所在行:%d---/\n" fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+# define GLog(...);
+#endif
+/************打印宏*************/
+
+/************屏幕尺寸*************/
+#define QSAMusicKeyWindow [UIApplication sharedApplication].keyWindow
+#pragma mark - 屏幕尺寸
+#define ScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+#define ScreenSize   [UIScreen mainScreen].bounds.size
+#define ScreenRect   [UIScreen mainScreen].bounds
+/************屏幕尺寸*************/
+
+/************RGB颜色*************/
+#pragma mark - 颜色
+#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+//传入RGB三个参数，得到颜色
+#define RGB(r,g,b) RGBA(r,g,b,1.f)
+//取得随机颜色
+#define RandomColor RGB(arc4random()%256,arc4random()%256,arc4random()%256)
+//系统颜色
+#define ClearColor [UIColor clearColor]
+#define BlackColor [UIColor blackColor]
+#define WhiteColor [UIColor whiteColor]
+#define RedColor [UIColor redColor]
+#define BlueColor [UIColor blueColor]
+#define OrangeColor [UIColor orangeColor]
+#define LightGrayColor [UIColor lightGrayColor]
+#define LightTextColor [UIColor lightTextColor]
+/************RGB颜色*************/
+
+#endif /* PrefixHeader_pch */

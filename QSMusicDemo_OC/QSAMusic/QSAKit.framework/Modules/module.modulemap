@@ -1,0 +1,6 @@
+framework module QSAKit {
+  umbrella header "QSAKit.h"
+
+  export *
+  module * { export * }
+}

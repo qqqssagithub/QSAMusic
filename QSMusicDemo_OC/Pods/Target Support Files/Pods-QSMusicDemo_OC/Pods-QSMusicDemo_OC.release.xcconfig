@@ -1,8 +1,0 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/FXImageView" "$PODS_CONFIGURATION_BUILD_DIR/MagicalRecord" "$PODS_CONFIGURATION_BUILD_DIR/SDWebImage" "$PODS_CONFIGURATION_BUILD_DIR/TheAmazingAudioEngine" "$PODS_CONFIGURATION_BUILD_DIR/iCarousel" "$PODS_CONFIGURATION_BUILD_DIR/pop"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/FXImageView/FXImageView.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/MagicalRecord/MagicalRecord.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/SDWebImage/SDWebImage.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/TheAmazingAudioEngine/TheAmazingAudioEngine.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/iCarousel/iCarousel.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/pop/pop.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "FXImageView" -framework "MagicalRecord" -framework "SDWebImage" -framework "TheAmazingAudioEngine" -framework "iCarousel" -framework "pop"
-PODS_BUILD_DIR = $BUILD_DIR
-PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
-PODS_ROOT = ${SRCROOT}/Pods

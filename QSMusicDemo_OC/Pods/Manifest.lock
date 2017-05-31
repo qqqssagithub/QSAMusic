@@ -1,31 +1,29 @@
 PODS:
+  - Alamofire (4.4.0)
   - FXImageView (1.3.5)
-  - iCarousel (1.8.2)
-  - MagicalRecord (2.3.2):
-    - MagicalRecord/Core (= 2.3.2)
-  - MagicalRecord/Core (2.3.2)
+  - iCarousel (1.8.3)
   - pop (1.0.9)
-  - SDWebImage (3.8.1):
-    - SDWebImage/Core (= 3.8.1)
-  - SDWebImage/Core (3.8.1)
-  - TheAmazingAudioEngine (1.5.6)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
+  - TheAmazingAudioEngine (1.5.8)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.4)
   - FXImageView (~> 1.3.5)
   - iCarousel (~> 1.8.2)
-  - MagicalRecord (~> 2.3.2)
   - pop (~> 1.0.9)
-  - SDWebImage (~> 3.8.1)
+  - SDWebImage (~> 3.7.6)
   - TheAmazingAudioEngine (~> 1.5.6)
 
 SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   FXImageView: 7d84722b37f0afea9a64f12fdd4a6c7f9ecc4b16
-  iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
-  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
-  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
-  TheAmazingAudioEngine: 0ed8c05486646373a48b22a341d31de42d1af2c3
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  TheAmazingAudioEngine: 24e382d9468283bb1b3f08df29b514aa522ef4fd
 
-PODFILE CHECKSUM: 1679d35f247b7a08aa79c314391a72d7c4fe2166
+PODFILE CHECKSUM: bc68ff794b6d80b07904b93a808c01e4cd7c37fa
 
 COCOAPODS: 1.0.1

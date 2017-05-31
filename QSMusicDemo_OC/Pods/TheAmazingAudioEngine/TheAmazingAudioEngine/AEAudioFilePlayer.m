@@ -322,8 +322,8 @@ static OSStatus renderCallback(__unsafe_unretained AEAudioFilePlayer *THIS,
     
     if ( !THIS->_running ) return noErr;
     
-    if (THIS.runCallbackBlock) { //运行时回调
-        THIS.runCallbackBlock(THIS);
+    if (THIS.runBlock) { //运行时回调
+        THIS.runBlock(THIS);
     }
     
     uint64_t hostTimeAtBufferEnd = time->mHostTime + AEHostTicksFromSeconds((double)frames / THIS->_outputDescription.mSampleRate);
