@@ -27,52 +27,8 @@
         [sharedPlayButtonView.nextButton setShowsTouchWhenHighlighted:YES];
         [sharedPlayButtonView.otherButton setShowsTouchWhenHighlighted:YES];
         sharedPlayButtonView.currentLoop = 0;
-        //监听耳机的拨出
-        [[NSNotificationCenter defaultCenter] addObserver:sharedPlayButtonView selector:@selector(outputDeviceChanged:) name:AVAudioSessionRouteChangeNotification object:[AVAudioSession sharedInstance]];
-        //添加中断播放监听
-        [sharedPlayButtonView addInterruptKVO];
     });
     return sharedPlayButtonView;
-}
-
-- (void)initView {
-    
-}
-
-- (void)outputDeviceChanged:(NSNotification *)aNotification {
-    if ([[aNotification.userInfo valueForKey:AVAudioSessionRouteChangeReasonKey] isEqualToNumber:[NSNumber numberWithInt:2]]) {
-        //NSLog(@"耳机拨出");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_playButton setImage:[UIImage imageNamed:@"bf"] forState:UIControlStateNormal];
-            //[[TingEVAPlayView sharedTingEVAPlayView] sphereViewStop];
-        });
-    } else if([[aNotification.userInfo valueForKey:AVAudioSessionRouteChangeReasonKey] isEqualToNumber:[NSNumber numberWithInt:1]]){
-        // NSLog(@"耳机插入");
-        //[_playButton setImage:[UIImage imageNamed:@"zantingduan3"] forState:UIControlStateNormal];
-    }
-}
-
-#pragma mark - 添加中断播放监听
-- (void)addInterruptKVO{
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleInterrupt:) name:AVAudioSessionInterruptionNotification object:nil];
-}
-
-//中断播发后的回调
-- (void)handleInterrupt:(NSNotification*)notification{
-    if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
-        if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
-            //NSLog(@"播放被中断");
-            [_playButton setImage:[UIImage imageNamed:@"bf"] forState:UIControlStateNormal];
-            //[[TingEVAPlayView sharedTingEVAPlayView] sphereViewStop];
-        } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
-            //NSLog(@"中断结束");
-//            if (QSMusicPlayer.isPlaying) {
-//                [_playButton setImage:[UIImage imageNamed:@"zantingduan3"] forState:UIControlStateNormal];
-//                [QSMusicPlayer play];
-//            }
-            
-        }
-    }
 }
 
 - (void)loopButton:(UIButton *)btn {

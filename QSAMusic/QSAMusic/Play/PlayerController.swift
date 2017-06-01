@@ -149,14 +149,32 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     }
     
     func playAndPause() {
-        QSAAudioPlayer.shared.playAndPause()
         if QSAAudioPlayer.shared.playing {
-            isPlaying = true
-            PlayView.shared().playButtonView.playButton.setImage(UIImage(named: "zantingduan3"), for: UIControlState.normal)
+            pause()
         } else {
-            isPlaying = false
-            PlayView.shared().playButtonView.playButton.setImage(UIImage(named: "bf"), for: UIControlState.normal)
+            play()
         }
+    }
+    
+    func play() {
+        QSAAudioPlayer.shared.play()
+        isPlaying = true
+        DispatchQueue.main.async(execute: {
+            PlayView.shared().playButtonView.playButton.setImage(UIImage(named: "zantingduan3"), for: UIControlState.normal)
+        })
+    }
+    
+    func pause() {
+        QSAAudioPlayer.shared.pause()
+        isPlaying = false
+        DispatchQueue.main.async(execute: {
+            PlayView.shared().playButtonView.playButton.setImage(UIImage(named: "bf"), for: UIControlState.normal)
+        })
+    }
+    
+    public func headphonePullOut() {
+        pause()
+        QSAAudioPlayer.shared.headphonePullOut()
     }
     
     func play(offset: Float) {

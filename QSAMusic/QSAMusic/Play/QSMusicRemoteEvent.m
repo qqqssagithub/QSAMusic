@@ -67,13 +67,6 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
         }else if(event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {//耳机''锁屏共用
             [[PlayerController shared] playPreviousIndex];
         }
-//        if (event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {
-//            [[PlayerController shared] playAndPause];
-//        } else if (event.subtype == UIEventSubtypeRemoteControlNextTrack) {
-//            [[PlayerController shared] playNextIndex];
-//        } else if(event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {
-//            [[PlayerController shared] playPreviousIndex];
-//        }
     }
 }
 

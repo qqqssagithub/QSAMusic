@@ -26,6 +26,4 @@
  */
 + (instancetype)sharedPlayButtonViewWithHeight:(CGFloat)height;
 
-- (void)initView;
-
 @end

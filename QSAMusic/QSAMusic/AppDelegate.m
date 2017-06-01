@@ -25,6 +25,13 @@
     
     [application beginReceivingRemoteControlEvents];
     
+    //监听耳机的拨出
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputDeviceChanged:) name:AVAudioSessionRouteChangeNotification object:session];
+    //添加中断播放监听
+    [self addInterruptKVO];
+    
+    [[QSAAudioPlayer shared] startEngine];
+    
     return YES;
 }
 
@@ -32,6 +39,37 @@
     [[QSMusicRemoteEvent sharedQSMusicRemoteEvent] responseEvent:event];
 }
 
+//耳机插拔巨坑, 至于为什么如下所写, 花了半天才试出来的. 耳机拔出会造成engine被停止, engine停止后, internalPlayer又不能播放. 正在播放耳机拔出和暂停播放耳机播出又不一样, 总之就是坑
+- (void)outputDeviceChanged:(NSNotification *)aNotification {
+    if ([[aNotification.userInfo valueForKey:AVAudioSessionRouteChangeReasonKey] isEqualToNumber:[NSNumber numberWithInt:2]]) {
+        //耳机拨出
+        [[PlayerController shared] headphonePullOut];
+    } else if([[aNotification.userInfo valueForKey:AVAudioSessionRouteChangeReasonKey] isEqualToNumber:[NSNumber numberWithInt:1]]){
+        //耳机插入
+        if ([QSAAudioPlayer shared].internalPlayer.isPlaying) {
+            [[QSAAudioPlayer shared].internalPlayer pause];
+            [[QSAAudioPlayer shared].engine pause];
+            [[QSAAudioPlayer shared].engine startAndReturnError:nil];
+            [[QSAAudioPlayer shared].internalPlayer play];
+        }
+    }
+}
+
+#pragma mark - 添加中断播放监听
+- (void)addInterruptKVO{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleInterrupt:) name:AVAudioSessionInterruptionNotification object:nil];
+}
+
+//中断播发后的回调, 播放被中断的情况有电话接入/打开其他多媒体app等
+- (void)handleInterrupt:(NSNotification*)notification{
+    if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
+        if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
+            if ([PlayerController shared].isPlaying) {
+                [[PlayerController shared] pause];
+            }
+        }
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -12,12 +12,12 @@ import AVFoundation
 open class QSAAudioPlayer: NSObject, UITableViewDelegate {
     
     // MARK: - private variables
-    private var engine = AVAudioEngine()                   //engine
+    var engine = AVAudioEngine()                   //engine
     private var internalAudioFile: AVAudioFile?            //播放文件
-    private var internalPlayer: AVAudioPlayerNode?         //播放器
+    var internalPlayer: AVAudioPlayerNode?         //播放器
     private var defaultSampleRate: Double = 44100.0        //默认采样率
     private var defaultChannels: AVAudioChannelCount = 2   //默认通道
-    private var timer: DispatchSourceTimer?                //读取播放进度的定时器
+    var timer: DispatchSourceTimer?                //读取播放进度的定时器
     private var eq: AVAudioUnitEQ?                         //均衡器
     private var startTime: Double = 0                      //开始播放的时间
     
@@ -30,12 +30,11 @@ open class QSAAudioPlayer: NSObject, UITableViewDelegate {
     
     private override init() {
         super.init()
-        startEngine()
     }
     
     // MARK: - engine设置
     ///将节点连接到engine上, 并启动engine
-    private func startEngine() {
+    func startEngine() {
         let defaultFormat = AVAudioFormat(standardFormatWithSampleRate: defaultSampleRate, channels: defaultChannels)
         connectNode(format: defaultFormat)
         if !engine.isRunning {
@@ -76,26 +75,30 @@ open class QSAAudioPlayer: NSObject, UITableViewDelegate {
     
     // MARK: - player操作
     ///播放器暂停后同时要暂停engine, 这样锁屏界面才会暂停, 但此时锁屏界面的时间并没有停止, 再次恢复播放的时候, 时间会直接跳过暂停的时长. 百度音乐盒也有同样的问题, 只是它做了处理, 再次刷新了时间
-    public func playAndPause() {
+    public func play() {
         if !playing {
             if !engine.isRunning {
-                do {
-                    try engine.start()
-                } catch let error as NSError {
-                    QSALog("couldn't start engine, Error: \(error)")
-                }
+                try? engine.start()
             }
-            internalPlayer?.play()
-            playing = true
-            timer?.resume()
-        } else {
-            internalPlayer?.pause()
             if engine.isRunning {
-                engine.pause()
+                internalPlayer?.play()
+                playing = true
+                timer?.resume()
             }
+        }
+    }
+    
+    public func pause() {
+        if playing {
+            internalPlayer?.pause()
+            engine.pause()
             playing = false
             timer?.suspend()
         }
+    }
+    
+    public func headphonePullOut() {
+        try? engine.start()
     }
     
     public func prepare() {
@@ -139,7 +142,7 @@ open class QSAAudioPlayer: NSObject, UITableViewDelegate {
             }
             
             ///play
-            playAndPause()
+            play()
         } else {
             QSALog("音乐文件加载失败")
             QSAKitFlashingPromptView.show(withMessage: "音乐文件加载失败")
