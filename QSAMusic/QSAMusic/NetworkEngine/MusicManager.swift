@@ -45,7 +45,7 @@ import UIKit
 //}
 
 extension String {
-    // 对象方法
+    // 获取文件大小
     func getFileSize() -> Int64  {
         var size: Int64 = 0
         let fileManager = FileManager.default
@@ -97,6 +97,13 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
     private var playLenght: Int64 = 0
     private var waiting: Bool = false
     
+    
+    ///指点时间
+    public func getMusic(playTime: Float) {
+        getMusic(playOffset: playTime / Float(oneSong["time"] as! NSNumber))
+    }
+    
+    //指点偏移
     public func getMusic(playOffset: Float) {
         waiting = false
         
@@ -134,20 +141,18 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
         fileManager.createFile(atPath: path, contents: nil, attributes: nil)
         fileHandle_write = FileHandle(forWritingAtPath: path)!
 
-
-        getTime {
-            while playLenght != musicPath.getFileSize() {
-                fileHandle_read.seek(toFileOffset: UInt64(playLenght))
-                let data = fileHandle_read.readData(ofLength: 104857)
-                fileHandle_write.seekToEndOfFile()
-                fileHandle_write.write(data)
-                playLenght += data.count
-            }
-            
-            QSAAudioPlayer.shared.play(startTime: Int(Float(oneSong["time"] as! NSNumber) * playOffset), endTime: Int(oneSong["time"] as! NSNumber), path: path)
+        while playLenght != musicPath.getFileSize() {
+            fileHandle_read.seek(toFileOffset: UInt64(playLenght))
+            let data = fileHandle_read.readData(ofLength: 104857)
+            fileHandle_write.seekToEndOfFile()
+            fileHandle_write.write(data)
+            playLenght += data.count
         }
+        
+        QSAAudioPlayer.shared.play(startTime: Int(Float(oneSong["time"] as! NSNumber) * playOffset), endTime: Int(oneSong["time"] as! NSNumber), path: path)
     }
     
+    ///下载音乐
     public func getMusic(songId: String) {
         waiting = false
         dataTask?.cancel()
@@ -174,7 +179,7 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
                 delegate?.musicDownload!(updateProgress: 1.0)
                 QSAAudioPlayer.shared.play(endTime: Int(song["time"] as! NSNumber), path: musicPath)
             }
-        } else {
+        } else { //新的音乐
             QSALog("新歌曲")
             delegate?.musicPrepare!()
             delegate?.musicDownload!(updateProgress: 0.0)
@@ -258,7 +263,6 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
         fileHandle_download.seekToEndOfFile()
         fileHandle_download.write(data)
         totalReceivedContentLength += data.count
-        //QSALog("下载进度: \(Double(totalReceivedContentLength) / Double(totalContentLength))")
         delegate?.musicDownload!(updateProgress: Double(totalReceivedContentLength) / Double(totalContentLength))
         if (offset <= 104857 && totalReceivedContentLength > 104857 /*0.1mb开始播放*/ && !isAdequateResources!) {
             QSALog("新歌曲可以播放")
@@ -273,16 +277,6 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
     
     var tempTotalReceivedContentLength: Int64 = 0
     
-//    func player(player: Player, updateSourceProgress progress: Double) {
-//        if (Double(self.totalContentLength) * progress + 5000 > Double(self.totalReceivedContentLength) && self.oneSong["finish"] as! String == "0") {
-//            QSALog("资源不足")
-//            isAdequateResources = false
-//            PlayerController.shared.pause()
-//            self.tempTotalReceivedContentLength = self.totalReceivedContentLength
-//            self.resumeMusicDownload(song: oneSong, offset: totalReceivedContentLength)
-//        }
-//    }
-    
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if error == nil {
             let song = ArchiveManager.archiveManagerDecode(songId: songId)
@@ -292,16 +286,8 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
             }
         } else {
             delegate?.musicDownloadFail!(error: (error as! NSError).code)
-//            if !isAdequateResources! {
-//                delegate?.musicDownloadFail!(error: (error as! NSError).code)
-//            }
         }
     }
-    
-//    func playerInitFail(player: Player) {
-//        QSALog("文件打开失败")
-//    }
-    
 }
 
 @objc public protocol MusicManagerDelegate: NSObjectProtocol {

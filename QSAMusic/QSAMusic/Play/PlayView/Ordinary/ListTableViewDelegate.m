@@ -35,7 +35,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listCellid"];
     cell.backgroundColor = [UIColor clearColor];
-    if (![_songList[indexPath.row][@"versions"] isEqualToString:@""]) {
+    if (_songList[indexPath.row][@"versions"] == nil) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", _songList[indexPath.row][@"title"], _songList[indexPath.row][@"artist"]];
+    } else if (![_songList[indexPath.row][@"versions"] isEqualToString:@""]) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@(%@) - %@", _songList[indexPath.row][@"title"], _songList[indexPath.row][@"versions"], _songList[indexPath.row][@"author"]];
     } else {
         cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", _songList[indexPath.row][@"title"], _songList[indexPath.row][@"author"]];
@@ -55,7 +57,7 @@
     [[QSAAudioPlayer shared] prepare];
     [[PlayView sharedPlayView].playButtonView.playButton setImage:[UIImage imageNamed:@"zantingduan3"] forState:UIControlStateNormal];
     NSDictionary *song = _songList[indexPath.row];
-    [[MusicManager shared] getMusicWithSongId:song[@"song_id"]];
+    [[MusicManager shared] getMusicWithSongId:song[@"song_id"] == nil ? song[@"songid"] : song[@"song_id"]];
 }
 
 - (void)selectRow:(NSInteger)row {

@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "QSMusicRemoteEvent.h"
 
 @interface RootViewController () <UIScrollViewDelegate>
 

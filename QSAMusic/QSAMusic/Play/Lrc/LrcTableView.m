@@ -133,8 +133,8 @@
         NSString *timeStr = _timeArray[indexPath.row];
         NSString *minute = [timeStr substringWithRange:NSMakeRange(0, 2)];
         NSString *second = [timeStr substringWithRange:NSMakeRange(3, 2)];
-        NSInteger curtime = [minute integerValue] *60 + [second integerValue];
-        //[[Player shared] playAtTime:curtime];
+        NSInteger curtime = [minute integerValue] * 60 + [second integerValue];
+        [[PlayerController shared] playWithTime:curtime];
     }
 }
 

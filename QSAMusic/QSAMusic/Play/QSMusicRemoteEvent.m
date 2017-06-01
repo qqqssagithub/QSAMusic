@@ -54,27 +54,26 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
 }
 
 - (void)responseEvent:(UIEvent *)event {
-    PlayButtonView *playButtonView = [PlayButtonView sharedPlayButtonViewWithHeight:[PlayView sharedPlayView].playBottomView.bounds.size.height];
+    //PlayButtonView *playButtonView = [PlayButtonView sharedPlayButtonViewWithHeight:[PlayView sharedPlayView].playBottomView.bounds.size.height];
     if (event.type == UIEventTypeRemoteControl) {
-        if (event.subtype == UIEventSubtypeRemoteControlPlay) {
-            //[QSMusicPlayer play];
-            [playButtonView.playButton setImage:[UIImage imageNamed:@"zantingduan3"] forState:UIControlStateNormal];
-        } else if(event.subtype == UIEventSubtypeRemoteControlPause) {
-            //[QSMusicPlayer pause];
-            [playButtonView.playButton setImage:[UIImage imageNamed:@"bf"] forState:UIControlStateNormal];
-        } else if(event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {
-//            if (QSMusicPlayer.isPlaying == YES) {
-//                [QSMusicPlayer pause];
-//                [playButtonView.playButton setImage:[UIImage imageNamed:@"bf"] forState:UIControlStateNormal];
-//            }else{
-//                [QSMusicPlayer play];
-//                [playButtonView.playButton setImage:[UIImage imageNamed:@"zantingduan3"] forState:UIControlStateNormal];
-//            }
-        }else if(event.subtype == UIEventSubtypeRemoteControlNextTrack) {
-            //[QSMusicPlayer playNextIndex];
-        }else if(event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {
-            //[QSMusicPlayer playPreviousIndex];
+        if (event.subtype == UIEventSubtypeRemoteControlPlay) {//锁屏play
+            [[PlayerController shared] playAndPause];
+        } else if(event.subtype == UIEventSubtypeRemoteControlPause) {//锁屏pause
+            [[PlayerController shared] playAndPause];
+        } else if(event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {//耳机play和pause
+            [[PlayerController shared] playAndPause];
+        }else if(event.subtype == UIEventSubtypeRemoteControlNextTrack) {//耳机''锁屏共用
+            [[PlayerController shared] playNextIndex];
+        }else if(event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {//耳机''锁屏共用
+            [[PlayerController shared] playPreviousIndex];
         }
+//        if (event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {
+//            [[PlayerController shared] playAndPause];
+//        } else if (event.subtype == UIEventSubtypeRemoteControlNextTrack) {
+//            [[PlayerController shared] playNextIndex];
+//        } else if(event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {
+//            [[PlayerController shared] playPreviousIndex];
+//        }
     }
 }
 
@@ -84,7 +83,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
     _style = style;
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         _direction	= kCameraMoveDirectionNone;								// 无方向
-        //_curtime = QSMusicPlayer.currentTimes;
+        _curtime = [PlayerController shared].playTime;
     }
     if (recognizer.state == UIGestureRecognizerStateChanged) {
         CGPoint translation = [recognizer translationInView:view];         // 事实移动位置 增量
@@ -100,9 +99,9 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
             musicPlayer.volume = currentVolume;
         }  else if (_direction == 3) { //Right
             _curtime += 2.0;
-//            if (_curtime > QSMusicPlayer.duration) {
-//                _curtime = QSMusicPlayer.duration;
-//            }
+            if (_curtime > [PlayerController shared].duration) {
+                _curtime = [PlayerController shared].duration;
+            }
             NSInteger second = _curtime;
             [self cycleModeWithTitle:[NSString stringWithFormat:@"快进>> %02ld:%02ld", second/60, second%60]];
         } else if (_direction == 4) { //Left
@@ -116,7 +115,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
     }
     if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
         if (_direction == 3 || _direction == 4) {
-            //[QSMusicPlayer playAtTime:_curtime];
+            [[PlayerController shared] playWithTime:_curtime];
         }
     }
 }
@@ -156,26 +155,25 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
 }
 
 - (void)cycleModeWithTitle:(NSString *)title {
-//    if ([title isEqualToString:@"单曲循环"]) {
-//        [_cycleButton setBackgroundImage:[UIImage imageNamed:@"danqu1"] forState:UIControlStateNormal];
-//    } else if ([title isEqualToString:@"随机播放"]) {
-//        [_cycleButton setBackgroundImage:[UIImage imageNamed:@"suiji1"] forState:UIControlStateNormal];
-//    } else if ([title isEqualToString:@"列表循环"]) {
-//        [_cycleButton setBackgroundImage:[UIImage imageNamed:@"xunhuan1"] forState:UIControlStateNormal];
-//    }
-//    UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(QSMUSICSCREEN_WIDTH /2 -50, QSMUSICSCREEN_HEIGHT - 22 - self.bounds.size.height, 100, 44)];
-//    whiteView.layer.cornerRadius = 5;
-//    whiteView.layer.masksToBounds = YES;
-//    whiteView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
-//    [[UIApplication sharedApplication].keyWindow addSubview:whiteView];
-//    UILabel *netLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, 100, 20)];
-//    netLabel.text = title;
-//    netLabel.textAlignment = NSTextAlignmentCenter;
-//    netLabel.textColor = [UIColor blackColor];
-//    [whiteView addSubview:netLabel];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [whiteView removeFromSuperview];
-//    });
+    UIView *view;
+    if (_style == 0) {
+        view = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth /2 -70, ScreenHeight /2 -150, 140, 44)];
+        view.backgroundColor = [UIColor redColor];
+    } else {
+        view = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth /2 -70, ScreenHeight -117, 140, 44)];
+        view.backgroundColor = [UIColor whiteColor];
+    }
+    view.layer.cornerRadius = 5;
+    view.layer.masksToBounds = YES;
+    [QSAMusicKeyWindow addSubview:view];
+    UILabel *netLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, 140, 20)];
+    netLabel.text = title;
+    netLabel.textAlignment = NSTextAlignmentCenter;
+    netLabel.textColor = [UIColor blackColor];
+    [view addSubview:netLabel];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [view removeFromSuperview];
+    });
 }
 
 @end

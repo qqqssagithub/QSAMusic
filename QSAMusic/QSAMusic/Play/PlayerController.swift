@@ -23,6 +23,9 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     
     var playList = [NSDictionary]()
     var playIndex: Int = 0
+    var isPlaying = false
+    var playTime: Int = 0
+    var duration: Int = 0
     
     func play(playList: [NSDictionary], index: Int) {
         self.playList = playList
@@ -36,12 +39,17 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     
     func musicPrepare() {
         let music = playList[playIndex]
-        if music["versions"] as! String != "" {
-            PlayView.shared().songLabel.text = "\(music["title"] as! String)(\(music["versions"] as! String))"
-        } else {
+        if music["versions"] == nil {
             PlayView.shared().songLabel.text = music["title"] as? String
+            PlayView.shared().author.text = music["artist"] as? String
+        } else {
+            if music["versions"] as! String != "" {
+                PlayView.shared().songLabel.text = "\(music["title"] as! String)(\(music["versions"] as! String))"
+            } else {
+                PlayView.shared().songLabel.text = music["title"] as? String
+            }
+            PlayView.shared().author.text = music["author"] as? String
         }
-        PlayView.shared().author.text = music["author"] as? String
         PlayView.shared().currentTime.text = "00:00"
         PlayView.shared().audioSlider.value = 0.0
         PlayView.shared().totalTime.text = "00:00"
@@ -61,7 +69,8 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         PlayView.shared().author.text = music["artistName"] as? String
         PlayView.shared().currentTime.text = "00:00"
         PlayView.shared().audioSlider.value = 0.0
-        PlayView.shared().totalTime.text = String(format: "%02ld:%02ld", music["time"] as! Int64 / 60, music["time"] as! Int64 % 60)
+        PlayView.shared().totalTime.text = String(format: "%02ld:%02ld", music["time"] as! Int / 60, music["time"] as! Int % 60)
+        self.duration = music["time"] as! Int
         LrcTableView.shared().initLrc(withLrcURL: music["lrcLink"] as! String)
         let sdManager = SDWebImageManager.shared()
         
@@ -102,7 +111,7 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     }
     
     func player(updatePlayTime playTime: Int) {
-        //QSALog("\(playTime)")
+        self.playTime = playTime
         let time = String(format: "%02ld", playTime / 60) + ":" + String(format: "%02ld", playTime % 60)
         DispatchQueue.main.async(execute: {
             PlayView.shared().currentTime.text = time
@@ -136,14 +145,26 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     
     private func play(index: Int) {
         ListTableViewDelegate.shared().selectRow(index)
+        isPlaying = true
     }
     
     func playAndPause() {
         QSAAudioPlayer.shared.playAndPause()
         if QSAAudioPlayer.shared.playing {
+            isPlaying = true
             PlayView.shared().playButtonView.playButton.setImage(UIImage(named: "zantingduan3"), for: UIControlState.normal)
         } else {
+            isPlaying = false
             PlayView.shared().playButtonView.playButton.setImage(UIImage(named: "bf"), for: UIControlState.normal)
         }
     }
+    
+    func play(offset: Float) {
+        MusicManager.shared.getMusic(playOffset: offset)
+    }
+    
+    func play(time: Int) {
+        MusicManager.shared.getMusic(playTime: Float(time))
+    }
+    
 }

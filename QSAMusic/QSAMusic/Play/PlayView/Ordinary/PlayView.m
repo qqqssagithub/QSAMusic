@@ -190,7 +190,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
 #pragma mark - 进度、音量调节
 - (IBAction)onProgressChanged:(UISlider *)sender {
     if (!sender.isTracking && sender.isTouchInside) {
-        [[MusicManager shared] getMusicWithPlayOffset:sender.value];
+        [[PlayerController shared] playWithOffset:sender.value];
     }
 }
 

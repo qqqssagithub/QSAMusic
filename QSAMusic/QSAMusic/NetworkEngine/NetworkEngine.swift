@@ -27,7 +27,7 @@ open class NetworkEngine: NSObject {
         let hotSingerList = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.artist.getList&format=json&order=1&limit=30&offset=0&area=0&sex=0&abc=&from=ios&version=5.8.1&cuid=1bb92ffcf38c17a7d8a3b3e75361f0a85c8b7054&channel=appstore&operator=0"
         let singerList = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.artist.getList&format=json&order=1&limit=%ld&offset=0&area=%@&sex=%@&abc=&from=ios&version=5.8.1&cuid=1bb92ffcf38c17a7d8a3b3e75361f0a85c8b7054&channel=appstore&operator=0"
         
-        let radio = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.radio.getChannelSong&channelid=0&channelname=%@&pn=0&rn=30&format=json&from=ios&baiduid=1bb92ffcf38c17a7d8a3b3e75361f0a85c8b7054&version=5.8.1&cuid=1bb92ffcf38c17a7d8a3b3e75361f0a85c8b7054&channel=appstore&operator=0"
+        let radio = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.radio.getChannelSong&channelid=0&channelname=%@&pn=%ld&rn=%ld&format=json&from=ios&baiduid=1bb92ffcf38c17a7d8a3b3e75361f0a85c8b7054&version=5.8.1&cuid=1bb92ffcf38c17a7d8a3b3e75361f0a85c8b7054&channel=appstore&operator=0"
         
         let search = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.search.merge&query=%@&page_no=%ld&page_size=%ld&from=ios&version=5.8.1&cuid=1bb92ffcf38c17a7d8a3b3e75361f0a85c8b7054&channel=appstore&operator=0"
         
@@ -163,6 +163,18 @@ open class NetworkEngine: NSObject {
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let list = json?.object(forKey: "artist") as! [NSDictionary]
                 responseClosure(list)
+            }
+        }
+    }
+    
+    //MARK: - 电台
+    public class func getChannelSong(channelname: String, page: Int = 1, size: Int = 30, responseClosure: @escaping (_ result: [NSDictionary]) -> Void) {
+        let url = String(format: RequestURL().radio, channelname, page, size)
+        NetworkEngine().getData(url: url) { (response) in
+            if let json: AnyObject? = response.result.value as AnyObject?? {
+                let result = json?.object(forKey: "result") as! NSDictionary
+                let songList = result["songlist"] as! [NSDictionary]
+                responseClosure(songList)
             }
         }
     }

@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <AVFoundation/AVFoundation.h>
+#import "QSMusicRemoteEvent.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,18 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [session setActive:YES error:nil];
+    
+    [application beginReceivingRemoteControlEvents];
+    
     return YES;
+}
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event{
+    [[QSMusicRemoteEvent sharedQSMusicRemoteEvent] responseEvent:event];
 }
 
 
