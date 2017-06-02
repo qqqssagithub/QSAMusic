@@ -10,6 +10,14 @@ import UIKit
 
 class SingerCell: UITableViewCell {
 
+    @IBOutlet weak var imgV: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    
+    func update(data: NSDictionary) {
+        imgV.sd_setImage(with: URL(string: data["avatar_small"] as! String), placeholderImage: UIImage(named: "QSAMusic_p.png"))
+        name.text = data["name"] as? String
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

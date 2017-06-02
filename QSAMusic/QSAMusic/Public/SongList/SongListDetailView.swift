@@ -31,7 +31,7 @@ class SongListDetailView: QSAKitBaseViewController, UITableViewDelegate, UITable
         headerView.addSubview(button)
         
         let headerLabel = UILabel(frame: CGRect(x: 0, y: 32, width: SwiftMacro().ScreenWidth, height: 30))
-        headerLabel.text = self.titleStr + " TOP30"
+        headerLabel.text = self.titleStr
         headerLabel.textAlignment = .center
         headerLabel.font = UIFont.systemFont(ofSize: 14)
         headerLabel.textColor = .white
@@ -66,7 +66,7 @@ class SongListDetailView: QSAKitBaseViewController, UITableViewDelegate, UITable
         tempHeaderView.addSubview(button)
         
         let headerLabel = UILabel(frame: CGRect(x: 0, y: 32, width: SwiftMacro().ScreenWidth, height: 30))
-        headerLabel.text = self.titleStr + " TOP30"
+        headerLabel.text = self.titleStr
         headerLabel.textAlignment = .center
         headerLabel.font = UIFont.systemFont(ofSize: 14)
         headerLabel.textColor = .white
@@ -89,7 +89,7 @@ class SongListDetailView: QSAKitBaseViewController, UITableViewDelegate, UITable
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexStr == "List") {
+        if (indexStr == "List" || indexStr == "Singer") {
             return 44.0;
         }
         return 55.0;
@@ -100,15 +100,29 @@ class SongListDetailView: QSAKitBaseViewController, UITableViewDelegate, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell") as! ListCell
             cell.update(data: dataArr[indexPath.row], indexStr: "List")
             return cell
+        } else if indexStr == "Singer" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SingerCell") as! SingerCell
+            cell.update(data: dataArr[indexPath.row])
+            return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ListViewTableViewCell
-        cell.update(data: dataArr[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LoadCell") as! LoadCell
+        //cell.update(data: dataArr[indexPath.row])
         return cell
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        PlayerController.shared.play(playList: dataArr, index: indexPath.row)
+        if indexStr == "List" {
+            PlayerController.shared.play(playList: dataArr, index: indexPath.row)
+        } else if indexStr == "Singer" {
+            let name = dataArr[indexPath.row]["name"] as! String
+            NetworkEngine.getSearch(query: name) { (result) in
+                let singer = SingerDetail()
+                singer.navigationName = name
+                singer.result = result
+                self.navigationController?.pushViewController(singer, animated: true)
+            }
+        }
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {

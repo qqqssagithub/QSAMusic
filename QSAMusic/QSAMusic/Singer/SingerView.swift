@@ -92,7 +92,20 @@ open class SingerView: QSAKitBaseView, UITableViewDataSource, UITableViewDelegat
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section != 0 {
-            
+            requestList(indexPath: indexPath)
         }
     }
+    
+    private func requestList(indexPath: IndexPath) {
+        let area = ["", "0", "3", "7", "60"]
+        let sex = "\(indexPath.row + 1)"
+        NetworkEngine.getSingerList(area: area[indexPath.section], sex: sex) { (singerList) in
+            let aDetail = SongListDetailView()
+            aDetail.dataArr = singerList
+            aDetail.titleStr = self.dataArr[indexPath.section][indexPath.row]
+            aDetail.indexStr = "Singer"
+            self.superVC.navigationController!.pushViewController(aDetail, animated: true)
+        }
+    }
+    
 }

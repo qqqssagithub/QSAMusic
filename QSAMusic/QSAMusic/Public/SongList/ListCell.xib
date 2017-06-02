@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIu-gc-BOh">
-                        <rect key="frame" x="35" y="24" width="251" height="16"/>
+                        <rect key="frame" x="31" y="24" width="281" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="BqM-dM-Pbp"/>
                         </constraints>
@@ -28,22 +28,22 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6k-5E-c1V">
-                        <rect key="frame" x="18" y="5" width="283" height="18"/>
+                        <rect key="frame" x="14" y="5" width="284" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="qCL-iN-w7F"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="VIu-gc-BOh" firstAttribute="top" secondItem="i6k-5E-c1V" secondAttribute="bottom" constant="1" id="Ekk-qS-q00"/>
-                    <constraint firstItem="VIu-gc-BOh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="MaI-wq-4rY"/>
-                    <constraint firstAttribute="trailing" secondItem="i6k-5E-c1V" secondAttribute="trailing" constant="19" id="Ycb-n5-X1u"/>
+                    <constraint firstItem="VIu-gc-BOh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="31" id="MaI-wq-4rY"/>
+                    <constraint firstAttribute="trailing" secondItem="i6k-5E-c1V" secondAttribute="trailing" constant="22" id="Ycb-n5-X1u"/>
                     <constraint firstItem="i6k-5E-c1V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="qY2-7C-Ze8"/>
-                    <constraint firstItem="i6k-5E-c1V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="qga-z3-bCg"/>
-                    <constraint firstAttribute="trailing" secondItem="VIu-gc-BOh" secondAttribute="trailing" constant="34" id="v5d-lx-Fif"/>
+                    <constraint firstItem="i6k-5E-c1V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="qga-z3-bCg"/>
+                    <constraint firstAttribute="trailing" secondItem="VIu-gc-BOh" secondAttribute="trailing" constant="8" id="v5d-lx-Fif"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

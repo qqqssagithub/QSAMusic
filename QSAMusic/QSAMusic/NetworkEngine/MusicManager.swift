@@ -8,64 +8,6 @@
 
 import UIKit
 
-//extension String {
-//    // 对象方法
-//    func getFileSize() -> UInt64  {
-//        var size: UInt64 = 0
-//        let fileManager = FileManager.default
-//        var isDir: ObjCBool = false
-//        let isExists = fileManager.fileExists(atPath: self, isDirectory: &isDir)
-//        // 判断文件存在
-//        if isExists {
-//            // 是否为文件夹
-//            if isDir.boolValue {
-//                // 迭代器 存放文件夹下的所有文件名
-//                let enumerator = fileManager.enumerator(atPath: self)
-//                for subPath in enumerator! {
-//                    // 获得全路径
-//                    let fullPath = self.appending("/\(subPath)")
-//                    do {
-//                        let attr = try fileManager.attributesOfItem(atPath: fullPath)
-//                        size += attr[FileAttributeKey.size] as! UInt64
-//                    } catch  {
-//                        QSALog("error :\(error)")
-//                    }
-//                }
-//            } else {    // 单文件
-//                do {
-//                    let attr = try fileManager.attributesOfItem(atPath: self)
-//                    size += attr[FileAttributeKey.size] as! UInt64
-//                } catch  {
-//                    QSALog("error :\(error)")
-//                }
-//            }
-//        }
-//        return size
-//    }
-//}
-
-extension String {
-    // 获取文件大小
-    func getFileSize() -> Int64  {
-        var size: Int64 = 0
-        let fileManager = FileManager.default
-        var isDir: ObjCBool = false
-        let isExists = fileManager.fileExists(atPath: self, isDirectory: &isDir)
-        // 判断文件存在
-        if isExists {
-            do {
-                let attr = try fileManager.attributesOfItem(atPath: self)
-                size += attr[FileAttributeKey.size] as! Int64
-            } catch  {
-                QSALog("文件size获取失败 :\(error)")
-            }
-        } else {
-            QSALog("音乐文件不存在")
-        }
-        return size
-    }
-}
-
 open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {
 
     open static let shared = MusicManager()

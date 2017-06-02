@@ -53,6 +53,7 @@ class TopTableViewCell: UITableViewCell {
             NetworkEngine.getSearch(query: name) { (result) in
                 let singer = SingerDetail()
                 singer.navigationName = name
+                singer.result = result
                 self.superVC?.navigationController?.pushViewController(singer, animated: true)
             }
         }
