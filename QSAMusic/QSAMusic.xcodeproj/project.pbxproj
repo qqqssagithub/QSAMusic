@@ -110,6 +110,19 @@
 		89F523731EB1EC2F00DC4279 /* QSAMusic_p.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F523721EB1EC2F00DC4279 /* QSAMusic_p.png */; };
 		89F523881EB1F38100DC4279 /* AlbumItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F523861EB1F38100DC4279 /* AlbumItem.swift */; };
 		89F523891EB1F38100DC4279 /* AlbumItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F523871EB1F38100DC4279 /* AlbumItem.xib */; };
+		89FA9B451EEB93AB00059E8F /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FA9B441EEB93AB00059E8F /* iflyMSC.framework */; };
+		89FA9B471EEB94B400059E8F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FA9B461EEB94B400059E8F /* libz.tbd */; };
+		89FA9B491EEB94CA00059E8F /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FA9B481EEB94CA00059E8F /* Contacts.framework */; };
+		89FA9B4A1EEB94D500059E8F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D66D881EBB078C00F71085 /* AddressBook.framework */; };
+		89FA9B4B1EEB94DF00059E8F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D66D861EBB078100F71085 /* CoreTelephony.framework */; };
+		89FA9B4C1EEB94E700059E8F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D66D841EBB06B800F71085 /* QuartzCore.framework */; };
+		89FA9B4D1EEB94EF00059E8F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DCF38C1EB81A4200CA14EF /* Accelerate.framework */; };
+		89FA9B4F1EEB94FD00059E8F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FA9B4E1EEB94FD00059E8F /* CoreLocation.framework */; };
+		89FA9B511EEB951800059E8F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FA9B501EEB951800059E8F /* SystemConfiguration.framework */; };
+		89FA9B531EEB952400059E8F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FA9B521EEB952400059E8F /* AudioToolbox.framework */; };
+		89FA9B571EEB9D6000059E8F /* QSMusicIFlytekDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FA9B561EEB9D6000059E8F /* QSMusicIFlytekDataHelper.m */; };
+		89FA9B591EEBA3E600059E8F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FA9B581EEBA3E600059E8F /* libc++.tbd */; };
+		89FA9B5B1EEBA3FB00059E8F /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FA9B5A1EEBA3FB00059E8F /* libicucore.tbd */; };
 		E38A4ADEE4AAF26C8E6F92D2 /* Pods_QSAMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CA765EDF6D27083DBCCDB8 /* Pods_QSAMusic.framework */; };
 /* End PBXBuildFile section */
 
@@ -252,6 +265,16 @@
 		89F523721EB1EC2F00DC4279 /* QSAMusic_p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QSAMusic_p.png; sourceTree = "<group>"; };
 		89F523861EB1F38100DC4279 /* AlbumItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumItem.swift; sourceTree = "<group>"; };
 		89F523871EB1F38100DC4279 /* AlbumItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumItem.xib; sourceTree = "<group>"; };
+		89FA9B441EEB93AB00059E8F /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
+		89FA9B461EEB94B400059E8F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		89FA9B481EEB94CA00059E8F /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		89FA9B4E1EEB94FD00059E8F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		89FA9B501EEB951800059E8F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		89FA9B521EEB952400059E8F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		89FA9B551EEB9D6000059E8F /* QSMusicIFlytekDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSMusicIFlytekDataHelper.h; sourceTree = "<group>"; };
+		89FA9B561EEB9D6000059E8F /* QSMusicIFlytekDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSMusicIFlytekDataHelper.m; sourceTree = "<group>"; };
+		89FA9B581EEBA3E600059E8F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		89FA9B5A1EEBA3FB00059E8F /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +282,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89FA9B5B1EEBA3FB00059E8F /* libicucore.tbd in Frameworks */,
+				89FA9B591EEBA3E600059E8F /* libc++.tbd in Frameworks */,
+				89FA9B531EEB952400059E8F /* AudioToolbox.framework in Frameworks */,
+				89FA9B511EEB951800059E8F /* SystemConfiguration.framework in Frameworks */,
+				89FA9B4F1EEB94FD00059E8F /* CoreLocation.framework in Frameworks */,
+				89FA9B4D1EEB94EF00059E8F /* Accelerate.framework in Frameworks */,
+				89FA9B4C1EEB94E700059E8F /* QuartzCore.framework in Frameworks */,
+				89FA9B4B1EEB94DF00059E8F /* CoreTelephony.framework in Frameworks */,
+				89FA9B4A1EEB94D500059E8F /* AddressBook.framework in Frameworks */,
+				89FA9B491EEB94CA00059E8F /* Contacts.framework in Frameworks */,
+				89FA9B471EEB94B400059E8F /* libz.tbd in Frameworks */,
+				89FA9B451EEB93AB00059E8F /* iflyMSC.framework in Frameworks */,
 				89DCF38F1EB81A4A00CA14EF /* AVFoundation.framework in Frameworks */,
 				89DDEDD81EAEE5590018292D /* QSAKit.framework in Frameworks */,
 				E38A4ADEE4AAF26C8E6F92D2 /* Pods_QSAMusic.framework in Frameworks */,
@@ -280,6 +315,13 @@
 		79E64A744849A21DCFC4F44D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89FA9B5A1EEBA3FB00059E8F /* libicucore.tbd */,
+				89FA9B581EEBA3E600059E8F /* libc++.tbd */,
+				89FA9B521EEB952400059E8F /* AudioToolbox.framework */,
+				89FA9B501EEB951800059E8F /* SystemConfiguration.framework */,
+				89FA9B4E1EEB94FD00059E8F /* CoreLocation.framework */,
+				89FA9B481EEB94CA00059E8F /* Contacts.framework */,
+				89FA9B461EEB94B400059E8F /* libz.tbd */,
 				89D66D881EBB078C00F71085 /* AddressBook.framework */,
 				89D66D861EBB078100F71085 /* CoreTelephony.framework */,
 				89D66D841EBB06B800F71085 /* QuartzCore.framework */,
@@ -384,6 +426,7 @@
 		89AC9CD91EADFB7800873FDB /* QSAMusic */ = {
 			isa = PBXGroup;
 			children = (
+				89FA9B441EEB93AB00059E8F /* iflyMSC.framework */,
 				89DDEDD51EAEE30B0018292D /* QSAKit.framework */,
 				89DDEDD71EAEE3380018292D /* PrefixHeader.pch */,
 				89B573681EB04B9200209030 /* QSAMusic-Bridging-Header.h */,
@@ -396,6 +439,7 @@
 				89AC9CE61EADFB7800873FDB /* Assets.xcassets */,
 				89AC9CE81EADFB7800873FDB /* LaunchScreen.storyboard */,
 				89AC9CEB1EADFB7800873FDB /* Info.plist */,
+				89FA9B541EEB9D4F00059E8F /* Search */,
 				8969ACDB1EC5827D009418E7 /* Public */,
 				89F523681EB1D9F800DC4279 /* Resources */,
 				89F523611EB1C74100DC4279 /* NetworkEngine */,
@@ -556,6 +600,15 @@
 				89F523721EB1EC2F00DC4279 /* QSAMusic_p.png */,
 			);
 			path = PlaceholderImage;
+			sourceTree = "<group>";
+		};
+		89FA9B541EEB9D4F00059E8F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				89FA9B551EEB9D6000059E8F /* QSMusicIFlytekDataHelper.h */,
+				89FA9B561EEB9D6000059E8F /* QSMusicIFlytekDataHelper.m */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -743,6 +796,7 @@
 				898A015E1EB3002D00E3AE45 /* AlbumDetails.swift in Sources */,
 				89C8C6411ED421C00062BD31 /* LoadCell.swift in Sources */,
 				89F523601EB1BDF000DC4279 /* SongView.swift in Sources */,
+				89FA9B571EEB9D6000059E8F /* QSMusicIFlytekDataHelper.m in Sources */,
 				89AC9CDF1EADFB7800873FDB /* AppDelegate.m in Sources */,
 				8970E75A1ED53556005B7578 /* TopTableViewCell.swift in Sources */,
 				897489921ECEB8B90068EBAE /* SongListClassCollectionViewCell.swift in Sources */,
@@ -896,6 +950,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TDV3UKPCP8;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QSAMusic",
@@ -921,6 +976,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TDV3UKPCP8;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QSAMusic",

@@ -12,7 +12,9 @@ open class SongView: QSAKitBaseView, UICollectionViewDataSource, UICollectionVie
     
     private lazy var collectionView: UICollectionView = {
         let layout = QSMusicGeDanCVFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
+        let lineSpacing = (SwiftMacro().ScreenWidth - (80.0 * 3)) / 4
+        layout.sectionInset = UIEdgeInsetsMake(20.0, lineSpacing, 0.0, lineSpacing)
+        layout.minimumLineSpacing = 20.0
         
         let collectionView = UICollectionView.init(frame: self.bounds, collectionViewLayout: layout)
         collectionView.delegate = self

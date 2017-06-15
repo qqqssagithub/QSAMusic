@@ -58,4 +58,6 @@
 #define LightTextColor [UIColor lightTextColor]
 /************RGB颜色*************/
 
+#define APPID_VALUE @"593b4e13"
+
 #endif /* PrefixHeader_pch */

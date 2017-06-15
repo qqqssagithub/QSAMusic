@@ -43,13 +43,13 @@ open class NetworkEngine: NSObject {
     }
     
     // MARK: - 歌曲详情
-    public class func getSong(songId: String, responseClosure: @escaping (_ oneSong: NSDictionary) -> Void) {
+    public class func getSong(songId: String, responseClosure: @escaping (_ oneSong: [String : Any]) -> Void) {
         QSALog("获取歌曲详情: \(songId)")
         let url = RequestURL().song + songId
         NetworkEngine().getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
-                let data = json?.object(forKey: "data") as! NSDictionary
-                let songList = data["songList"] as! [NSDictionary]
+                let data = json?.object(forKey: "data") as! [String : Any]
+                let songList = data["songList"] as! [[String : Any]]
                 responseClosure(songList[0])
             } else {
                 responseClosure(["songId" : 0])

@@ -8,8 +8,11 @@
 
 #import "RootViewController.h"
 #import "QSMusicRemoteEvent.h"
+#import <iflyMSC/iflyMSC.h>
 
-@interface RootViewController () <UIScrollViewDelegate>
+#import "QSMusicIFlytekDataHelper.h"
+
+@interface RootViewController () <UIScrollViewDelegate, IFlySpeechRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel      *titleLabel;
 
@@ -31,6 +34,8 @@
 @property (nonatomic) SongView   *songView;
 
 @property (nonatomic) NSMutableArray *appearViews;
+
+@property (nonatomic, strong) IFlySpeechUnderstander *iFlySpeechUnderstander;
 
 @end
 
@@ -126,7 +131,13 @@
 - (IBAction)btnsAction:(UIButton *)sender {
     switch (sender.tag) {
         case 5: { //mine
-            
+            //获得语义理解单例
+            _iFlySpeechUnderstander = [IFlySpeechUnderstander sharedInstance];
+            [_iFlySpeechUnderstander setParameter:@"3.0" forKey:@"nlp_version"];
+            //设置委托
+            _iFlySpeechUnderstander.delegate = self;
+            //启动语义理解服务
+            [_iFlySpeechUnderstander startListening];
         }
             break;
         case 6: { //search
@@ -221,6 +232,45 @@
         }
     }
     _appearViews = tempArr;
+}
+
+#pragma mark - 讯飞
+//结果返回代理
+- (void)onResults:(NSArray *)results isLast:(BOOL) isLast {
+    NSDictionary *dic = results[0];
+    NSLog(@"-----------:%@", dic);
+    NSMutableString *resultString = [[NSMutableString alloc] init];
+    for (NSString *key in dic) {
+        [resultString appendFormat:@"%@",key];
+    }
+    
+    //NSMutableString *tempStr = [[NSMutableString alloc] init];
+    NSDictionary *resultDic  = [NSJSONSerialization JSONObjectWithData:    //返回的格式必须为utf8的,否则发生未知错误
+                                [resultString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+    
+    
+    
+    NSLog(@"结果返回代理:\nrc:%@\ntext:%@", resultDic[@"rc"], resultDic[@"text"]);
+}
+
+//会话结束回调
+- (void)onError:(IFlySpeechError*)error {
+    NSLog(@"会话结束回调: %@", error);
+}
+
+//录音开始回调
+- (void)onBeginOfSpeech {
+    NSLog(@"录音开始回调");
+}
+
+//录音结束回调
+- (void)onEndOfSpeech {
+    NSLog(@"录音结束回调");
+}
+
+//会话取消回调
+- (void)onCancel {
+    NSLog(@"会话取消回调");
 }
 
 #pragma mark - 内存警告
