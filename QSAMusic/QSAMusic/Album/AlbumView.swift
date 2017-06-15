@@ -25,6 +25,7 @@ open class AlbumView: QSAKitBaseView, UICollectionViewDelegate, UICollectionView
         collectionView.backgroundColor = UIColor.clear
         return collectionView
     }()
+    
     private let dataArr = NSMutableArray()
     private var offset: Int = 0
     
