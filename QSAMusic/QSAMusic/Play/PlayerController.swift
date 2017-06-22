@@ -21,11 +21,11 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         QSAAudioPlayer.shared.delegate = self
     }
     
-    var playList = [NSDictionary]()
-    var playIndex: Int = 0
+    var playList = [NSDictionary]() //播放列表
+    var playIndex: Int = 0          //当前播放标记
     var isPlaying = false
     var playTime: Int = 0
-    var duration: Int = 0
+    var duration: Int = 0           //总时间
     
     func play(playList: [NSDictionary], index: Int) {
         self.playList = playList
@@ -37,6 +37,8 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         PlayView.shared().updataList(withData: playList)
     }
     
+    // MARK: - MusicManager代理
+    //准备播放, 更新播放界面
     func musicPrepare() {
         let music = playList[playIndex]
         if music["versions"] == nil {
@@ -60,6 +62,7 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         LrcTableView.shared().updateLrc(withCurrentTime: "00:00")
     }
     
+    //准备完毕
     func music(createComplete music: NSMutableDictionary) {
         if music["version"] as! String != "" {
             PlayView.shared().songLabel.text = "\(music["songName"] as! String)(\(music["version"] as! String))"
@@ -86,7 +89,6 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         })
     }
     
-    
     func musicDownload(updateProgress progress: Double) {
         DispatchQueue.main.async(execute: {
             PlayView.shared().progressView.progress = Float(progress)
@@ -102,6 +104,7 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
 //        }
     }
     
+    // MARK: - QSAAudioPlayer代理
     func player(updatePlayProgress playProgress: Float) {
         DispatchQueue.main.async(execute: {
             if !PlayView.shared().audioSlider.isTracking && !PlayView.shared().audioSlider.isTracking {
@@ -122,11 +125,13 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     func playerPlayEnd() {
         self.playNextIndex()
     }
+    // MARK: -
     
     func changePlayMode() -> String {
         return "列表循环"
     }
     
+    //上一曲
     func playPreviousIndex() {
         playIndex -= 1
         if playIndex  == -1 {
@@ -135,6 +140,7 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         self.play(index: playIndex)
     }
     
+    //下一曲
     func playNextIndex() {
         playIndex += 1
         if playIndex == playList.count {
@@ -172,17 +178,18 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         })
     }
     
-    public func headphonePullOut() {
-        pause()
-        QSAAudioPlayer.shared.headphonePullOut()
-    }
-    
     func play(offset: Float) {
         MusicManager.shared.getMusic(playOffset: offset)
     }
     
     func play(time: Int) {
         MusicManager.shared.getMusic(playTime: Float(time))
+    }
+    
+    //耳机拔出
+    public func headphonePullOut() {
+        pause()
+        QSAAudioPlayer.shared.headphonePullOut()
     }
     
 }

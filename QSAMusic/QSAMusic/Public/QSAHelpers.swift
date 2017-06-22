@@ -19,19 +19,23 @@ import UIKit
  */
 
 open class QSAHelpers: NSObject {
-    // Turn off logging
+    //log的开关
     open static var enableLogging: Bool = true
     
 }
 
+//基础闭包
 public typealias QSACallback = (Void) -> Void
 
+
+//打印, 包括文件 函数名称 行号 打印的内容
 public func QSALog(_ string: String, fName: String = #function, fLine: Int = #line, file: String = #file) {
     if QSAHelpers.enableLogging {
         print("----> file: \(file) \n----> func: \(fName) \n----> line: \(fLine) \n----> info: \(string) \n----------------------")
     }
 }
 
+//测试一个函数的用时
 public func getTime(function:()->()){
     let start = CACurrentMediaTime()
     function()
@@ -97,6 +101,7 @@ extension String {
     }
 }
 
+//删除字符串中指定的字符
 extension String {
     mutating func removeExcess(excess: [String]) -> String {
         for str in excess {

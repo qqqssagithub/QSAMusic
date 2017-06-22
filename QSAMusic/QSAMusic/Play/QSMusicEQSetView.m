@@ -10,6 +10,7 @@
 
 @interface QSMusicEQSetView ()
 
+//频率控制
 @property (weak, nonatomic) IBOutlet UISlider *eq31;
 @property (weak, nonatomic) IBOutlet UISlider *eq62;
 @property (weak, nonatomic) IBOutlet UISlider *eq125;
@@ -21,15 +22,16 @@
 @property (weak, nonatomic) IBOutlet UISlider *eq8k;
 @property (weak, nonatomic) IBOutlet UISlider *eq16k;
 
-@property (weak, nonatomic) IBOutlet UIButton *custom;
-@property (weak, nonatomic) IBOutlet UIButton *pop;
-@property (weak, nonatomic) IBOutlet UIButton *heavyBass;
-@property (weak, nonatomic) IBOutlet UIButton *voice;
-@property (weak, nonatomic) IBOutlet UIButton *rock;
-@property (weak, nonatomic) IBOutlet UIButton *classical;
-@property (weak, nonatomic) IBOutlet UIButton *jazz;
-@property (weak, nonatomic) IBOutlet UIButton *dance;
-@property (weak, nonatomic) IBOutlet UIButton *electronics;
+//风格
+@property (weak, nonatomic) IBOutlet UIButton *custom;    //自定义
+@property (weak, nonatomic) IBOutlet UIButton *pop;       //流行
+@property (weak, nonatomic) IBOutlet UIButton *heavyBass; //重低
+@property (weak, nonatomic) IBOutlet UIButton *voice;     //人声
+@property (weak, nonatomic) IBOutlet UIButton *rock;      //摇滚
+@property (weak, nonatomic) IBOutlet UIButton *classical; //古典
+@property (weak, nonatomic) IBOutlet UIButton *jazz;      //爵士
+@property (weak, nonatomic) IBOutlet UIButton *dance;     //舞曲
+@property (weak, nonatomic) IBOutlet UIButton *electronics;//电子
 
 
 @end
@@ -62,6 +64,7 @@
     }];
 }
 
+//设置频率的db的值
 - (IBAction)setDB:(UISlider *)sender {
     if (!sender.isTracking) {
         [self updateValueWithIndex:sender.tag - 30 gain:sender.value];
@@ -78,6 +81,7 @@
     [[QSAAudioPlayer shared] updateEQWithBandIndex:index gain:gain];
 }
 
+//风格按钮
 - (IBAction)styleAction:(UIButton *)sender {
     for (NSInteger i = 0; i < 9; i ++) {
         UIButton *btn = (UIButton *)[self viewWithTag:i + 100];

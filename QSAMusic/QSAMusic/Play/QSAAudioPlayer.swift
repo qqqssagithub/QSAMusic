@@ -12,12 +12,12 @@ import AVFoundation
 open class QSAAudioPlayer: NSObject, UITableViewDelegate {
     
     // MARK: - private variables
-    var engine = AVAudioEngine()                   //engine
+    var engine = AVAudioEngine()                           //engine
     private var internalAudioFile: AVAudioFile?            //播放文件
-    var internalPlayer: AVAudioPlayerNode?         //播放器
+    var internalPlayer: AVAudioPlayerNode?                 //播放器
     private var defaultSampleRate: Double = 44100.0        //默认采样率
     private var defaultChannels: AVAudioChannelCount = 2   //默认通道
-    var timer: DispatchSourceTimer?                //读取播放进度的定时器
+    var timer: DispatchSourceTimer?                        //读取播放进度的定时器
     private var eq: AVAudioUnitEQ?                         //均衡器
     private var startTime: Double = 0                      //开始播放的时间
     
@@ -97,10 +97,12 @@ open class QSAAudioPlayer: NSObject, UITableViewDelegate {
         }
     }
     
+    //耳机拔出
     public func headphonePullOut() {
         try? engine.start()
     }
     
+    //准备
     public func prepare() {
         playing = false
         internalPlayer?.stop()

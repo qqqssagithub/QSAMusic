@@ -10,6 +10,7 @@
 
 @interface mainColor : NSObject
 
+//读取imgae的主要颜色
 -(UIColor *)mostColor:(UIImage *)image;
 
 @end

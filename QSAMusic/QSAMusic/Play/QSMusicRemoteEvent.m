@@ -62,9 +62,9 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
             [[PlayerController shared] playAndPause];
         } else if(event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {//耳机play和pause
             [[PlayerController shared] playAndPause];
-        }else if(event.subtype == UIEventSubtypeRemoteControlNextTrack) {//耳机''锁屏共用
+        }else if(event.subtype == UIEventSubtypeRemoteControlNextTrack) {//耳机-锁屏共用
             [[PlayerController shared] playNextIndex];
-        }else if(event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {//耳机''锁屏共用
+        }else if(event.subtype == UIEventSubtypeRemoteControlPreviousTrack) {//耳机-锁屏共用
             [[PlayerController shared] playPreviousIndex];
         }
     }
@@ -147,6 +147,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
     return self.direction;
 }
 
+//展示进度提示文字
 - (void)cycleModeWithTitle:(NSString *)title {
     UIView *view;
     if (_style == 0) {

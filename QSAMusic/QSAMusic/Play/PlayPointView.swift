@@ -9,6 +9,7 @@
 import UIKit
 import pop
 
+//主屏幕上的圆点
 class PlayPointView: QSAKitBaseView {
     
     static let shared = PlayPointView(frame: CGRect(x: 24, y: SwiftMacro().ScreenHeight - 24 - 50, width: 50, height: 50))
@@ -49,6 +50,7 @@ class PlayPointView: QSAKitBaseView {
     
     var isList: Bool = false
     
+    //展开
     func open(isList: Bool) {
         self.isList = isList
         self.isUserInteractionEnabled = false
@@ -62,14 +64,15 @@ class PlayPointView: QSAKitBaseView {
         })
     }
     
+    //收缩
     func shrink() {
         isOpen = false
         self.performTransactionAnimation()
     }
     
-    typealias CallClosure =  (Void) -> Void
-    var openCallClosure: CallClosure!
+    var openCallClosure: QSACallback!
     
+    //展开收缩动画
     private func performTransactionAnimation() {
         self.pop_removeAllAnimations()
         let boundsAnimation: POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPLayerBounds)

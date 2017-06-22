@@ -168,6 +168,7 @@
     [_singer setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_radio setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
+    //移动过程中的处理, 添加新的view
     if (x > 0 && x < ScreenWidth * 1) {
         [_bottomScrollView addSubview:self.albumView];
         [_bottomScrollView addSubview:self.songView];
@@ -182,6 +183,7 @@
         [_bottomScrollView addSubview:self.radioView];
     }
     
+    //移动结束后的处理, 删除不显示的view
     if (x == ScreenWidth * 0) {
         [_album setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
         [_bottomScrollView addSubview:self.albumView];

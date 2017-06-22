@@ -80,21 +80,15 @@
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 
+//更新当前显示行
 - (void)updateLrcWithCurrentTime:(NSString *)currentTime {
     if (!_tableView.tracking) {
         for (NSInteger index = 0; index < _timeArray.count; index++) {
             if ([currentTime isEqualToString:_timeArray[index]]) {
                 LrcTableViewCell *cell = (LrcTableViewCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
                 LrcTableViewCell *beforeCell = (LrcTableViewCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index - 1 inSection:0]];
-                //            if ([PlayView sharedPlayView].isLoad) {
-                //                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
-                //            } else {
-                //                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-                //            }
                 [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-                //beforeCell.lrcLabel.textColor = [UIColor whiteColor];
                 [beforeCell.lrcLabel setFont:[UIFont systemFontOfSize:14.0]];
-                //cell.lrcLabel.textColor = [UIColor redColor];
                 [cell.lrcLabel setFont:[UIFont systemFontOfSize:20.0]];
             }
         }

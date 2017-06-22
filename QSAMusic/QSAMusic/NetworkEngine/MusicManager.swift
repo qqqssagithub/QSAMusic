@@ -40,12 +40,12 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
     private var waiting: Bool = false
     
     
-    ///指点时间
+    ///指定时间
     public func getMusic(playTime: Float) {
         getMusic(playOffset: playTime / Float(oneSong["time"] as! NSNumber))
     }
     
-    //指点偏移
+    //指定偏移进度
     public func getMusic(playOffset: Float) {
         waiting = false
         
@@ -164,6 +164,7 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
     private var dataTask: URLSessionDataTask?
     private var isAdequateResources: Bool?
     
+    //开始下载
     private func resumeMusicDownload(song: NSMutableDictionary, offset: Int64) {
         QSALog("创建歌曲下载dataTask")
         let url = URL(string: song["songLink"] as! String)!
@@ -233,13 +234,13 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
 }
 
 @objc public protocol MusicManagerDelegate: NSObjectProtocol {
-    
+    //准备
     @objc optional func musicPrepare()
-    
+    //准备完毕
     @objc optional func music(createComplete music: NSMutableDictionary)
-    
+    //下载进度
     @objc optional func musicDownload(updateProgress progress: Double)
-    
+    //下载出错
     @objc optional func musicDownloadFail(error: Int)
 }
 
