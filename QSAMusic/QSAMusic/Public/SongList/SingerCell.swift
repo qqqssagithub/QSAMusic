@@ -14,8 +14,14 @@ class SingerCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     
     func update(data: NSDictionary) {
-        imgV.sd_setImage(with: URL(string: data["avatar_small"] as! String), placeholderImage: UIImage(named: "QSAMusic_p.png"))
-        name.text = data["name"] as? String
+        imgV.layer.cornerRadius = 15.0
+        imgV.layer.masksToBounds = true
+        imgV.sd_setImage(with: URL(string: data["avatar_middle"] as! String), placeholderImage: UIImage(named: "QSAMusic_p.png"))
+        var name = data["name"] as? String
+        if name == nil {
+            name = data["author"] as? String
+        }
+        self.name.text = name?.remove(excess: ["<em>", "</em>"])
     }
     
     override func awakeFromNib() {

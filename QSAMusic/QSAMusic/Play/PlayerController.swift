@@ -27,6 +27,8 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     var playTime: Int = 0
     var duration: Int = 0           //总时间
     
+    var oneSong: NSMutableDictionary? = nil
+    
     func play(playList: [NSDictionary], index: Int) {
         self.playList = playList
         playIndex = index
@@ -57,6 +59,8 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         PlayView.shared().totalTime.text = "00:00"
         PlayView.shared().starImgV.image = UIImage(named: "QSAMusic_pc.png")
         PlayView.shared().playViewBackImageView.image = nil
+        PlayView.shared().scImgV.image = UIImage(named: "ax_0.png")
+        PlayView.shared().scButton.isEnabled = true
         
         LrcTableView.shared().initLrc(withLrcStr: "")
         LrcTableView.shared().updateLrc(withCurrentTime: "00:00")
@@ -74,12 +78,16 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         PlayView.shared().audioSlider.value = 0.0
         PlayView.shared().totalTime.text = String(format: "%02ld:%02ld", music["time"] as! Int / 60, music["time"] as! Int % 60)
         self.duration = music["time"] as! Int
+        if music["like"] as! String == "1" {
+            PlayView.shared().scImgV.image = UIImage(named: "ax_1.png")
+        }
+        PlayView.shared().scButton.isEnabled = true
+        oneSong = music
         LrcTableView.shared().initLrc(withLrcURL: music["lrcLink"] as! String)
-        let sdManager = SDWebImageManager.shared()
         
+        let sdManager = SDWebImageManager.shared()
         var urlStr = music["songPicBig"] as! String
         urlStr = urlStr.replacingOccurrences(of: "w_150", with: "w_414")
-        
         let url = URL(string: urlStr)
         sdManager?.downloadImage(with: url, options: [], progress: { (receivedSize, expectedSize) in
         }, completed: { (image, errer, _, _, imageURL) in
@@ -123,17 +131,62 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     }
     
     func playerPlayEnd() {
-        self.playNextIndex()
+        playNextIndex()
     }
-    // MARK: -
     
-    func changePlayMode() -> String {
-        return "列表循环"
+    // MARK: - play界面操作
+    //收藏
+    func like() {
+        if oneSong?["like"] as! String == "1" {
+            oneSong?.setValue("0", forKey: "like")
+            PlayView.shared().scImgV.image = UIImage(named: "ax_0.png")
+        } else {
+            oneSong?.setValue("1", forKey: "like")
+            PlayView.shared().scImgV.image = UIImage(named: "ax_1.png")
+        }
+        if ArchiveManager.archiveManagerEncode(songId: oneSong?["songId"] as! String, data: oneSong!) {
+            QSALog("收藏状态修改成功")
+        } else {
+            QSALog("收藏状态修改失败")
+        }
+    }
+    
+    //循环模式
+    func changeCycleMode() -> String {
+        if SystemSettings().cycleMode() == SystemSettings.CycleMode.List {
+            SystemSettings().cycleMode(cycleMode: SystemSettings.CycleMode.Single)
+            return "单曲循环"
+        } else if SystemSettings().cycleMode() == SystemSettings.CycleMode.Single {
+            SystemSettings().cycleMode(cycleMode: SystemSettings.CycleMode.Random)
+            return "随机播放"
+        } else {
+            SystemSettings().cycleMode(cycleMode: SystemSettings.CycleMode.List)
+            return "列表循环"
+        }
+    }
+    
+    func cycleMode() -> String {
+        if SystemSettings().cycleMode() == SystemSettings.CycleMode.List {
+            return "列表循环"
+        } else if SystemSettings().cycleMode() == SystemSettings.CycleMode.Single {
+            return "单曲循环"
+        } else {
+            return "随机播放"
+        }
     }
     
     //上一曲
     func playPreviousIndex() {
-        playIndex -= 1
+        if SystemSettings().cycleMode() == SystemSettings.CycleMode.Random {
+            let temp = Int(arc4random() % UInt32(playList.count))
+            if temp == playIndex {
+                playIndex -= 1
+            } else {
+                playIndex = temp
+            }
+        } else {
+            playIndex -= 1
+        }
         if playIndex  == -1 {
             playIndex = playList.count - 1
         }
@@ -141,8 +194,21 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     }
     
     //下一曲
-    func playNextIndex() {
-        playIndex += 1
+    func playNextIndex(isAuto: Bool = true) {
+        if SystemSettings().cycleMode() == SystemSettings.CycleMode.Random {
+            let temp = Int(arc4random() % UInt32(playList.count))
+            if temp == playIndex {
+                playIndex += 1
+            } else {
+                playIndex = temp
+            }
+        } else if SystemSettings().cycleMode() == SystemSettings.CycleMode.List {
+            playIndex += 1
+        } else {
+            if !isAuto {
+                playIndex += 1
+            }
+        }
         if playIndex == playList.count {
             playIndex = 0
         }

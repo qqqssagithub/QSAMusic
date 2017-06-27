@@ -19,7 +19,13 @@
     dispatch_once(&onceToken, ^{
         UINib *nib = [UINib nibWithNibName:@"PlayButtonView" bundle:nil];
         sharedPlayButtonView = [[nib instantiateWithOwner:nil options:nil] firstObject];
-        //sharePlayButtonView.cycleMode = CirculationModeIsCycle;
+        if ([[[PlayerController shared] cycleMode]  isEqual: @"列表循环"]) {
+            [sharedPlayButtonView.cycleButton setBackgroundImage:[UIImage imageNamed:@"xunhuan1"] forState:UIControlStateNormal];
+        } else if ([[[PlayerController shared] cycleMode]  isEqual: @"单曲循环"]) {
+            [sharedPlayButtonView.cycleButton setBackgroundImage:[UIImage imageNamed:@"danqu1"] forState:UIControlStateNormal];
+        } else {
+            [sharedPlayButtonView.cycleButton setBackgroundImage:[UIImage imageNamed:@"suiji1"] forState:UIControlStateNormal];
+        }
         sharedPlayButtonView.frame = CGRectMake(0, ScreenHeight, ScreenWidth, height);
         [sharedPlayButtonView.cycleButton setShowsTouchWhenHighlighted:YES];
         [sharedPlayButtonView.previousButton setShowsTouchWhenHighlighted:YES];
@@ -39,7 +45,7 @@
 - (IBAction)buttonAction:(UIButton *)oneButton {
     switch (oneButton.tag) {
         case 201:
-            [self cycleModeWithTitle:[[PlayerController shared] changePlayMode]];
+            [self cycleModeWithTitle:[[PlayerController shared] changeCycleMode]];
             break;
         case 202:
             [[PlayerController shared] playPreviousIndex];
@@ -48,7 +54,7 @@
             [[PlayerController shared] playAndPause];
             break;
         case 204:
-            [[PlayerController shared] playNextIndex];
+            [[PlayerController shared] playNextIndexWithIsAuto:NO];
             break;
         case 205: {
             [[QSMusicEQSetView shared] show];

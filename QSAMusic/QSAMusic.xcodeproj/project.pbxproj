@@ -75,6 +75,8 @@
 		897489AD1ECEC4370068EBAE /* search@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 897489A31ECEC4370068EBAE /* search@3x.png */; };
 		897500EF1ECEF95500EC8720 /* SongListDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897500ED1ECEF95500EC8720 /* SongListDetail.swift */; };
 		898A015E1EB3002D00E3AE45 /* AlbumDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A015C1EB3002D00E3AE45 /* AlbumDetails.swift */; };
+		899EE9EF1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 899EE9EC1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.m */; };
+		899EE9F01F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 899EE9ED1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.xib */; };
 		89AC9CDC1EADFB7800873FDB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC9CDB1EADFB7800873FDB /* main.m */; };
 		89AC9CDF1EADFB7800873FDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC9CDE1EADFB7800873FDB /* AppDelegate.m */; };
 		89AC9CE71EADFB7800873FDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89AC9CE61EADFB7800873FDB /* Assets.xcassets */; };
@@ -221,6 +223,11 @@
 		897489A31ECEC4370068EBAE /* search@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@3x.png"; sourceTree = "<group>"; };
 		897500ED1ECEF95500EC8720 /* SongListDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListDetail.swift; sourceTree = "<group>"; };
 		898A015C1EB3002D00E3AE45 /* AlbumDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetails.swift; sourceTree = "<group>"; };
+		899EE9E91F02C8FE004B6C8A /* QSMusicSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSMusicSearch.h; sourceTree = "<group>"; };
+		899EE9EA1F02C8FE004B6C8A /* QSMusicSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSMusicSearch.m; sourceTree = "<group>"; };
+		899EE9EB1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSMusicSearchTbVHeaderView.h; sourceTree = "<group>"; };
+		899EE9EC1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSMusicSearchTbVHeaderView.m; sourceTree = "<group>"; };
+		899EE9ED1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QSMusicSearchTbVHeaderView.xib; sourceTree = "<group>"; };
 		89AC9CD71EADFB7800873FDB /* QSAMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QSAMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89AC9CDB1EADFB7800873FDB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		89AC9CDD1EADFB7800873FDB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -605,6 +612,11 @@
 		89FA9B541EEB9D4F00059E8F /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				899EE9E91F02C8FE004B6C8A /* QSMusicSearch.h */,
+				899EE9EA1F02C8FE004B6C8A /* QSMusicSearch.m */,
+				899EE9EB1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.h */,
+				899EE9EC1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.m */,
+				899EE9ED1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.xib */,
 				89FA9B551EEB9D6000059E8F /* QSMusicIFlytekDataHelper.h */,
 				89FA9B561EEB9D6000059E8F /* QSMusicIFlytekDataHelper.m */,
 			);
@@ -701,6 +713,7 @@
 				8970E75F1ED53583005B7578 /* SingerClassTableViewCell.xib in Resources */,
 				897489A61ECEC4370068EBAE /* arrow_down@3x.png in Resources */,
 				895BC7E11EDE7F0700A523E7 /* dy.jpg in Resources */,
+				899EE9F01F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.xib in Resources */,
 				891911101EBC6CB100F61D0A /* download.png in Resources */,
 				89C8C63A1ED421250062BD31 /* ListCell.xib in Resources */,
 				891911181EBC6CB100F61D0A /* yinliang1.png in Resources */,
@@ -821,6 +834,8 @@
 				89D31F851EB9772D000F9FD9 /* MusicManager.swift in Sources */,
 				8974898B1ECE9DCA0068EBAE /* QSMusicGeDanCVFlowLayout.m in Sources */,
 				89B573671EB044C200209030 /* SwiftMacro.swift in Sources */,
+				899EE9EE1F02C8FE004B6C8A /* QSMusicSearch.m in Sources */,
+				899EE9EF1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.m in Sources */,
 				8969ACDD1EC582ED009418E7 /* QSAHelpers.swift in Sources */,
 				89F523631EB1C83800DC4279 /* NetworkEngine.swift in Sources */,
 				89B573641EB043F600209030 /* AlbumView.swift in Sources */,

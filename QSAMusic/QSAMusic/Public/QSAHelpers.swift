@@ -18,24 +18,23 @@ import UIKit
  //归档失败：-1000
  */
 
+//MARK: - log的开关
 open class QSAHelpers: NSObject {
-    //log的开关
     open static var enableLogging: Bool = true
-    
 }
 
-//基础闭包
+//MARK: - 基础闭包
 public typealias QSACallback = (Void) -> Void
 
 
-//打印, 包括文件 函数名称 行号 打印的内容
+//MARK: - 打印, 包括文件 函数名称 行号 打印的内容
 public func QSALog(_ string: String, fName: String = #function, fLine: Int = #line, file: String = #file) {
     if QSAHelpers.enableLogging {
         print("----> file: \(file) \n----> func: \(fName) \n----> line: \(fLine) \n----> info: \(string) \n----------------------")
     }
 }
 
-//测试一个函数的用时
+//MARK: - 测试一个函数的用时
 public func getTime(function:()->()){
     let start = CACurrentMediaTime()
     function()
@@ -43,6 +42,7 @@ public func getTime(function:()->()){
     QSALog("方法耗时为：\(end - start)")
 }
 
+//MARK: - 获取文件大小
 //extension String {
 //    // 对象方法
 //    func getFileSize() -> UInt64  {
@@ -101,12 +101,64 @@ extension String {
     }
 }
 
-//删除字符串中指定的字符
+//MARK: - 删除字符串中指定的字符
 extension String {
-    mutating func removeExcess(excess: [String]) -> String {
+    mutating func remove(excess: [String]) -> String {
         for str in excess {
             self = self.replacingOccurrences(of: str, with: "")
         }
         return self
+    }
+}
+
+//MARK: - 系统配置
+extension UserDefaults {
+    func set(value: SystemSettings.CycleMode, forKey: String) {
+        if value == SystemSettings.CycleMode.List {
+            UserDefaults.standard.setValue("list", forKey: forKey)
+        } else if value == SystemSettings.CycleMode.Single {
+            UserDefaults.standard.setValue("single", forKey: forKey)
+        } else {
+            UserDefaults.standard.setValue("random", forKey: forKey)
+        }
+    }
+}
+
+open class SystemSettings {
+    func likeList() -> NSMutableArray {
+        let likeList = UserDefaults.standard.object(forKey: "likeList")
+        if likeList != nil {
+            return likeList as! NSMutableArray
+        } else {
+            return NSMutableArray()
+        }
+    }
+    
+    enum CycleMode {
+        case List
+        case Single
+        case Random
+    }
+    
+    
+    
+    func cycleMode() -> CycleMode {
+        let cycleMode = UserDefaults.standard.object(forKey: "cycleMode") as? String
+        if cycleMode == nil {
+            UserDefaults.standard.set(value: CycleMode.List, forKey: "cycleMode")
+            return CycleMode.List
+        } else {
+            if cycleMode == "list" {
+                return CycleMode.List
+            } else if cycleMode == "single" {
+                return CycleMode.Single
+            } else {
+                return CycleMode.Random
+            }
+        }
+    }
+    
+    func cycleMode(cycleMode: CycleMode) {
+        UserDefaults.standard.set(value: cycleMode, forKey: "cycleMode")
     }
 }

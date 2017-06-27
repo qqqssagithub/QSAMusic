@@ -83,9 +83,6 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
         [self.layer addAnimation:opacityAnimation forKey:@"opacity"];
     } completion:^(BOOL finished) {
         self.alpha = 1.0;
-        if (_isLoad) {
-            _playButtonView.otherButton.enabled = NO;
-        }
         [UIView animateWithDuration:0.3 animations:^{
             _playButtonView.frame = CGRectMake(0, ScreenHeight - self.playBottomView.bounds.size.height, ScreenWidth, self.playBottomView.bounds.size.height);
         }];

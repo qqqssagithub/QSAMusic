@@ -13,18 +13,18 @@
 /**
  *  解析命令词返回的结果
  *
- *  @param params
+ *  @param params 命令词
  *
- *  @return
+ *  @return 结果
  */
 + (NSString *)stringFromAsr:(NSString*)params;
 
 /**
  *  解析JSON数据
  *
- *  @param params
+ *  @param params JSON数据
  *
- *  @return
+ *  @return 结果
  */
 + (NSString *)stringFromJson:(NSString*)params;//
 
@@ -32,9 +32,9 @@
 /**
  *  解析语法识别返回的结果
  *
- *  @param params
+ *  @param params 语法词
  *
- *  @return 
+ *  @return 结果
  */
 + (NSString *)stringFromABNFJson:(NSString*)params;
 

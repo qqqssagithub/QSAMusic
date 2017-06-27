@@ -31,6 +31,7 @@ class TopTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    //MARK: - collection代理
     private class TopCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
         static let shared = TopCollectionViewDelegate()
         private override init() {}

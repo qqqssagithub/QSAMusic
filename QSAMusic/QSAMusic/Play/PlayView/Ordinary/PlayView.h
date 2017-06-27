@@ -30,9 +30,8 @@
 
 @property (nonatomic, copy) void(^contractionBlock)();                       //隐藏完成后的回调
 
-@property (weak, nonatomic) IBOutlet UIImageView *scImgV;
-@property (weak, nonatomic) IBOutlet UIButton *scButton;
-@property (nonatomic) BOOL isLoad;
+@property (weak, nonatomic) IBOutlet UIImageView *scImgV;                    //收藏
+@property (weak, nonatomic) IBOutlet UIButton *scButton;                     //收藏btn
 
 @property (weak, nonatomic) IBOutlet UITableView *listTbV;
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-//音乐文件归档
+//音乐信息归档
 class ArchiveManager: NSObject {
 
     class func archiveManagerEncode(songId: String, data: NSMutableDictionary) -> Bool {

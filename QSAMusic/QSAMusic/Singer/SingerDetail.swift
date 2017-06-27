@@ -194,14 +194,14 @@ class SingerDetail: QSAKitBaseViewController, UITableViewDelegate, UITableViewDa
             let song = songArr[indexPath.row] as! NSDictionary
             let pic = song["pic_small"] as! String
             var title = song["title"] as! String
-            title = title.removeExcess(excess: ["<em>", "</em>"])
+            title = title.remove(excess: ["<em>", "</em>"])
             let other = song["album_title"] as! String
             cell.update(data: ["pic": pic, "title": title, "other": "专辑: \(other)"])
         } else {
             let album = albumArr[indexPath.row] as! NSDictionary
             let pic = album["pic_small"] as! String
             var title = album["title"] as! String
-            title = title.removeExcess(excess: ["<em>", "</em>"])
+            title = title.remove(excess: ["<em>", "</em>"])
             let other = album["publishtime"] as! String
             cell.update(data: ["pic": pic, "title": title, "other": other])
         }
