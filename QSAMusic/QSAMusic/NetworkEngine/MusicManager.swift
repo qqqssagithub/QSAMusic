@@ -125,7 +125,7 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
             QSALog("新歌曲")
             delegate?.musicPrepare!()
             delegate?.musicDownload!(updateProgress: 0.0)
-            NetworkEngine.getSong(songId: songId, responseClosure: { (songDetails) in
+            NetworkEngine.getSong(songId: songId, responseBlock: { (songDetails) in
                 if songDetails.count == 1 {
                    self.delegate?.musicDownloadFail!(error: -1009)
                 } else {

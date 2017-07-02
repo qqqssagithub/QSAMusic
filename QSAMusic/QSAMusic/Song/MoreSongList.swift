@@ -55,11 +55,11 @@ open class MoreSongList: QSAKitBaseView, UICollectionViewDelegate, UICollectionV
     
     private func getData(page: Int = 1) {
         if tags != "" {
-            NetworkEngine.getSongListClassDetail(page: page, tag: tags, responseClosure: { (content, havemore) in
+            NetworkEngine.getSongListClassDetail(page: page, tag: tags, responseBlock: { (content, havemore) in
                 self.updateDate(content: content, havemore: havemore)
             })
         } else {
-            NetworkEngine.getRecommend(page: page, responseClosure: { (content, havemore) in
+            NetworkEngine.getRecommend(page: page, responseBlock: { (content, havemore) in
                 self.updateDate(content: content, havemore: havemore)
             })
         }

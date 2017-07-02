@@ -171,7 +171,7 @@
 #pragma mark - searchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (searchText.length > 0) {
-        [NetworkEngine getSearchWithQuery:searchText page:0 size:3 responseClosure:^(NSDictionary * _Nonnull data) {
+        [NetworkEngine getSearchWithQuery:searchText page:0 size:3 responseBlock:^(NSDictionary * _Nonnull data) {
             _data = data;
             [_searchTableView reloadData];
         }];

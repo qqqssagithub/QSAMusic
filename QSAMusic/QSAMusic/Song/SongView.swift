@@ -53,7 +53,7 @@ open class SongView: QSAKitBaseView, UICollectionViewDataSource, UICollectionVie
             self.songListDataArr = songList
             self.collectionView.reloadData()
             
-            NetworkEngine.getRecommend(size: 8, responseClosure: { (content, havemore) in
+            NetworkEngine.getRecommend(size: 8, responseBlock: { (content, havemore) in
                 self.songListDetailsDataArr = content
                 self.collectionView.reloadData()
             })

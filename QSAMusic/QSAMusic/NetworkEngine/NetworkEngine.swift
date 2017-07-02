@@ -11,7 +11,7 @@ import Alamofire
 
 open class NetworkEngine: NSObject {
 
-    private class RequestURL: NSObject {
+    private struct RequestURL {
         
         let albumList = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.plaza.getRecommendAlbum&format=json&offset=%ld&limit=25&type=2&from=ios&version=5.8.1&cuid=1bb92ffcf38c17a7d8a3b3e75361f0a85c8b7054&channel=appstore&operator=0"
         let albumDetail = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.album.getAlbumInfo&album_id=%@&format=json&from=ios&version=5.8.1&cuid=1bb92ffcf38c17a7d8a3b3e75361f0a85c8b7054&channel=appstore&operator=0"
@@ -34,169 +34,178 @@ open class NetworkEngine: NSObject {
         let song = "http://music.baidu.com/data/music/links?songIds="
     }
     
-    private func getData(url: String, responseClosure: @escaping (_ data: DataResponse<Any>) -> Void) {
+    let animals = ["fish", "cat", "chicken", "dog"]
+    
+    func s() {
+        _ = animals.sorted { _,_ in
+            return true;
+        }
+        
+    }
+    
+    private class func getData(url: String, responseBlock: @escaping (_ data: DataResponse<Any>) -> Void) {
         QSAKitPromptView.show()
         Alamofire.request(url).validate().responseJSON { response in
             QSAKitPromptView.disappear()
-            responseClosure(response)
+            responseBlock(response)
         }
     }
     
     // MARK: - 歌曲详情
-    public class func getSong(songId: String, responseClosure: @escaping (_ oneSong: [String : Any]) -> Void) {
+    public class func getSong(songId: String, responseBlock: @escaping (_ oneSong: [String : Any]) -> Void) {
         QSALog("获取歌曲详情: \(songId)")
         let url = RequestURL().song + songId
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let data = json?.object(forKey: "data") as! [String : Any]
                 let songList = data["songList"] as! [[String : Any]]
-                responseClosure(songList[0])
+                responseBlock(songList[0])
             } else {
-                responseClosure(["songId" : 0])
+                responseBlock(["songId" : 0])
             }
         }
     }
     
     // MARK: - 新碟
-    public class func getAlbumList(offset : Int = 0, responseClosure: @escaping (_ dataArr: [NSDictionary], _ havemore: Int) -> Void) {
+    public class func getAlbumList(offset : Int = 0, responseBlock: @escaping (_ dataArr: [NSDictionary], _ havemore: Int) -> Void) {
         let url = String(format: RequestURL().albumList, offset)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let plaze_album_list = json?.object(forKey: "plaze_album_list") as! NSDictionary
                 let RM = plaze_album_list["RM"] as! NSDictionary
                 let album_list = RM["album_list"] as! NSDictionary
                 let list = album_list["list"] as! [NSDictionary]
                 let havemore = Int(album_list["havemore"] as! NSNumber)
-                responseClosure(list, havemore)
+                responseBlock(list, havemore)
             }
         }
     }
     
-    public class func getAlbumDetail(albumId: String, responseClosure: @escaping (_ albumInfo: NSDictionary, _ songList: [NSDictionary]) -> Void) {
+    public class func getAlbumDetail(albumId: String, responseBlock: @escaping (_ albumInfo: NSDictionary, _ songList: [NSDictionary]) -> Void) {
         QSALog("获取新碟详情: \(albumId)")
         let url = String(format: RequestURL().albumDetail, albumId)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let albumInfo = json?.object(forKey: "albumInfo") as! NSDictionary
                 let songList: AnyObject = json?.object(forKey: "songlist") as AnyObject
                 if !songList.isEqual(String.self) {
-                    responseClosure(albumInfo, songList as! [NSDictionary])
+                    responseBlock(albumInfo, songList as! [NSDictionary])
                 } else {
-                    responseClosure(albumInfo, [])
+                    responseBlock(albumInfo, [])
                 }
             }
         }
     }
     
     // MARK: - 歌单
-    public class func getSongListClass(responseClosure: @escaping (_ songListClass: [NSDictionary]) -> Void) {
+    public class func getSongListClass(responseBlock: @escaping (_ songListClass: [NSDictionary]) -> Void) {
         let url = RequestURL().songListClass
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let content = json?.object(forKey: "content") as! [NSDictionary]
-                responseClosure(content)
+                responseBlock(content)
             }
         }
     }
     
-    public class func getSongListClassDetail(page: Int = 1, size: Int = 25, tag: String, responseClosure: @escaping (_ content: [NSDictionary], _ havemore: Int) -> Void) {
+    public class func getSongListClassDetail(page: Int = 1, size: Int = 25, tag: String, responseBlock: @escaping (_ content: [NSDictionary], _ havemore: Int) -> Void) {
         let tagURL = tag.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = String(format: RequestURL().songListClassDetail, page, size, tagURL)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let content = json?.object(forKey: "content") as! [NSDictionary]
                 let havemore = Int(json?.object(forKey: "havemore") as! NSNumber)
-                responseClosure(content, havemore)
+                responseBlock(content, havemore)
             }
         }
     }
     
-    public class func getRecommend(page: Int = 1, size: Int = 25, responseClosure: @escaping (_ content: [NSDictionary], _ havemore: Int) -> Void) {
+    public class func getRecommend(page: Int = 1, size: Int = 25, responseBlock: @escaping (_ content: [NSDictionary], _ havemore: Int) -> Void) {
         let url = String(format: RequestURL().songListRecommend, page, size)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let content = json?.object(forKey: "content") as! [NSDictionary]
                 let havemore = Int(json?.object(forKey: "havemore") as! NSNumber)
-                responseClosure(content, havemore)
+                responseBlock(content, havemore)
             }
         }
     }
     
-    public class func getSongListDetail(listId: String, responseClosure: @escaping (_ listInfo:  NSDictionary, _ songList: [NSDictionary]) -> Void) {
+    public class func getSongListDetail(listId: String, responseBlock: @escaping (_ listInfo:  NSDictionary, _ songList: [NSDictionary]) -> Void) {
         let url = String(format: RequestURL().songListDetail, listId)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let listInfo: NSDictionary = ["title": json?.object(forKey: "title") as! String,
                                               "pic_radio": json?.object(forKey: "pic_w700") as! String,
                                               "info": json?.object(forKey: "desc") as! String]
                 let songList = json?.object(forKey: "content") as! [NSDictionary]
-                responseClosure(listInfo, songList)
+                responseBlock(listInfo, songList)
             }
         }
     }
     
     // MARK: - 榜单
-    public class func getList(responseClosure: @escaping (_ list: [NSDictionary]) -> Void) {
+    public class func getList(responseBlock: @escaping (_ list: [NSDictionary]) -> Void) {
         let url = RequestURL().list
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let content = json?.object(forKey: "content") as! [NSDictionary]
-                responseClosure(content)
+                responseBlock(content)
             }
         }
     }
     
-    public class func getListDetail(listType: Int, responseClosure: @escaping (_ list: [NSDictionary]) -> Void) {
+    public class func getListDetail(listType: Int, responseBlock: @escaping (_ list: [NSDictionary]) -> Void) {
         let url = String(format: RequestURL().listDetail, listType, 30)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let song_list = json?.object(forKey: "song_list") as! [NSDictionary]
-                responseClosure(song_list)
+                responseBlock(song_list)
             }
         }
     }
     
     // MARK: - 歌手
-    public class func getHotSinger(responseClosure: @escaping (_ list: [NSDictionary]) -> Void) {
+    public class func getHotSinger(responseBlock: @escaping (_ list: [NSDictionary]) -> Void) {
         let url = String(format: RequestURL().hotSingerList)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let list = json?.object(forKey: "artist") as! [NSDictionary]
-                responseClosure(list)
+                responseBlock(list)
             }
         }
     }
     
-    public class func getSingerList(limit: Int = 30, offset: Int = 0, area: String, sex: String, responseClosure: @escaping (_ list: [NSDictionary]) -> Void) {
+    public class func getSingerList(limit: Int = 30, offset: Int = 0, area: String, sex: String, responseBlock: @escaping (_ list: [NSDictionary]) -> Void) {
         let url = String(format: RequestURL().singerList, limit, offset, area, sex)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let list = json?.object(forKey: "artist") as! [NSDictionary]
-                responseClosure(list)
+                responseBlock(list)
             }
         }
     }
     
     //MARK: - 电台
-    public class func getChannelSong(channelname: String, page: Int = 1, size: Int = 30, responseClosure: @escaping (_ result: [NSDictionary]) -> Void) {
+    public class func getChannelSong(channelname: String, page: Int = 1, size: Int = 30, responseBlock: @escaping (_ result: [NSDictionary]) -> Void) {
         let url = String(format: RequestURL().radio, channelname, page, size)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let result = json?.object(forKey: "result") as! NSDictionary
                 let songList = result["songlist"] as! [NSDictionary]
-                responseClosure(songList)
+                responseBlock(songList)
             }
         }
     }
     
     // MARK: - 搜索
-    public class func getSearch(query: String, page: Int = 1, size: Int = 25, responseClosure: @escaping (_ result: NSDictionary) -> Void) {
+    public class func getSearch(query: String, page: Int = 1, size: Int = 25, responseBlock: @escaping (_ result: NSDictionary) -> Void) {
         let queryURL = query.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = String(format: RequestURL().search, queryURL, page, size)
-        NetworkEngine().getData(url: url) { (response) in
+        NetworkEngine.getData(url: url) { (response) in
             if let json: AnyObject? = response.result.value as AnyObject?? {
                 let result = json?.object(forKey: "result") as! NSDictionary
-                responseClosure(result)
+                responseBlock(result)
             }
         }
     }
