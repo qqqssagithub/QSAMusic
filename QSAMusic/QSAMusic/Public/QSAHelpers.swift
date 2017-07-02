@@ -28,9 +28,9 @@ public typealias QSACallback = (Void) -> Void
 
 
 //MARK: - 打印, 包括文件 函数名称 行号 打印的内容
-public func QSALog(_ string: String, fName: String = #function, fLine: Int = #line, file: String = #file) {
+public func QSALog(_ items: Any, fName: String = #function, fLine: Int = #line, file: String = #file) {
     if QSAHelpers.enableLogging {
-        print("----> file: \(file) \n----> func: \(fName) \n----> line: \(fLine) \n----> info: \(string) \n----------------------")
+        print("---->file:\(file)\n---->func:\(fName)\n---->line:\(fLine)\n---->info:\((items))\n----------------------")
     }
 }
 

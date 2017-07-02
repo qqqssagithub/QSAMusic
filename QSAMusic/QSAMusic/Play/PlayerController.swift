@@ -89,7 +89,7 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         var urlStr = music["songPicBig"] as! String
         urlStr = urlStr.replacingOccurrences(of: "w_150", with: "w_414")
         let url = URL(string: urlStr)
-        sdManager?.downloadImage(with: url, options: [], progress: { (receivedSize, expectedSize) in
+        _ = sdManager?.downloadImage(with: url, progress: { (receivedSize, expectedSize) in
         }, completed: { (image, errer, _, _, imageURL) in
             PlayView.shared().starImgV.image = image
             PlayView.shared().playViewBackImageView.image = image?.blur(with: UIColor.black)

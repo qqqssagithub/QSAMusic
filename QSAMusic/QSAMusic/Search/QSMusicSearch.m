@@ -246,15 +246,13 @@
     if (indexPath.section == 1) {
         NSDictionary *tempData = _data[@"song_info"][@"song_list"][indexPath.row];
         NSString *pic = tempData[@"pic_small"];
-        NSString *title = tempData[@"title"];
-        title = [self string:title removeExcess:@[@"<em>", @"</em>"]];
+        NSString *title = [self string:tempData[@"title"] removeExcess:@[@"<em>", @"</em>"]];
         NSString *other = tempData[@"album_title"];
         data = @{@"pic": pic, @"title": title, @"other": [NSString stringWithFormat:@"专辑: %@", other]};
     } else {
         NSDictionary *tempData = _data[@"album_info"][@"album_list"][indexPath.row];
         NSString *pic = tempData[@"pic_small"];
-        NSString *title = tempData[@"title"];
-        title = [self string:title removeExcess:@[@"<em>", @"</em>"]];
+        NSString *title = [self string:tempData[@"title"] removeExcess:@[@"<em>", @"</em>"]];
         NSString *other = tempData[@"publishtime"];
         data = @{@"pic": pic, @"title": title, @"other": [NSString stringWithFormat:@"专辑: %@", other]};
     }

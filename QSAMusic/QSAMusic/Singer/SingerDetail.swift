@@ -211,7 +211,11 @@ class SingerDetail: QSAKitBaseViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if songTF.textColor == .purple {
-            PlayerController.shared.play(playList: songArr as! [NSDictionary], index: indexPath.row)
+            var playList = [NSDictionary]()
+            for item in songArr {
+                playList.append(item as! NSDictionary)
+            }
+            PlayerController.shared.play(playList: playList, index: indexPath.row)
         } else {
             let album = albumArr[indexPath.row] as! NSDictionary
             NetworkEngine.getAlbumDetail(albumId: album["album_id"] as! String) { (albumInfo, songList) in
