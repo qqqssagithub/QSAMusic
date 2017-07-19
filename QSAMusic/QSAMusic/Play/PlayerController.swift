@@ -87,14 +87,18 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         
         let sdManager = SDWebImageManager.shared()
         var urlStr = music["songPicBig"] as! String
-        urlStr = urlStr.replacingOccurrences(of: "w_150", with: "w_414")
-        let url = URL(string: urlStr)
-        _ = sdManager?.downloadImage(with: url, progress: { (receivedSize, expectedSize) in
-        }, completed: { (image, errer, _, _, imageURL) in
-            PlayView.shared().starImgV.image = image
-            PlayView.shared().playViewBackImageView.image = image?.blur(with: UIColor.black)
-            QSMusicRemoteEvent.shared().addLockScreenView(withTitle: "\(music["songName"] as! String)", time: String(format: "%ld", Int(music["time"] as! NSNumber)), author: "\(music["artistName"] as! String)", image: image)
-        })
+        if urlStr == "" || urlStr.characters.count < 10 {
+            QSMusicRemoteEvent.shared().addLockScreenView(withTitle: "\(music["songName"] as! String)", time: String(format: "%ld", Int(music["time"] as! NSNumber)), author: "\(music["artistName"] as! String)", image: UIImage(named: "QSAMusic_pc.png"))
+        } else {
+            urlStr = urlStr.replacingOccurrences(of: "w_150", with: "w_414")
+            let url = URL(string: urlStr)
+            _ = sdManager?.downloadImage(with: url, progress: { (receivedSize, expectedSize) in
+            }, completed: { (image, errer, _, _, imageURL) in
+                PlayView.shared().starImgV.image = image
+                PlayView.shared().playViewBackImageView.image = image?.blur(with: UIColor.black)
+                QSMusicRemoteEvent.shared().addLockScreenView(withTitle: "\(music["songName"] as! String)", time: String(format: "%ld", Int(music["time"] as! NSNumber)), author: "\(music["artistName"] as! String)", image: image)
+            })
+        }
     }
     
     func musicDownload(updateProgress progress: Double) {

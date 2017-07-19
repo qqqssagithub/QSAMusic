@@ -83,6 +83,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
         _direction	= [self determineCameraDirectionIfNeeded:translation];
         if (_direction == 1 || _direction == 2) {
             MPMusicPlayerController *musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+            //MPVolumeView *volumeView
             float currentVolume = musicPlayer.volume - (translation.y / view.bounds.size.height) * 0.05;
             if (currentVolume <= 0.0) {
                 currentVolume = 0.0;

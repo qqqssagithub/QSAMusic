@@ -59,7 +59,7 @@
                     </variation>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="89Z-C5-hLR">
-                    <rect key="frame" x="182" y="6.5" width="69" height="30"/>
+                    <rect key="frame" x="182" y="7" width="69" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="46" id="Lfe-P7-Buy">
                             <variation key="heightClass=regular-widthClass=compact" constant="69"/>
@@ -82,7 +82,7 @@
                     </variation>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Vh-xP-R5n">
-                    <rect key="frame" x="182" y="6.5" width="69" height="30"/>
+                    <rect key="frame" x="182" y="7" width="69" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="HGm-sb-dkx"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="PlN-NI-D0h"/>
@@ -141,15 +141,15 @@
                     <exclude reference="9Vh-xP-R5n"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="XQU-MU-Zti"/>
+                    <exclude reference="u92-u6-9q7"/>
+                    <exclude reference="C0v-FR-ilx"/>
+                    <exclude reference="V9g-Eq-WQv"/>
+                    <exclude reference="fu4-Y5-aux"/>
                     <exclude reference="3uu-YI-JB2"/>
                     <exclude reference="Fda-ZC-iQm"/>
                     <exclude reference="PbF-Ve-oQS"/>
                     <exclude reference="lE4-r7-19z"/>
-                    <exclude reference="C0v-FR-ilx"/>
-                    <exclude reference="V9g-Eq-WQv"/>
-                    <exclude reference="fu4-Y5-aux"/>
-                    <exclude reference="XQU-MU-Zti"/>
-                    <exclude reference="u92-u6-9q7"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -160,19 +160,20 @@
                     <include reference="9Vh-xP-R5n"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="XQU-MU-Zti"/>
+                    <include reference="u92-u6-9q7"/>
+                    <include reference="C0v-FR-ilx"/>
+                    <include reference="V9g-Eq-WQv"/>
+                    <include reference="fu4-Y5-aux"/>
                     <include reference="3uu-YI-JB2"/>
                     <include reference="Fda-ZC-iQm"/>
                     <include reference="PbF-Ve-oQS"/>
                     <include reference="lE4-r7-19z"/>
-                    <include reference="C0v-FR-ilx"/>
-                    <include reference="V9g-Eq-WQv"/>
-                    <include reference="fu4-Y5-aux"/>
-                    <include reference="XQU-MU-Zti"/>
-                    <include reference="u92-u6-9q7"/>
                 </mask>
             </variation>
             <connections>
                 <outlet property="moreButton" destination="9Vh-xP-R5n" id="Ijo-PD-17T"/>
+                <outlet property="moreTF" destination="89Z-C5-hLR" id="wRD-na-d3Y"/>
                 <outlet property="num" destination="Ag3-CP-lXc" id="5Pl-C4-mwe"/>
                 <outlet property="title" destination="JG0-tM-kC9" id="feH-zg-A19"/>
             </connections>

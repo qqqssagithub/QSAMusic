@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class RootViewController;
 
 @interface QSMusicSearch : NSObject
 
 + (instancetype)sharedQSMusicSearch;
 
-- (void)initView;
+- (void)initViewWithSuperVC:(RootViewController *)superVC;
 
 @end

@@ -10,18 +10,31 @@
 #import "QSMusicSearchTbVHeaderView.h"
 #import <iflyMSC/IFlyMSC.h>
 #import "QSMusicIFlytekDataHelper.h"
+#import "RootViewController.h"
 //#import "QSMusicSearchResultView.h"
 
 @interface QSMusicSearch () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, IFlyRecognizerViewDelegate>
 
 @property (nonatomic) UITableView  *searchTableView;
 @property (nonatomic) UISearchBar  *searchBar;
-@property (nonatomic) NSDictionary *data;
+@property (nonatomic) NSMutableArray *data;
+@property (nonatomic) NSMutableArray *data_tmp;
+@property (nonatomic) NSMutableArray *data_count;
 
 @property (nonatomic) IFlyRecognizerView *iflyRecognizerView; //语音搜索界面
 @property (nonatomic) BOOL isYuYinSearch;
 
 @property (nonatomic) BOOL isNeedRecovery;
+
+@property (nonatomic) RootViewController *superVC;
+
+@property (nonatomic) NSInteger searchIndex;//0 歌手, 1 单曲, 2 专辑, 3 全部
+
+@property (nonatomic) NSString *searchStr;
+@property (nonatomic) NSInteger searchPage;
+
+@property (nonatomic) NSString *bottomLabelStr;
+@property (nonatomic) UILabel *bottomLabel;
 
 @end
 
@@ -38,9 +51,12 @@
     return sharedQSMusicSearch;
 }
 
-- (void)initView {
-    [QSAMusicKeyWindow addSubview:self.searchBar];
-    [QSAMusicKeyWindow addSubview:self.searchTableView];
+- (void)initViewWithSuperVC:(RootViewController *)superVC {
+    _data = [NSMutableArray array];
+    _data_count = [NSMutableArray array];
+    _superVC = superVC;
+    [_superVC.rootBackView addSubview:self.searchBar];
+    [_superVC.rootBackView addSubview:self.searchTableView];
     [UIView animateWithDuration:0.2 animations:^{
         _searchBar.frame = CGRectMake(0, 20, ScreenWidth, 44);
         _searchTableView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64);
@@ -84,7 +100,7 @@
 - (UITableView *)searchTableView {
     if (_searchTableView == nil) {
         _searchTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 64)];
-        _searchTableView.showsVerticalScrollIndicator = NO;
+        //_searchTableView.showsVerticalScrollIndicator = NO;
         _searchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_searchTableView registerNib:[UINib nibWithNibName:@"SingerCell" bundle:nil] forCellReuseIdentifier:@"singerCell"];
         [_searchTableView registerNib:[UINib nibWithNibName:@"SingerDetailCell" bundle:nil] forCellReuseIdentifier:@"singerDetailCell"];
@@ -170,11 +186,37 @@
 
 #pragma mark - searchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    _searchPage = 1;
+    _searchIndex = 3;
+    _searchTableView.tableFooterView = nil;
+    _searchStr = searchText;
+    [_data removeAllObjects];
+    [_data_count removeAllObjects];
     if (searchText.length > 0) {
-        [NetworkEngine getSearchWithQuery:searchText page:0 size:3 responseBlock:^(NSDictionary * _Nonnull data) {
-            _data = data;
+        [NetworkEngine getSearchWithQuery:searchText page:_searchPage size:3 responseBlock:^(NSDictionary * _Nonnull data) {
+            NSInteger artist_total = [data[@"artist_info"][@"total"] integerValue];
+            NSInteger song_total = [data[@"song_info"][@"total"] integerValue];
+            NSInteger album_total = [data[@"album_info"][@"total"] integerValue];
+            if (artist_total != 0) {
+                NSMutableArray *artist_arr = [NSMutableArray arrayWithArray:data[@"artist_info"][@"artist_list"]];
+                [_data addObject:artist_arr];
+                [_data_count addObject:@(artist_total)];
+            }
+            if (song_total != 0) {
+                NSMutableArray *song_arr = [NSMutableArray arrayWithArray:data[@"song_info"][@"song_list"]];
+                [_data addObject:song_arr];
+                [_data_count addObject:@(song_total)];
+            }
+            if (album_total != 0) {
+                NSMutableArray *album_arr = [NSMutableArray arrayWithArray:data[@"album_info"][@"album_list"]];
+                [_data addObject:album_arr];
+                [_data_count addObject:@(album_total)];
+            }
+            _data_tmp = [_data copy];
             [_searchTableView reloadData];
         }];
+    } else if (searchText.length == 0) {
+        [_searchTableView reloadData];
     }
 }
 
@@ -200,13 +242,11 @@
 
 #pragma mark - TabelView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return _data.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *oneArr = @[@"artist_info", @"song_info", @"album_info"];
-    NSArray *twoArr = @[@"artist_list", @"song_list", @"album_list"];
-    return ((NSArray *)_data[oneArr[section]][twoArr[section]]).count;
+    return ((NSMutableArray *)_data[section]).count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -214,12 +254,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    NSArray *oneArr = @[@"artist_info", @"song_info", @"album_info"];
-    NSArray *twoArr = @[@"artist_list", @"song_list", @"album_list"];
-    if (((NSArray *)_data[oneArr[section]][twoArr[section]]).count == 0) {
-        return 0;
-    }
-    return 44;
+    return 44.0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -228,33 +263,65 @@
     view.frame = CGRectMake(0, 0, tableView.bounds.size.width, 44);
     view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
     view.moreButton.tag = section;
-    NSArray *titleArr = @[@"歌手/乐队", @"单曲", @"专辑"];
-    NSArray *numArr = @[@"artist_info", @"song_info", @"album_info"];
-    view.num.text = [NSString stringWithFormat:@"%ld", [_data[numArr[section]][@"total"] integerValue]];
-    view.title.text = titleArr[section];
+    
+    NSDictionary *data = _data[section][0];
+    if (data.count == 9) {
+        view.title.text = @"歌手/乐队";
+    } else if (data.count == 35) {
+        view.title.text = @"单曲";
+    } else if (data.count == 11) {
+        view.title.text = @"专辑";
+    }
+    
+    NSInteger num = [_data_count[_searchIndex == 3 ? section : _searchIndex] integerValue];
+    view.num.text = [NSString stringWithFormat:@"%ld", num];
+    if (num <= 3) {
+        view.moreButton.hidden = YES;
+        view.moreTF.hidden = YES;
+    } else {
+        view.moreButton.hidden = NO;
+        view.moreTF.hidden = NO;
+    }
+    if (_searchIndex != 3) {
+        [view.moreButton setTitle:@"返回" forState:UIControlStateNormal];
+    }
+    WeakObject(view);
+    [view setButtonBlock:^(NSInteger tag) {
+        if (![wealObject.moreButton.titleLabel.text isEqualToString:@"返回"]) {
+            _searchIndex = tag;
+            [wealObject.moreButton setTitle:@"返回" forState:UIControlStateNormal];
+            [self removeOther];
+        } else {
+            [wealObject.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
+            [self addOther];
+        }
+    }];
     return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    NSDictionary *data = _data[indexPath.section][indexPath.row];
+    if (data.count == 9) {
         SingerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singerCell"];
-        NSDictionary *data = _data[@"artist_info"][@"artist_list"][indexPath.row];
         [cell updateWithData:data];
         return cell;
     }
-    NSDictionary *data;
-    if (indexPath.section == 1) {
-        NSDictionary *tempData = _data[@"song_info"][@"song_list"][indexPath.row];
-        NSString *pic = tempData[@"pic_small"];
-        NSString *title = [self string:tempData[@"title"] removeExcess:@[@"<em>", @"</em>"]];
-        NSString *other = tempData[@"album_title"];
-        data = @{@"pic": pic, @"title": title, @"other": [NSString stringWithFormat:@"专辑: %@", other]};
-    } else {
-        NSDictionary *tempData = _data[@"album_info"][@"album_list"][indexPath.row];
-        NSString *pic = tempData[@"pic_small"];
-        NSString *title = [self string:tempData[@"title"] removeExcess:@[@"<em>", @"</em>"]];
-        NSString *other = tempData[@"publishtime"];
-        data = @{@"pic": pic, @"title": title, @"other": [NSString stringWithFormat:@"专辑: %@", other]};
+    if (data.count == 35) {
+        NSString *pic = data[@"pic_small"];
+        NSString *title = [self string:data[@"title"] removeExcess:@[@"<em>", @"</em>"]];
+        NSString *album_title = data[@"album_title"];
+        if ([album_title isEqualToString:@""]) {
+            album_title = @"未知";
+        }
+        data = @{@"pic": pic, @"title": title, @"other": [NSString stringWithFormat:@"专辑: %@", album_title]};
+    } else if (data.count == 11) {
+        NSString *pic = data[@"pic_small"];
+        NSString *title = [self string:data[@"title"] removeExcess:@[@"<em>", @"</em>"]];
+        NSString *publishtime = data[@"publishtime"];
+        if ([publishtime isEqualToString:@"0000-00-00"]) {
+            publishtime = @"年份未知";
+        }
+        data = @{@"pic": pic, @"title": title, @"other": [NSString stringWithFormat:@"发布日期: %@", publishtime]};
     }
     SingerDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singerDetailCell"];
     [cell updateWithData:data];
@@ -271,76 +338,111 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_searchBar resignFirstResponder];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    if (indexPath.section == 0) {
-//        NSArray *dataArr = _data[@"song_info"][@"song_list"];
-//
-//        [QSMusicPlayerDelegate sharedQSMusicPlayerDelegate].playStyle = @"Ordinary";
-//        [[QSMusicPlayerDelegate sharedQSMusicPlayerDelegate] openPlayPoint];
-//        [PlayView sharedPlayView].isLoad = NO;
-//        [[PlayView sharedPlayView] updataListWithData:dataArr];
-//        [PlayView sharedPlayView].currentIndex = indexPath.row;
-//        
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [QSMusicPlayer createPlayListWithPlayList:dataArr listid:dataArr[0][@"author"]];
-//            [QSMusicPlayer playAtIndex:indexPath.row];
-//        });
-//    } else if (indexPath.section == 1) {
-//        [CSWProgressView showWithPrompt:@"加载中"];
-//        QSMusicSongListTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//        [QSMusicPlayer getSearchDataWithKeyword:cell.title.text pageSize:10 responseClosure:^(NSDictionary * _Nonnull data) {
-//            [CSWProgressView disappear];
-//            UINib *nib = [UINib nibWithNibName:@"QSMusicSearchResultView" bundle:nil];
-//            QSMusicSearchResultView *view = [[nib instantiateWithOwner:nil options:nil] firstObject];
-//            view.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight);
-//            [view reloadDataWithData:data];
-//            __block typeof(view) blockView = view;
-//            UIView *rootBackView = QSMusicRootVC_rootBackView;
-//            view.backBlock = ^{
-//                [UIView animateWithDuration:0.3 animations:^{
-//                    blockView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight);
-//                    rootBackView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-//                } completion:^(BOOL finished) {
-//                    [blockView removeFromSuperview];
-//                }];
-//            };
-//            [QSMusicRootVC_View addSubview:view];
-//            [UIView animateWithDuration:0.3 animations:^{
-//                view.frame = QSMUSICSCREEN_RECT;
-//                rootBackView.transform = CGAffineTransformMakeScale(0.7, 0.7);
-//            }];
-//        }];
-//    } else {
-//        [CSWProgressView showWithPrompt:@"专辑加载中"];
-//        QSMusicSearchRightTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//        [QSMusicPlayer requestSingleWithAlbumId:cell.albumId response:^(NSDictionary * _Nonnull albumInfo, NSArray<NSDictionary *> * _Nonnull songList) {
-//            [CSWProgressView disappear];
-//            QSMusicPublicBigHeaderView *view = [QSMusicPublicBigHeaderView sharedQSMusicPublicBigHeaderView];
-//            __block typeof(view) blockView = view;
-//            UIView *rootBackView = QSMusicRootVC_rootBackView;
-//            view.backBlock = ^{
-//                [UIView animateWithDuration:0.3 animations:^{
-//                    rootBackView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-//                    blockView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight);
-//                } completion:^(BOOL finished) {
-//                    [blockView.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-//                    [blockView removeFromSuperview];
-//                }];
-//            };
-//            [view updateWithHeaderInfo:albumInfo songList:songList];
-//            //[_rootViewController.view addSubview:view];
-//            
-//            [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:view];
-//            
-//            [UIView animateWithDuration:0.3 animations:^{
-//                rootBackView.transform = CGAffineTransformMakeScale(0.7, 0.7);
-//                view.frame = QSMUSICSCREEN_RECT;
-//            }];
-//        }];
-//    }
+    NSDictionary *data = _data[indexPath.section][indexPath.row];
+    if (data.count == 9) {
+        NSString *name = data[@"name"];
+        if (name == nil) {
+            name = data[@"author"];
+        }
+        name = [self string:name removeExcess:@[@"<em>", @"</em>"]];
+        [NetworkEngine getSearchWithQuery:name page:1 size:25 responseBlock:^(NSDictionary * _Nonnull result) {
+            SingerDetail *singer = [[SingerDetail alloc] init];
+            singer.navigationName = name;
+            singer.result = result;
+            [_superVC.navigationController pushViewController:singer animated:YES];
+        }];
+    } else if (data.count == 35) {
+        NSArray *list = _data[indexPath.section];
+        [[PlayerController shared] playWithPlayList:list index:indexPath.row];
+    } else if (data.count == 11) {
+        [NetworkEngine getAlbumDetailWithAlbumId:data[@"album_id"] responseBlock:^(NSDictionary * _Nonnull albumInfo, NSArray<NSDictionary *> * _Nonnull songList) {
+            AlbumDetails *aDetails = [[AlbumDetails alloc] init];
+            aDetails.albumInfo = albumInfo;
+            aDetails.songList = songList;
+            [_superVC.navigationController pushViewController:aDetails animated:YES];
+        }];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [_searchBar resignFirstResponder];
+    if (_searchIndex != 3) {
+        if (scrollView.contentOffset.y >= scrollView.contentSize.height - (ScreenHeight - 64 - 33) - 30) {
+            if (![_bottomLabel.text isEqualToString:@"没有更多了"] && ![_bottomLabelStr isEqualToString:@""]) {
+                _bottomLabelStr = @"";
+                [self addData];
+            }
+        }
+    }
+}
+
+#pragma mark - 查看更多
+- (void)removeOther {
+    for (NSInteger i = _data.count - 1; i >= 0; i--) {
+        if (i != _searchIndex) {
+            [_data removeObjectAtIndex:i];
+            [_searchTableView deleteSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationTop];
+        }
+    }
+    _bottomLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+    _bottomLabel.textAlignment = 1;
+    _bottomLabel.font = [UIFont systemFontOfSize:12.0];
+    _searchTableView.tableFooterView = _bottomLabel;
+    [self addData];
+}
+
+- (void)addData {
+    [NetworkEngine getSearchWithQuery:_searchStr page:_searchPage size:25 responseBlock:^(NSDictionary * _Nonnull data) {
+        _searchPage++;
+        _bottomLabelStr = @"加载完成";
+        NSArray *arr;
+        if (_searchIndex == 0) {
+            arr = data[@"artist_info"][@"artist_list"];
+        }
+        if (_searchIndex == 1) {
+            arr = data[@"song_info"][@"song_list"];
+        }
+        if (_searchIndex == 2) {
+            arr = data[@"album_info"][@"album_list"];
+        }
+        if (arr.count < 25) {
+            _bottomLabelStr = @"没有更多了";
+        }
+        _bottomLabel.text = _bottomLabelStr;
+        if ([_bottomLabelStr isEqualToString:@"没有更多了"]) {
+            _bottomLabel.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.1];
+            _bottomLabel.textColor = [UIColor lightGrayColor];
+        } else {
+            _bottomLabel.backgroundColor = [UIColor clearColor];
+            _bottomLabel.textColor = [UIColor clearColor];
+        }
+        for (NSInteger j = _searchPage == 1 ? 3 : 0; j < arr.count; j++) {
+            [_data[0] addObject:arr[j]];
+        }
+        [_searchTableView reloadData];
+    }];
+}
+
+- (void)addOther {
+    _searchPage = 1;
+    _searchIndex = 3;
+    _searchTableView.tableFooterView = nil;
+    [_searchTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    NSMutableArray *arr = _data[0];
+    for (NSInteger i = arr.count - 1; i >= 3; i--) {
+        [arr removeObjectAtIndex:i];
+    }
+    [_searchTableView reloadData];
+    for (NSInteger j = 0; j < _data_tmp.count; j++) {
+        if (j != _searchIndex) {
+            if (j < _searchIndex) {
+                [_data insertObject:_data_tmp[j] atIndex:j];
+            } else {
+                [_data addObject:_data_tmp[j]];
+            }
+            [_searchTableView insertSections:[NSIndexSet indexSetWithIndex:j] withRowAnimation:UITableViewRowAnimationBottom];
+        }
+    }
 }
 
 @end

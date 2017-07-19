@@ -34,15 +34,6 @@ open class NetworkEngine: NSObject {
         let song = "http://music.baidu.com/data/music/links?songIds="
     }
     
-    let animals = ["fish", "cat", "chicken", "dog"]
-    
-    func s() {
-        _ = animals.sorted { _,_ in
-            return true;
-        }
-        
-    }
-    
     private class func getData(url: String, responseBlock: @escaping (_ data: DataResponse<Any>) -> Void) {
         QSAKitPromptView.show()
         Alamofire.request(url).validate().responseJSON { response in

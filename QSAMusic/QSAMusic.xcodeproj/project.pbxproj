@@ -147,6 +147,7 @@
 		43CA765EDF6D27083DBCCDB8 /* Pods_QSAMusic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QSAMusic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B4BA813857EC1DE4D465E01 /* Pods-QSAMusic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSAMusic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QSAMusic/Pods-QSAMusic.debug.xcconfig"; sourceTree = "<group>"; };
 		6113FD8D613F6B4321D61ED8 /* Pods-QSAMusic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSAMusic.release.xcconfig"; path = "Pods/Target Support Files/Pods-QSAMusic/Pods-QSAMusic.release.xcconfig"; sourceTree = "<group>"; };
+		89017E6E1F1F815C00A42047 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		891910E71EBC6CB100F61D0A /* ListTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewDelegate.h; sourceTree = "<group>"; };
 		891910E81EBC6CB100F61D0A /* ListTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewDelegate.m; sourceTree = "<group>"; };
 		891910E91EBC6CB100F61D0A /* mainColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainColor.h; sourceTree = "<group>"; };
@@ -323,6 +324,7 @@
 		79E64A744849A21DCFC4F44D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89017E6E1F1F815C00A42047 /* libc++abi.tbd */,
 				89FA9B5A1EEBA3FB00059E8F /* libicucore.tbd */,
 				89FA9B581EEBA3E600059E8F /* libc++.tbd */,
 				89FA9B521EEB952400059E8F /* AudioToolbox.framework */,

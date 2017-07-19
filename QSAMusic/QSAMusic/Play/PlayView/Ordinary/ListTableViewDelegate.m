@@ -55,6 +55,7 @@
         _selectedBlock(indexPath.row);
     }
     [[QSAAudioPlayer shared] prepare];
+    [PlayerController shared].playIndex = indexPath.row;
     [[PlayView sharedPlayView].playButtonView.playButton setImage:[UIImage imageNamed:@"zantingduan3"] forState:UIControlStateNormal];
     NSDictionary *song = _songList[indexPath.row];
     [[MusicManager shared] getMusicWithSongId:song[@"song_id"] == nil ? song[@"songid"] : song[@"song_id"]];

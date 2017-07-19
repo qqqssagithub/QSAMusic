@@ -40,7 +40,9 @@ class SingerDetail: QSAKitBaseViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet var sectionHeader: UIView!
     
     @IBOutlet weak var songTF: UITextField!
+    @IBOutlet weak var songBtn: UIButton!
     @IBOutlet weak var albumTF: UITextField!
+    @IBOutlet weak var albumBtn: UIButton!
     
     var navigationName: String = ""
     var  page = 1
@@ -123,6 +125,13 @@ class SingerDetail: QSAKitBaseViewController, UITableViewDelegate, UITableViewDa
                 self.albumNoMore = true
             }
             self.albumTF.text = "专辑(\(album_num))"
+            if (album_num == 0) {
+                self.albumTF.isEnabled = false
+                self.albumBtn.isEnabled = false
+            } else {
+                self.albumTF.isEnabled = true
+                self.albumBtn.isEnabled = true
+            }
         }
     }
 

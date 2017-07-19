@@ -10,4 +10,6 @@
 
 @interface RootViewController : QSAKitBaseViewController
 
+@property (weak, nonatomic) IBOutlet UIView *rootBackView;
+
 @end

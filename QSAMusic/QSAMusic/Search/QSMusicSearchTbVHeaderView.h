@@ -10,8 +10,11 @@
 
 @interface QSMusicSearchTbVHeaderView : UIView
 
+@property (nonatomic, copy) void(^buttonBlock)(NSInteger);
+
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *num;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
+@property (weak, nonatomic) IBOutlet UITextField *moreTF;
 
 @end

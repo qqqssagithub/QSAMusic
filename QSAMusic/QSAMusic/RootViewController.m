@@ -17,8 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel      *titleLabel;
 
-@property (weak, nonatomic) IBOutlet UIView       *rootBackView;
-
 @property (weak, nonatomic) IBOutlet UIButton     *album;
 @property (weak, nonatomic) IBOutlet UIButton     *song;
 @property (weak, nonatomic) IBOutlet UIButton     *list;
@@ -45,6 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
+    self.view.backgroundColor = [UIColor blackColor];
     
     [self initView];
     
@@ -143,7 +142,7 @@
         }
             break;
         case 6: { //search
-            [[QSMusicSearch sharedQSMusicSearch] initView];
+            [[QSMusicSearch sharedQSMusicSearch] initViewWithSuperVC:self];
         }
             break;
         default:

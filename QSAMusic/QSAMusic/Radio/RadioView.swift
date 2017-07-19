@@ -86,7 +86,15 @@ open class RadioView: QSAKitBaseView, iCarouselDelegate, iCarouselDataSource {
     
     public func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
         NetworkEngine.getChannelSong(channelname: chArr[index]) { (songList) in
-            PlayerController.shared.play(playList: songList, index: 0)
+            //歌曲列表最后会出现错误信息
+            var list:[NSDictionary] = songList;
+            for i in (0..<list.count).reversed() {
+                let song: NSDictionary = list[i]
+                if (song["songid"] is NSNull) {
+                    list.remove(at: i)
+                }
+            }
+            PlayerController.shared.play(playList: list, index: 0)
         }
     }
     

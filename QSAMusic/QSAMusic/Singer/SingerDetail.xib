@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,12 +12,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingerDetail" customModule="QSAMusic" customModuleProvider="target">
             <connections>
+                <outlet property="albumBtn" destination="P1f-5o-CWn" id="RAq-TO-sQN"/>
                 <outlet property="albumTF" destination="a7w-lM-fMv" id="ToT-iV-7Yd"/>
                 <outlet property="area" destination="d7u-45-el2" id="cs5-hQ-Oto"/>
                 <outlet property="infoImgV" destination="TLQ-c1-jXg" id="4Cs-Dq-H8s"/>
                 <outlet property="infoView" destination="ERR-hq-0eT" id="NJu-o7-NRv"/>
                 <outlet property="name" destination="fPR-Rh-GFz" id="Vzf-f0-cea"/>
                 <outlet property="sectionHeader" destination="5aG-OD-3bH" id="Vc7-6M-0uA"/>
+                <outlet property="songBtn" destination="bkF-XF-sXR" id="SPe-jE-UtX"/>
                 <outlet property="songTF" destination="bMQ-k4-ELk" id="J9s-Qv-3Pv"/>
                 <outlet property="tableView" destination="Pzy-up-Uy1" id="mLj-BS-1xF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -156,13 +158,13 @@
             <point key="canvasLocation" x="413" y="-191.5"/>
         </view>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LEZ-LS-Q7v">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LEZ-LS-Q7v" id="xlR-gQ-XoR">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="19" y="485"/>
+            <point key="canvasLocation" x="413" y="-78"/>
         </tableViewCell>
     </objects>
 </document>
