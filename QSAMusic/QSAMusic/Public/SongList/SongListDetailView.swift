@@ -46,7 +46,6 @@ class SongListDetailView: QSAKitBaseViewController, UITableViewDelegate, UITable
         tableView.tableHeaderView = self.headerView
         tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: "ListCell")
         tableView.register(UINib(nibName: "SingerCell", bundle: nil), forCellReuseIdentifier: "SingerCell")
-        tableView.register(UINib(nibName: "LoadCell", bundle: nil), forCellReuseIdentifier: "LoadCell")
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -89,10 +88,7 @@ class SongListDetailView: QSAKitBaseViewController, UITableViewDelegate, UITable
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexStr == "List" || indexStr == "Singer") {
-            return 44.0;
-        }
-        return 55.0;
+        return 44.0;
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,13 +96,9 @@ class SongListDetailView: QSAKitBaseViewController, UITableViewDelegate, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell") as! ListCell
             cell.update(data: dataArr[indexPath.row], indexStr: "List")
             return cell
-        } else if indexStr == "Singer" {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SingerCell") as! SingerCell
-            cell.update(data: dataArr[indexPath.row])
-            return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LoadCell") as! LoadCell
-        //cell.update(data: dataArr[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SingerCell") as! SingerCell
+        cell.update(data: dataArr[indexPath.row])
         return cell
     }
     

@@ -125,6 +125,8 @@ extension UserDefaults {
 }
 
 open class SystemSettings {
+    let maxCacheCount = 30 //最大缓存
+    
     func likeList() -> NSMutableArray {
         let likeList = UserDefaults.standard.object(forKey: "likeList")
         if likeList != nil {

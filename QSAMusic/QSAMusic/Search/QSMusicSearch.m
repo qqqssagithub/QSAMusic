@@ -100,7 +100,6 @@
 - (UITableView *)searchTableView {
     if (_searchTableView == nil) {
         _searchTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight - 64)];
-        //_searchTableView.showsVerticalScrollIndicator = NO;
         _searchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_searchTableView registerNib:[UINib nibWithNibName:@"SingerCell" bundle:nil] forCellReuseIdentifier:@"singerCell"];
         [_searchTableView registerNib:[UINib nibWithNibName:@"SingerDetailCell" bundle:nil] forCellReuseIdentifier:@"singerDetailCell"];

@@ -24,10 +24,6 @@
     return sharedListTableViewDelegate;
 }
 
-- (void)reloadDataWithData:(NSArray *)dataArr {
-    _songList = dataArr;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _songList.count;
 }

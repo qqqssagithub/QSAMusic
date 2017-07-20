@@ -131,14 +131,8 @@
 - (IBAction)btnsAction:(UIButton *)sender {
     switch (sender.tag) {
         case 5: { //mine
-//            //获得语义理解单例
-//            _iFlySpeechUnderstander = [IFlySpeechUnderstander sharedInstance];
-//            [_iFlySpeechUnderstander setParameter:@"3.0" forKey:@"nlp_version"];
-//            //设置委托
-//            _iFlySpeechUnderstander.delegate = self;
-//            //启动语义理解服务
-//            [_iFlySpeechUnderstander startListening];
-            [QSAKitAlertView showWithTitle:@"提示" message:@"功能完善中， 敬请期待" cancelButtonTitle:@"确定" otherButtonTitle:nil];
+            MineViewController *mineVC = [[MineViewController alloc] init];
+            [self.navigationController pushViewController:mineVC animated:YES];
         }
             break;
         case 6: { //search

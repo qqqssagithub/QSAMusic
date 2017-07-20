@@ -120,6 +120,16 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
 
 - (void)updataListWithData:(NSArray *)dataArr {
     ListTableViewDelegate *delegate = [ListTableViewDelegate sharedListTableViewDelegate];
+//    NSMutableArray *mArr = [NSMutableArray array];
+//    for (NSInteger i = 0; i < dataArr.count; i++) {
+//        NSMutableDictionary *mDic = [NSMutableDictionary dictionary];
+//        NSDictionary *dic = dataArr[i];
+//        for (NSString *key in dic) {
+//            mDic[key] = dic[key];
+//        }
+//        [mArr addObject:mDic];
+//    }
+//    delegate.songList = mArr;
     delegate.songList = dataArr;
     [delegate setSelectedBlock:^(NSInteger row) {
         NSIndexPath *path = [NSIndexPath indexPathForItem:row inSection:0];
@@ -204,7 +214,7 @@ typedef NS_ENUM(NSInteger, CameraMoveDirection) {
 
 #pragma mark - 收藏
 - (IBAction)scAction:(id)sender {
-    
+    [[PlayerController shared] like];
 }
 
 #pragma mark

@@ -84,6 +84,8 @@
 		89AC9CEA1EADFB7800873FDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89AC9CE81EADFB7800873FDB /* LaunchScreen.storyboard */; };
 		89B573641EB043F600209030 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B573631EB043F600209030 /* AlbumView.swift */; };
 		89B573671EB044C200209030 /* SwiftMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B573661EB044C200209030 /* SwiftMacro.swift */; };
+		89C2DA391F20A69300DE6708 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C2DA371F20A69200DE6708 /* MineViewController.swift */; };
+		89C2DA3A1F20A69300DE6708 /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C2DA381F20A69200DE6708 /* MineViewController.xib */; };
 		89C8C6321ED401A20062BD31 /* ListViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8C6301ED401A20062BD31 /* ListViewTableViewCell.swift */; };
 		89C8C6331ED401A20062BD31 /* ListViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C8C6311ED401A20062BD31 /* ListViewTableViewCell.xib */; };
 		89C8C6361ED413210062BD31 /* SongListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8C6351ED413210062BD31 /* SongListDetailView.swift */; };
@@ -91,8 +93,6 @@
 		89C8C63A1ED421250062BD31 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C8C6381ED421250062BD31 /* ListCell.xib */; };
 		89C8C63D1ED421490062BD31 /* SingerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8C63B1ED421490062BD31 /* SingerCell.swift */; };
 		89C8C63E1ED421490062BD31 /* SingerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C8C63C1ED421490062BD31 /* SingerCell.xib */; };
-		89C8C6411ED421C00062BD31 /* LoadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8C63F1ED421C00062BD31 /* LoadCell.swift */; };
-		89C8C6421ED421C00062BD31 /* LoadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C8C6401ED421C00062BD31 /* LoadCell.xib */; };
 		89D31F851EB9772D000F9FD9 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D31F841EB9772D000F9FD9 /* MusicManager.swift */; };
 		89D31F871EB9BA40000F9FD9 /* ArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D31F861EB9BA40000F9FD9 /* ArchiveManager.swift */; };
 		89D531491EC068A800B4ADB3 /* eq.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D531481EC068A800B4ADB3 /* eq.png */; };
@@ -240,6 +240,8 @@
 		89B573631EB043F600209030 /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		89B573661EB044C200209030 /* SwiftMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftMacro.swift; sourceTree = "<group>"; };
 		89B573681EB04B9200209030 /* QSAMusic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QSAMusic-Bridging-Header.h"; sourceTree = "<group>"; };
+		89C2DA371F20A69200DE6708 /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
+		89C2DA381F20A69200DE6708 /* MineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewController.xib; sourceTree = "<group>"; };
 		89C8C6301ED401A20062BD31 /* ListViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewTableViewCell.swift; sourceTree = "<group>"; };
 		89C8C6311ED401A20062BD31 /* ListViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewTableViewCell.xib; sourceTree = "<group>"; };
 		89C8C6351ED413210062BD31 /* SongListDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListDetailView.swift; sourceTree = "<group>"; };
@@ -247,8 +249,6 @@
 		89C8C6381ED421250062BD31 /* ListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 		89C8C63B1ED421490062BD31 /* SingerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingerCell.swift; sourceTree = "<group>"; };
 		89C8C63C1ED421490062BD31 /* SingerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingerCell.xib; sourceTree = "<group>"; };
-		89C8C63F1ED421C00062BD31 /* LoadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadCell.swift; sourceTree = "<group>"; };
-		89C8C6401ED421C00062BD31 /* LoadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadCell.xib; sourceTree = "<group>"; };
 		89D31F841EB9772D000F9FD9 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		89D31F861EB9BA40000F9FD9 /* ArchiveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveManager.swift; sourceTree = "<group>"; };
 		89D531481EC068A800B4ADB3 /* eq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eq.png; sourceTree = "<group>"; };
@@ -449,6 +449,7 @@
 				89AC9CE61EADFB7800873FDB /* Assets.xcassets */,
 				89AC9CE81EADFB7800873FDB /* LaunchScreen.storyboard */,
 				89AC9CEB1EADFB7800873FDB /* Info.plist */,
+				89C2DA361F20A67100DE6708 /* Mine */,
 				89FA9B541EEB9D4F00059E8F /* Search */,
 				8969ACDB1EC5827D009418E7 /* Public */,
 				89F523681EB1D9F800DC4279 /* Resources */,
@@ -472,6 +473,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		89C2DA361F20A67100DE6708 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				89C2DA371F20A69200DE6708 /* MineViewController.swift */,
+				89C2DA381F20A69200DE6708 /* MineViewController.xib */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
 		89C8C6341ED412E90062BD31 /* SongList */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,8 +490,6 @@
 				89C8C6381ED421250062BD31 /* ListCell.xib */,
 				89C8C63B1ED421490062BD31 /* SingerCell.swift */,
 				89C8C63C1ED421490062BD31 /* SingerCell.xib */,
-				89C8C63F1ED421C00062BD31 /* LoadCell.swift */,
-				89C8C6401ED421C00062BD31 /* LoadCell.xib */,
 			);
 			path = SongList;
 			sourceTree = "<group>";
@@ -695,6 +703,7 @@
 				895BC7E41EDE7F0700A523E7 /* om.jpg in Resources */,
 				891911091EBC6CB100F61D0A /* PlayView.xib in Resources */,
 				89DDEE0F1EAF21F50018292D /* RootViewController.storyboard in Resources */,
+				89C2DA3A1F20A69300DE6708 /* MineViewController.xib in Resources */,
 				897489A51ECEC4370068EBAE /* arrow_down@2x.png in Resources */,
 				897489931ECEB8B90068EBAE /* SongListClassCollectionViewCell.xib in Resources */,
 				89C8C63E1ED421490062BD31 /* SingerCell.xib in Resources */,
@@ -728,7 +737,6 @@
 				89D531491EC068A800B4ADB3 /* eq.png in Resources */,
 				891911121EBC6CB100F61D0A /* hufu.png in Resources */,
 				8919111A1EBC6CB100F61D0A /* zantingduan3.png in Resources */,
-				89C8C6421ED421C00062BD31 /* LoadCell.xib in Resources */,
 				89F523731EB1EC2F00DC4279 /* QSAMusic_p.png in Resources */,
 				897489A41ECEC4370068EBAE /* arrow_down.png in Resources */,
 				8919111B1EBC6CB100F61D0A /* zuidayinliang1.png in Resources */,
@@ -811,7 +819,6 @@
 				8972DD4D1F0919D600258CB3 /* QSMusicSearch.m in Sources */,
 				8970E7621ED53AFE005B7578 /* TopCollectionViewCell.swift in Sources */,
 				898A015E1EB3002D00E3AE45 /* AlbumDetails.swift in Sources */,
-				89C8C6411ED421C00062BD31 /* LoadCell.swift in Sources */,
 				89F523601EB1BDF000DC4279 /* SongView.swift in Sources */,
 				89FA9B571EEB9D6000059E8F /* QSMusicIFlytekDataHelper.m in Sources */,
 				89AC9CDF1EADFB7800873FDB /* AppDelegate.m in Sources */,
@@ -837,6 +844,7 @@
 				8919112A1EBC6E4000F61D0A /* LrcTableView.m in Sources */,
 				89D31F851EB9772D000F9FD9 /* MusicManager.swift in Sources */,
 				8974898B1ECE9DCA0068EBAE /* QSMusicGeDanCVFlowLayout.m in Sources */,
+				89C2DA391F20A69300DE6708 /* MineViewController.swift in Sources */,
 				89B573671EB044C200209030 /* SwiftMacro.swift in Sources */,
 				899EE9EF1F02C8FE004B6C8A /* QSMusicSearchTbVHeaderView.m in Sources */,
 				8969ACDD1EC582ED009418E7 /* QSAHelpers.swift in Sources */,

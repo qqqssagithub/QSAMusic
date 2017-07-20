@@ -104,6 +104,7 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
         if song.count != 0 {
             oneSong = song
             musicPath = NSHomeDirectory() + "/Documents" + "/" + songId + "." + "\(song["format"] as! String)"
+            delegate?.musicPrepare!()
             delegate?.music!(createComplete: oneSong)
             //isAdequateResources = true
             if song["finish"] as! String != "1" {
@@ -179,6 +180,10 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         if offset == 0 {
+            //写入缓存列表
+            ArchiveManager.setCacheList(songId: songId, data: oneSong)
+            
+            //归档
             if ArchiveManager.archiveManagerEncode(songId: songId, data: oneSong) {
                 QSALog("歌曲信息归档成功")
                 self.musicPath = NSHomeDirectory() + "/Documents" + "/" + self.songId + "." + "\(oneSong["format"] as! String)"
@@ -243,10 +248,4 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
     //下载出错
     @objc optional func musicDownloadFail(error: Int)
 }
-
-//@objc public protocol MusicManagerDataSource: NSObjectProtocol {
-//    
-//    
-//
-//}
 

@@ -144,9 +144,11 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         if oneSong?["like"] as! String == "1" {
             oneSong?.setValue("0", forKey: "like")
             PlayView.shared().scImgV.image = UIImage(named: "ax_0.png")
+            ArchiveManager.cancelCollection(songId: oneSong?["songId"] as! String);
         } else {
             oneSong?.setValue("1", forKey: "like")
             PlayView.shared().scImgV.image = UIImage(named: "ax_1.png")
+            ArchiveManager.setCollectionList(songId: oneSong?["songId"] as! String)
         }
         if ArchiveManager.archiveManagerEncode(songId: oneSong?["songId"] as! String, data: oneSong!) {
             QSALog("收藏状态修改成功")
