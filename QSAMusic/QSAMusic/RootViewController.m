@@ -50,6 +50,8 @@
     PlayPointView *playPointView = [PlayPointView shared];
     playPointView.superVC = self;
     [QSAMusicKeyWindow addSubview:playPointView];
+    
+    [[PlayerController shared] prepareList];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -131,7 +133,7 @@
 - (IBAction)btnsAction:(UIButton *)sender {
     switch (sender.tag) {
         case 5: { //mine
-            MineViewController *mineVC = [[MineViewController alloc] init];
+            MineViewController *mineVC = [MineViewController shared];
             [self.navigationController pushViewController:mineVC animated:YES];
         }
             break;

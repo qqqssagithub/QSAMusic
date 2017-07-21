@@ -40,7 +40,6 @@ class ArchiveManager: NSObject {
         }
     }
     
-
     class func setCacheList(songId: String, data: NSMutableDictionary) {
         setCacheList(songId: songId, data: getInfo(data: data))
     }
@@ -48,18 +47,24 @@ class ArchiveManager: NSObject {
     private class func setCacheList(songId: String, data: Dictionary<String, String>) {
         var cacheList = getCacheList()
         cacheList.insert([songId: data], at: 0)
+        NSKeyedArchiver.archiveRootObject(cacheList, toFile: NSHomeDirectory() + "/Documents" + "/cacheList.archive")
         let maxCacheCount = SystemSettings().maxCacheCount
         while cacheList.count > maxCacheCount {
             //QSALog("缓存文件超出: \(cacheList.count)")
             for key in cacheList[maxCacheCount].keys {
-                let manager = FileManager.default
-                try? manager.removeItem(atPath: NSHomeDirectory() + "/Documents" + "/\(key).archive")
-                try? manager.removeItem(atPath: NSHomeDirectory() + "/Documents" + "/\(key).mp3")
-                cacheList.remove(at: maxCacheCount)
+                deleteCache(cacheList: cacheList, songId: key, index: maxCacheCount)
             }
         }
+        
+    }
+    
+    class func deleteCache(cacheList: [Dictionary<String, Dictionary<String, String>>], songId: String, index: Int) {
+        var cacheList = cacheList
+        let manager = FileManager.default
+        try? manager.removeItem(atPath: NSHomeDirectory() + "/Documents" + "/\(songId).archive")
+        try? manager.removeItem(atPath: NSHomeDirectory() + "/Documents" + "/\(songId).mp3")
+        cacheList.remove(at: index)
         NSKeyedArchiver.archiveRootObject(cacheList, toFile: NSHomeDirectory() + "/Documents" + "/cacheList.archive")
-        QSALog("缓存文件count: \(cacheList.count)")
     }
     
     //收藏列表(如果音乐被收藏, 则会从缓存列表中剔除)
@@ -97,8 +102,8 @@ class ArchiveManager: NSObject {
         NSKeyedArchiver.archiveRootObject(cacheList, toFile: NSHomeDirectory() + "/Documents" + "/cacheList.archive")
     }
     
-    class func cancelCollection(songId: String) {
-        var collectionList = getCollectionList()
+    class func cancelCollection(collectionList: [Dictionary<String, Dictionary<String, String>>], songId: String) {
+        var collectionList = collectionList
         var index = 0
         var isBreak = false
         for song in collectionList {
@@ -114,6 +119,19 @@ class ArchiveManager: NSObject {
                 } else {
                     index += 1;
                 }
+            }
+        }
+        NSKeyedArchiver.archiveRootObject(collectionList, toFile: NSHomeDirectory() + "/Documents" + "/collectionList.archive")
+    }
+    
+    class func cancelCollection(collectionList: [Dictionary<String, Dictionary<String, String>>], songId: String, index: Int) {
+        var collectionList = collectionList
+        let song = collectionList[index]
+        for (key, value) in song {
+            if songId == key {
+                setCacheList(songId: key, data: value)
+                collectionList.remove(at: index)
+                QSALog("缓存列表: \(getCacheList().count) -- 收藏列表: \(collectionList.count)")
             }
         }
         NSKeyedArchiver.archiveRootObject(collectionList, toFile: NSHomeDirectory() + "/Documents" + "/collectionList.archive")

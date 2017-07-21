@@ -21,13 +21,39 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         QSAAudioPlayer.shared.delegate = self
     }
     
-    var playList = [NSDictionary]() //播放列表
-    var playIndex: Int = 0          //当前播放标记
+    private var playList = [NSDictionary]() //播放列表
+    
+    var playIndex: Int = 0                  //当前播放标记
     var isPlaying = false
     var playTime: Int = 0
     var duration: Int = 0           //总时间
     
-    var oneSong: NSMutableDictionary? = nil
+    private var oneSong: NSMutableDictionary? = nil
+    
+    var listReady = false
+    
+    func prepareList() {
+        var dataArr = [Dictionary<String, Dictionary<String, String>>]()
+        var clist = ArchiveManager.getCollectionList()
+        if clist.count == 0 {
+            clist = ArchiveManager.getCacheList()
+        }
+        for song in clist {
+            dataArr.append(song)
+        }
+        if dataArr.count != 0 {
+            listReady = true
+            var list = [NSDictionary]()
+            for item in dataArr {
+                for value in item.values {
+                    list.append(value as NSDictionary)
+                }
+            }
+            playList = list
+            playIndex = 0
+            PlayView.shared().updataList(withData: list)
+        }
+    }
     
     func play(playList: [NSDictionary], index: Int) {
         self.playList = playList
@@ -141,15 +167,18 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     // MARK: - play界面操作
     //收藏
     func like() {
+        var like = false
         if oneSong?["like"] as! String == "1" {
             oneSong?.setValue("0", forKey: "like")
             PlayView.shared().scImgV.image = UIImage(named: "ax_0.png")
-            ArchiveManager.cancelCollection(songId: oneSong?["songId"] as! String);
+            ArchiveManager.cancelCollection(collectionList: ArchiveManager.getCollectionList(), songId: oneSong?["songId"] as! String)
         } else {
             oneSong?.setValue("1", forKey: "like")
             PlayView.shared().scImgV.image = UIImage(named: "ax_1.png")
             ArchiveManager.setCollectionList(songId: oneSong?["songId"] as! String)
+            like = true
         }
+        MineViewController.shared.itemChange(like: like, songId: oneSong?["songId"] as! String)
         if ArchiveManager.archiveManagerEncode(songId: oneSong?["songId"] as! String, data: oneSong!) {
             QSALog("收藏状态修改成功")
         } else {
@@ -221,7 +250,7 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         self.play(index: playIndex)
     }
     
-    private func play(index: Int) {
+    func play(index: Int) {
         ListTableViewDelegate.shared().selectRow(index)
         isPlaying = true
     }

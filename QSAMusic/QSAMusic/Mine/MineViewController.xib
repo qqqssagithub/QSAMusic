@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MineViewController" customModule="QSAMusic" customModuleProvider="target">
             <connections>
+                <outlet property="deleteBtn" destination="ZSX-3c-9g0" id="mHF-cg-BOg"/>
+                <outlet property="editBtn" destination="h4V-Z4-Lqg" id="9Og-5O-9on"/>
                 <outlet property="tableView" destination="zUR-bp-gir" id="1vJ-6q-YrV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -71,18 +73,44 @@
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
-                                    <exclude reference="xH3-3d-tRb"/>
                                     <exclude reference="81v-f0-et6"/>
+                                    <exclude reference="xH3-3d-tRb"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=compact">
                                 <mask key="constraints">
-                                    <include reference="xH3-3d-tRb"/>
                                     <include reference="81v-f0-et6"/>
+                                    <include reference="xH3-3d-tRb"/>
                                 </mask>
                             </variation>
                             <connections>
                                 <action selector="edit:" destination="-1" eventType="touchUpInside" id="2Iu-Cu-oV1"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSX-3c-9g0">
+                            <rect key="frame" x="275" y="27" width="46" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="FPQ-65-VIp"/>
+                                <constraint firstAttribute="height" constant="30" id="hmu-aG-h6h"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="删除">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="hmu-aG-h6h"/>
+                                    <exclude reference="FPQ-65-VIp"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="hmu-aG-h6h"/>
+                                    <include reference="FPQ-65-VIp"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="deleteAction:" destination="-1" eventType="touchUpInside" id="6AY-bH-O08"/>
                             </connections>
                         </button>
                     </subviews>
@@ -92,6 +120,8 @@
                         <constraint firstItem="Qmg-QJ-ZDi" firstAttribute="top" secondItem="tpg-N2-7aa" secondAttribute="top" constant="27" id="7dK-cR-lbH"/>
                         <constraint firstAttribute="height" constant="64" id="Aoa-WU-fmT"/>
                         <constraint firstItem="JZQ-fr-bkH" firstAttribute="top" secondItem="tpg-N2-7aa" secondAttribute="top" constant="28" id="Egp-e7-pS3"/>
+                        <constraint firstItem="ZSX-3c-9g0" firstAttribute="top" secondItem="tpg-N2-7aa" secondAttribute="top" constant="27" id="Fl5-6D-Rnv"/>
+                        <constraint firstItem="h4V-Z4-Lqg" firstAttribute="leading" secondItem="ZSX-3c-9g0" secondAttribute="trailing" id="IGl-iE-vnT"/>
                         <constraint firstAttribute="trailing" secondItem="h4V-Z4-Lqg" secondAttribute="trailing" constant="8" id="JW1-Va-vTg"/>
                         <constraint firstItem="h4V-Z4-Lqg" firstAttribute="top" secondItem="tpg-N2-7aa" secondAttribute="top" constant="27" id="cml-u3-RqI"/>
                         <constraint firstItem="JZQ-fr-bkH" firstAttribute="centerX" secondItem="tpg-N2-7aa" secondAttribute="centerX" id="wxt-OO-JnV"/>

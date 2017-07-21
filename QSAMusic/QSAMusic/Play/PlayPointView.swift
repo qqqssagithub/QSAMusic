@@ -12,6 +12,8 @@ import pop
 //主屏幕上的圆点
 class PlayPointView: QSAKitBaseView {
     
+    var open = false //是否打开过
+    
     static let shared = PlayPointView(frame: CGRect(x: 24, y: SwiftMacro().ScreenHeight - 24 - 50, width: 50, height: 50))
     
     private override init(frame: CGRect) {
@@ -42,6 +44,14 @@ class PlayPointView: QSAKitBaseView {
     }
     
     func tap(tapGR: UITapGestureRecognizer) {
+        if !open {
+            if PlayerController.shared.listReady {
+                PlayerController.shared.play(index: 0)
+            } else {
+                QSAKitAlertView.show(withTitle: "提示", message: "列表中没有任何歌曲, 去挑选几首吧", cancelButtonTitle: "知道了", otherButtonTitle: nil)
+                return
+            }
+        }
         self.open(isList: false)
     }
     
@@ -52,6 +62,7 @@ class PlayPointView: QSAKitBaseView {
     
     //展开
     func open(isList: Bool) {
+        open = true
         self.isList = isList
         self.isUserInteractionEnabled = false
         self.superVC.view.isUserInteractionEnabled = false
