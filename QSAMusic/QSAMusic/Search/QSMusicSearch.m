@@ -264,11 +264,11 @@
     view.moreButton.tag = section;
     
     NSDictionary *data = _data[section][0];
-    if (data.count == 9) {
+    if (data.count <= 9) {
         view.title.text = @"歌手/乐队";
-    } else if (data.count == 35) {
+    } else if (data.count > 30) {
         view.title.text = @"单曲";
-    } else if (data.count == 11) {
+    } else if (data.count > 9 && data.count < 20) {
         view.title.text = @"专辑";
     }
     
@@ -300,12 +300,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *data = _data[indexPath.section][indexPath.row];
-    if (data.count == 9) {
+    if (data.count <= 9) {
         SingerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singerCell"];
         [cell updateWithData:data];
         return cell;
     }
-    if (data.count == 35) {
+    if (data.count > 30) {
         NSString *pic = data[@"pic_small"];
         NSString *title = [self string:data[@"title"] removeExcess:@[@"<em>", @"</em>"]];
         NSString *album_title = data[@"album_title"];
@@ -313,7 +313,7 @@
             album_title = @"未知";
         }
         data = @{@"pic": pic, @"title": title, @"other": [NSString stringWithFormat:@"专辑: %@", album_title]};
-    } else if (data.count == 11) {
+    } else if (data.count > 9 && data.count < 20) {
         NSString *pic = data[@"pic_small"];
         NSString *title = [self string:data[@"title"] removeExcess:@[@"<em>", @"</em>"]];
         NSString *publishtime = data[@"publishtime"];
@@ -338,7 +338,7 @@
     [_searchBar resignFirstResponder];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *data = _data[indexPath.section][indexPath.row];
-    if (data.count == 9) {
+    if (data.count <= 9) {
         NSString *name = data[@"name"];
         if (name == nil) {
             name = data[@"author"];
@@ -350,10 +350,10 @@
             singer.result = result;
             [_superVC.navigationController pushViewController:singer animated:YES];
         }];
-    } else if (data.count == 35) {
+    } else if (data.count > 30) {
         NSArray *list = _data[indexPath.section];
         [[PlayerController shared] playWithPlayList:list index:indexPath.row];
-    } else if (data.count == 11) {
+    } else if (data.count > 9 && data.count < 20) {
         [NetworkEngine getAlbumDetailWithAlbumId:data[@"album_id"] responseBlock:^(NSDictionary * _Nonnull albumInfo, NSArray<NSDictionary *> * _Nonnull songList) {
             AlbumDetails *aDetails = [[AlbumDetails alloc] init];
             aDetails.albumInfo = albumInfo;

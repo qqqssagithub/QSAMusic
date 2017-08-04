@@ -11,6 +11,8 @@
 #import "PlayView.h"
 #import "PlayButtonView.h"
 
+#import "QSMusicEQSetView.h"
+
 // 滑动方向
 typedef NS_ENUM(NSInteger, CameraMoveDirection) {
     kCameraMoveDirectionNone  = 0,
