@@ -50,7 +50,9 @@ class AlbumDetails: QSAKitBaseViewController, UITableViewDelegate, UITableViewDa
     
     private lazy var infoImgV: UIImageView = {
         let infoImgV = UIImageView(frame: CGRect(x: 0, y: 0, width: SwiftMacro().ScreenWidth, height: SwiftMacro().ScreenWidth))
-        infoImgV.sd_setImage(with: URL(string: self.albumInfo["pic_radio"] as! String), placeholderImage: UIImage(named: "QSAMusic_pc.png"))
+        var urlStr = self.albumInfo["pic_radio"] as! String
+        urlStr = urlStr.replaceToScreenSize(old: "_300", new: "_500")
+        infoImgV.sd_setImage(with: URL(string: urlStr), placeholderImage: UIImage(named: "QSAMusic_pc.png"))
         return infoImgV
     }()
     

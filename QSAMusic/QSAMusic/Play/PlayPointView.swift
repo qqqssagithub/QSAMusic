@@ -10,7 +10,7 @@ import UIKit
 import pop
 
 //主屏幕上的圆点
-class PlayPointView: QSAKitBaseView {
+public class PlayPointView: QSAKitBaseView {
     
     var open = false //是否打开过
     
@@ -30,7 +30,7 @@ class PlayPointView: QSAKitBaseView {
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -43,7 +43,7 @@ class PlayPointView: QSAKitBaseView {
         self.addGestureRecognizer(panGR)
     }
     
-    func tap(tapGR: UITapGestureRecognizer) {
+    @objc private func tap(tapGR: UITapGestureRecognizer) {
         if !open {
             if PlayerController.shared.listReady {
                 PlayerController.shared.play(index: 0)
@@ -55,13 +55,13 @@ class PlayPointView: QSAKitBaseView {
         self.open(isList: false)
     }
     
-    var tempPoint = CGPoint(x: 24 + 25, y: SwiftMacro().ScreenHeight - 24 - 50 + 25)
-    var isOpen = false
+    private var tempPoint = CGPoint(x: 24 + 25, y: SwiftMacro().ScreenHeight - 24 - 50 + 25)
+    private var isOpen = false
     
-    var isList: Bool = false
+    private var isList: Bool = false
     
     //展开
-    func open(isList: Bool) {
+    public func open(isList: Bool) {
         open = true
         self.isList = isList
         self.isUserInteractionEnabled = false
@@ -76,12 +76,12 @@ class PlayPointView: QSAKitBaseView {
     }
     
     //收缩
-    func shrink() {
+    private func shrink() {
         isOpen = false
         self.performTransactionAnimation()
     }
     
-    var openCallClosure: QSACallback!
+    public var openCallClosure: QSACallback!
     
     //展开收缩动画
     private func performTransactionAnimation() {
@@ -119,7 +119,7 @@ class PlayPointView: QSAKitBaseView {
         }
     }
     
-    func pan(panGR: UIPanGestureRecognizer) {
+    @objc private func pan(panGR: UIPanGestureRecognizer) {
         if (panGR.state == UIGestureRecognizerState.began) {
             animation.removeAllBehaviors()
         } else if (panGR.state == UIGestureRecognizerState.changed) {

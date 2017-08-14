@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class SongView: QSAKitBaseView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+public class SongView: QSAKitBaseView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private lazy var collectionView: UICollectionView = {
         let layout = QSMusicGeDanCVFlowLayout()

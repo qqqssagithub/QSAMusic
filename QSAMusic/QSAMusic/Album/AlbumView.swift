@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class AlbumView: QSAKitBaseView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+public class AlbumView: QSAKitBaseView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

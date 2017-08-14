@@ -9,24 +9,24 @@
 import UIKit
 import AVFoundation
 
-open class QSAAudioPlayer: NSObject, UITableViewDelegate {
+public class QSAAudioPlayer: NSObject, UITableViewDelegate {
     
     // MARK: - private variables
-    var engine = AVAudioEngine()                           //engine
     private var internalAudioFile: AVAudioFile?            //播放文件
-    var internalPlayer = AVAudioPlayerNode()               //播放器
 //    private var defaultSampleRate: Double = 44100.0        //默认采样率
 //    private var defaultChannels: AVAudioChannelCount = 2   //默认通道
-    var timer: DispatchSourceTimer?                        //读取播放进度的定时器
+    private var timer: DispatchSourceTimer?                //读取播放进度的定时器
     private var eq = AVAudioUnitEQ(numberOfBands: 10)      //均衡器
     private var startTime: Double = 0                      //开始播放的时间
     
-    // MARK: - open variables
-    open var delegate: QSAAudioPlayerDelegate?
-    open var playing = false
+    // MARK: - public variables
+    public var engine = AVAudioEngine()                    //engine
+    public var internalPlayer = AVAudioPlayerNode()        //播放器
+    public weak var delegate: QSAAudioPlayerDelegate?
+    public var playing = false
     
     // MARK: - sharedInstance
-    open static let shared = QSAAudioPlayer()
+    public static let shared = QSAAudioPlayer()
     
     private override init() {
         super.init()
@@ -34,7 +34,7 @@ open class QSAAudioPlayer: NSObject, UITableViewDelegate {
     
     // MARK: - engine设置
     ///将节点连接到engine上, 并启动engine
-    func startEngine() {
+    public func startEngine() {
         //初始化eq均衡器的frequency数值, 参考qq音乐播放器
         let frequencys = [31.0, 62.0, 125.0, 250.0, 500.0, 1000.0, 2000.0, 4000.0, 8000.0, 16000.0]
         for i in 0...9 {

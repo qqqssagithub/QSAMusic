@@ -10,7 +10,7 @@ import UIKit
 import iCarousel
 import FXImageView
 
-open class RadioView: QSAKitBaseView, iCarouselDelegate, iCarouselDataSource {
+public class RadioView: QSAKitBaseView, iCarouselDelegate, iCarouselDataSource {
     
     private lazy var radioPics: Array<String> = {
         let radioPics = ["jd.jpg", "jg.jpg", "cmq.jpg", "om.jpg", "wl.jpg", "sbtt.jpg", "dy.jpg"]

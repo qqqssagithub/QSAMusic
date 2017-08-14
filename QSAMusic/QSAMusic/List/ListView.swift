@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class ListView: QSAKitBaseView, UITableViewDelegate, UITableViewDataSource {
+public class ListView: QSAKitBaseView, UITableViewDelegate, UITableViewDataSource {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.bounds)

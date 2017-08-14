@@ -19,8 +19,8 @@ import UIKit
  */
 
 //MARK: - log的开关
-open class QSAHelpers: NSObject {
-    open static var enableLogging: Bool = true
+public class QSAHelpers: NSObject {
+    public static var enableLogging: Bool = true
 }
 
 //MARK: - 基础闭包
@@ -111,6 +111,16 @@ extension String {
     }
 }
 
+//Mark: - 修改图片链接
+extension String {
+    mutating func replaceToScreenSize(old: String, new: String) -> String {
+        for _ in 0...1 {
+            self = self.replacingOccurrences(of: old, with: new)
+        }
+        return self
+    }
+}
+
 //MARK: - 系统配置
 extension UserDefaults {
     func set(value: SystemSettings.CycleMode, forKey: String) {
@@ -124,10 +134,10 @@ extension UserDefaults {
     }
 }
 
-open class SystemSettings {
-    let maxCacheCount = 30 //最大缓存
+public class SystemSettings {
+    public let maxCacheCount = 30 //最大缓存
     
-    func likeList() -> NSMutableArray {
+    public func likeList() -> NSMutableArray {
         let likeList = UserDefaults.standard.object(forKey: "likeList")
         if likeList != nil {
             return likeList as! NSMutableArray
@@ -136,7 +146,7 @@ open class SystemSettings {
         }
     }
     
-    enum CycleMode {
+    public enum CycleMode {
         case List
         case Single
         case Random
@@ -144,7 +154,7 @@ open class SystemSettings {
     
     
     
-    func cycleMode() -> CycleMode {
+    public func cycleMode() -> CycleMode {
         let cycleMode = UserDefaults.standard.object(forKey: "cycleMode") as? String
         if cycleMode == nil {
             UserDefaults.standard.set(value: CycleMode.List, forKey: "cycleMode")
@@ -160,7 +170,7 @@ open class SystemSettings {
         }
     }
     
-    func cycleMode(cycleMode: CycleMode) {
+    public func cycleMode(cycleMode: CycleMode) {
         UserDefaults.standard.set(value: cycleMode, forKey: "cycleMode")
     }
 }

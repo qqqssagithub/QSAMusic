@@ -8,14 +8,14 @@
 
 import UIKit
 
-open class MoreSongList: QSAKitBaseView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+public class MoreSongList: QSAKitBaseView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var data = NSMutableArray()
     private var page: Int = 1
-    open var tags: String = ""
+    public var tags: String = ""
     
     private var footer: UICollectionReusableView!
     private lazy var bottomLabel: UILabel = {
@@ -30,7 +30,7 @@ open class MoreSongList: QSAKitBaseView, UICollectionViewDelegate, UICollectionV
     
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override open func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         collectionView.delegate = self
         collectionView.dataSource = self
         let layout = UICollectionViewFlowLayout()
@@ -41,7 +41,7 @@ open class MoreSongList: QSAKitBaseView, UICollectionViewDelegate, UICollectionV
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
     }
     
-    open func show(superView: UIView, title: String) {
+    public func show(superView: UIView, title: String) {
         self.frame = CGRect(x: 0, y: SwiftMacro().ScreenHeight, width: SwiftMacro().ScreenWidth, height: SwiftMacro().ScreenHeight - 64 - 33)
         superView.addSubview(self)
         self.title.text = title

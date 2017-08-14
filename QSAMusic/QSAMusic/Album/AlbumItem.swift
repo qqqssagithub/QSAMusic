@@ -15,7 +15,9 @@ class AlbumItem: UICollectionViewCell {
     @IBOutlet weak var name: UILabel!
     
     func update(data: NSDictionary) -> Void {
-        imgV.sd_setImage(with: URL(string: data["pic_small"] as! String), placeholderImage: UIImage(named: "QSAMusic_p.png"))
+        var urlStr = data["pic_small"] as! String
+        urlStr = urlStr.replaceToScreenSize(old: "_90", new: "_120")
+        imgV.sd_setImage(with: URL(string: urlStr), placeholderImage: UIImage(named: "QSAMusic_p.png"))
         title.text = data["title"] as? String
         name.text = data["author"] as? String
     }

@@ -116,7 +116,7 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
         if urlStr == "" || urlStr.characters.count < 10 {
             QSMusicRemoteEvent.shared().addLockScreenView(withTitle: "\(music["songName"] as! String)", time: String(format: "%ld", Int(music["time"] as! NSNumber)), author: "\(music["artistName"] as! String)", image: UIImage(named: "QSAMusic_pc.png"))
         } else {
-            urlStr = urlStr.replacingOccurrences(of: "w_150", with: "w_414")
+            urlStr = urlStr.replaceToScreenSize(old: "_150", new: "_500")
             let url = URL(string: urlStr)
             _ = sdManager?.downloadImage(with: url, progress: { (receivedSize, expectedSize) in
             }, completed: { (image, errer, _, _, imageURL) in

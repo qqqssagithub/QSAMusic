@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class SingerView: QSAKitBaseView, UITableViewDataSource, UITableViewDelegate {
+public class SingerView: QSAKitBaseView, UITableViewDataSource, UITableViewDelegate {
     
     private var topDataArr = [NSDictionary]()
     private var dataArr: Array = [[], ["华语男歌手", "华语女歌手", "华语乐队组合"], ["欧美男歌手手", "欧美女歌手", "欧美乐队组合"], ["韩国男歌手", "韩国女歌手", "韩国乐队组合"], ["日本男歌手", "日本女歌手", "日本乐队组合"]]

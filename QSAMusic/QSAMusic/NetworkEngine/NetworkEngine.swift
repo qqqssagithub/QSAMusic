@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-open class NetworkEngine: NSObject {
+public class NetworkEngine: NSObject {
 
     private struct RequestURL {
         

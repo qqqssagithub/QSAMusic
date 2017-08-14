@@ -76,8 +76,8 @@ class SingerDetail: QSAKitBaseViewController, UITableViewDelegate, UITableViewDa
         view.addSubview(navigationView)
         view.addSubview(backBtn)
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) { 
-            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: SwiftMacro().ScreenWidth, height: 183))
+        //DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 600, height: 183))
             headerView.backgroundColor = UIColor.clear
             self.tableView.tableHeaderView = headerView
             
@@ -89,7 +89,7 @@ class SingerDetail: QSAKitBaseViewController, UITableViewDelegate, UITableViewDa
             let artist_list = artist_info["artist_list"] as! NSArray
             let artist = artist_list[0] as! NSDictionary
             var  urlStr = artist["avatar_middle"] as! String
-            urlStr = urlStr.replacingOccurrences(of: "w_120", with: "w_414")
+            urlStr = urlStr.replaceToScreenSize(old: "_120", new: "_500")
             self.infoImgV.sd_setImage(with: URL(string: urlStr), placeholderImage: UIImage(named: "QSAMusic_pc.png"))
             self.name.text = self.result["query"] as? String
             var country = artist["country"] as! String
@@ -133,7 +133,7 @@ class SingerDetail: QSAKitBaseViewController, UITableViewDelegate, UITableViewDa
                 self.albumBtn.isEnabled = true
             }
         }
-    }
+    //}
 
     @IBAction func songAndAlbumBtnAction(_ sender: UIButton) {
         if sender.tag == 0 {

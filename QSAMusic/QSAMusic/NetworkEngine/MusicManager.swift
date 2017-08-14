@@ -8,15 +8,15 @@
 
 import UIKit
 
-open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {
+public class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {
 
-    open static let shared = MusicManager()
+    public static let shared = MusicManager()
     
     private override init() {
         super.init()
     }
     
-    open var delegate: MusicManagerDelegate?
+    public weak var delegate: MusicManagerDelegate?
     
     private var fileHandle_download = FileHandle()
     private var fileHandle_read = FileHandle()
@@ -136,7 +136,7 @@ open class MusicManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
                     self.oneSong.setValue(songDetails["artistName"], forKey: "artistName")
                     self.oneSong.setValue(songDetails["albumName"], forKey: "albumName")
                     self.oneSong.setValue(songDetails["songPicSmall"], forKey: "songPicSmall")
-                    self.oneSong.setValue(songDetails["songPicBig"], forKey: "songPicBig")
+                    self.oneSong.setValue(songDetails["songPicBig"], forKey: "songPicBig") // songPicBig(150) songPicRadio(300)
                     self.oneSong.setValue(songDetails["lrcLink"], forKey: "lrcLink")
                     self.oneSong.setValue(songDetails["version"], forKey: "version")
                     self.oneSong.setValue(songDetails["time"], forKey: "time")

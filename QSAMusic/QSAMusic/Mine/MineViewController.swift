@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MineViewController: QSAKitBaseViewController, UITableViewDelegate, UITableViewDataSource {
+public class MineViewController: QSAKitBaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editBtn: UIButton!
@@ -20,7 +20,7 @@ class MineViewController: QSAKitBaseViewController, UITableViewDelegate, UITable
     
     
     // MARK: - sharedInstance
-    open static let shared = MineViewController()
+    public static let shared = MineViewController()
     
     private init() {
         super.init(nibName: "MineViewController", bundle: nil)
@@ -30,11 +30,11 @@ class MineViewController: QSAKitBaseViewController, UITableViewDelegate, UITable
         fatalError("init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) has not been implemented")
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         deleteBtn.isHidden = true
@@ -48,7 +48,7 @@ class MineViewController: QSAKitBaseViewController, UITableViewDelegate, UITable
         tableView.tableFooterView = footerView;
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         dataArr.removeAll()
@@ -58,7 +58,7 @@ class MineViewController: QSAKitBaseViewController, UITableViewDelegate, UITable
         tableView.reloadData()
     }
     
-    func itemChange(like: Bool, songId: String) {
+    public func itemChange(like: Bool, songId: String) {
         if (index == 1 && like) || (index == 0 && !like) {
             dataArr.removeAll()
             for song in index == 0 ? ArchiveManager.getCacheList() : ArchiveManager.getCollectionList() {
@@ -70,7 +70,7 @@ class MineViewController: QSAKitBaseViewController, UITableViewDelegate, UITable
         }
     }
     
-    func removeItem(songId: String) {
+    private func removeItem(songId: String) {
         var i = 0
         for item in dataArr {
             for (key, _) in item {
@@ -175,19 +175,19 @@ class MineViewController: QSAKitBaseViewController, UITableViewDelegate, UITable
         }
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         editDic.removeValue(forKey: "\(indexPath)")
         if editDic.count == 0 {
             deleteBtn.isHidden = true
         }
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle(rawValue: UITableViewCellEditingStyle.insert.rawValue | UITableViewCellEditingStyle.delete.rawValue)!
     }
     
     
-    override func didReceiveMemoryWarning() {
+    public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

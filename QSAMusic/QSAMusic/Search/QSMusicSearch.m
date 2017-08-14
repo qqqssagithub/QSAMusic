@@ -28,7 +28,8 @@
 
 @property (nonatomic) RootViewController *superVC;
 
-@property (nonatomic) NSInteger searchIndex;//0 歌手, 1 单曲, 2 专辑, 3 全部
+@property (nonatomic) NSInteger touchIndex; //0 歌手, 1 单曲, 2 专辑, 3 没选择任何分组
+@property (nonatomic) BOOL isAll;           //YES 在分组列表页面, NO 在单个分组详情页面
 
 @property (nonatomic) NSString *searchStr;
 @property (nonatomic) NSInteger searchPage;
@@ -186,7 +187,8 @@
 #pragma mark - searchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     _searchPage = 1;
-    _searchIndex = 3;
+    _touchIndex = 3;
+    _isAll = YES;
     _searchTableView.tableFooterView = nil;
     _searchStr = searchText;
     [_data removeAllObjects];
@@ -241,6 +243,7 @@
 
 #pragma mark - TabelView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    GLog("///////:%ld", _data.count);
     return _data.count;
 }
 
@@ -272,7 +275,7 @@
         view.title.text = @"专辑";
     }
     
-    NSInteger num = [_data_count[_searchIndex == 3 ? section : _searchIndex] integerValue];
+    NSInteger num = [_data_count[_isAll ? section : _touchIndex] integerValue];
     view.num.text = [NSString stringWithFormat:@"%ld", num];
     if (num <= 3) {
         view.moreButton.hidden = YES;
@@ -280,18 +283,18 @@
     } else {
         view.moreButton.hidden = NO;
         view.moreTF.hidden = NO;
-    }
-    if (_searchIndex != 3) {
-        [view.moreButton setTitle:@"返回" forState:UIControlStateNormal];
+        if (!_isAll) {
+            [view.moreButton setTitle:@"返回" forState:UIControlStateNormal];
+        } else {
+            [view.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
+        }
     }
     WeakObject(view);
     [view setButtonBlock:^(NSInteger tag) {
         if (![wealObject.moreButton.titleLabel.text isEqualToString:@"返回"]) {
-            _searchIndex = tag;
-            [wealObject.moreButton setTitle:@"返回" forState:UIControlStateNormal];
+            _touchIndex = tag;
             [self removeOther];
         } else {
-            [wealObject.moreButton setTitle:@"查看更多" forState:UIControlStateNormal];
             [self addOther];
         }
     }];
@@ -365,7 +368,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [_searchBar resignFirstResponder];
-    if (_searchIndex != 3) {
+    if (!_isAll) {
         if (scrollView.contentOffset.y >= scrollView.contentSize.height - (ScreenHeight - 64 - 33) - 30) {
             if (![_bottomLabel.text isEqualToString:@"没有更多了"] && ![_bottomLabelStr isEqualToString:@""]) {
                 _bottomLabelStr = @"";
@@ -377,8 +380,9 @@
 
 #pragma mark - 查看更多
 - (void)removeOther {
+    _isAll = NO;
     for (NSInteger i = _data.count - 1; i >= 0; i--) {
-        if (i != _searchIndex) {
+        if (i != _touchIndex) {
             [_data removeObjectAtIndex:i];
             [_searchTableView deleteSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationTop];
         }
@@ -395,13 +399,13 @@
         _searchPage++;
         _bottomLabelStr = @"加载完成";
         NSArray *arr;
-        if (_searchIndex == 0) {
+        if (_touchIndex == 0) {
             arr = data[@"artist_info"][@"artist_list"];
         }
-        if (_searchIndex == 1) {
+        if (_touchIndex == 1) {
             arr = data[@"song_info"][@"song_list"];
         }
-        if (_searchIndex == 2) {
+        if (_touchIndex == 2) {
             arr = data[@"album_info"][@"album_list"];
         }
         if (arr.count < 25) {
@@ -423,8 +427,7 @@
 }
 
 - (void)addOther {
-    _searchPage = 1;
-    _searchIndex = 3;
+    _isAll = YES;
     _searchTableView.tableFooterView = nil;
     [_searchTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     NSMutableArray *arr = _data[0];
@@ -433,8 +436,8 @@
     }
     [_searchTableView reloadData];
     for (NSInteger j = 0; j < _data_tmp.count; j++) {
-        if (j != _searchIndex) {
-            if (j < _searchIndex) {
+        if (j != _touchIndex) {
+            if (j < _touchIndex) {
                 [_data insertObject:_data_tmp[j] atIndex:j];
             } else {
                 [_data addObject:_data_tmp[j]];
@@ -442,6 +445,8 @@
             [_searchTableView insertSections:[NSIndexSet indexSetWithIndex:j] withRowAnimation:UITableViewRowAnimationBottom];
         }
     }
+    _searchPage = 1;
+    _touchIndex = 3;
 }
 
 @end
