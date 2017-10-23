@@ -188,7 +188,6 @@
                                     ((x / ScreenWidth) * 2 + 1),
                                     _indexView.center.y);
     
-    
     //更新分类button的颜色
     [_album setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_song setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
