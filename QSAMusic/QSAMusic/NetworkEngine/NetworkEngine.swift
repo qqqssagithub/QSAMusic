@@ -43,7 +43,7 @@ public class NetworkEngine: NSObject {
     }
     
     // MARK: - 歌曲详情
-    public class func getSong(songId: String, responseBlock: @escaping (_ oneSong: [String : Any]) -> Void) {
+    public class func getSong(songId: String, responseBlock: @escaping ([String : Any]) -> Void) {
         QSALog("获取歌曲详情: \(songId)")
         let url = RequestURL().song + songId
         NetworkEngine.getData(url: url) { (response) in

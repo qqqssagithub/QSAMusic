@@ -145,7 +145,7 @@ class PlayerController: NSObject, MusicManagerDelegate, QSAAudioPlayerDelegate {
     // MARK: - QSAAudioPlayer代理
     func player(updatePlayProgress playProgress: Float) {
         DispatchQueue.main.async(execute: {
-            if !PlayView.shared().audioSlider.isTracking && !PlayView.shared().audioSlider.isTracking {
+            if !PlayView.shared().audioSlider.isTracking {
                 PlayView.shared().audioSlider.value = playProgress
             }
         })

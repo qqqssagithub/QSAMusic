@@ -4,7 +4,7 @@
 //
 //  Created by 陈少文 on 17/4/26.
 //  Copyright © 2017年 qqqssa. All rights reserved.
-//
+//  新碟
 
 import UIKit
 
@@ -103,6 +103,11 @@ public class AlbumView: QSAKitBaseView, UICollectionViewDelegate, UICollectionVi
             aDetails.songList = songList
             self.superVC.navigationController!.pushViewController(aDetails, animated: true)
         }
+
+//        InstanceZFJUncaughtExceptionHandler()
+        
+//        let a = ["1"]
+//        print("\(a[1])")
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -11,6 +11,8 @@
 #import "QSMusicRemoteEvent.h"
 #import <iflyMSC/iflyMSC.h>
 
+#import "MQLSignalHandler.h"
+
 @interface AppDelegate ()
 
 @end
@@ -51,6 +53,8 @@
     
     //所有服务启动前，需要确保执行createUtility
     [IFlySpeechUtility createUtility:initString];
+    
+    [[MQLSignalHandler instance] start];
     
     return YES;
 }

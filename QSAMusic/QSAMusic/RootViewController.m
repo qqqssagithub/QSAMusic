@@ -11,9 +11,10 @@
 #import "QSMusicSearch.h"
 //#import <iflyMSC/iflyMSC.h>
 //#import "QSMusicIFlytekDataHelper.h"
+#import <MessageUI/MFMailComposeViewController.h>
+#import "MQLSignalHandler.h"
 
-
-@interface RootViewController () <UIScrollViewDelegate/*, IFlySpeechRecognizerDelegate*/>
+@interface RootViewController () <UIScrollViewDelegate/*, IFlySpeechRecognizerDelegate*/, MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel      *titleLabel;
 
@@ -26,11 +27,11 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *bottomScrollView;
 
-@property (nonatomic) AlbumView  *albumView;
-@property (nonatomic) ListView   *listView;
-@property (nonatomic) RadioView  *radioView;
-@property (nonatomic) SingerView *singerView;
-@property (nonatomic) SongView   *songView;
+@property (nonatomic, strong) AlbumView  *albumView;
+@property (nonatomic, strong) ListView   *listView;
+@property (nonatomic, strong) RadioView  *radioView;
+@property (nonatomic, strong) SingerView *singerView;
+@property (nonatomic, strong) SongView   *songView;
 
 @property (nonatomic) NSMutableArray *appearViews;
 
@@ -52,6 +53,27 @@
     [QSAMusicKeyWindow addSubview:playPointView];
     
     [[PlayerController shared] prepareList];
+    
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isCrash"] isEqualToString:@"1"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isCrash"];
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+        controller.mailComposeDelegate = self;
+        [controller setToRecipients:@[@"qqqssa@126.com"]];
+        [controller setSubject:@"crash"];
+        
+        NSString *str = [[NSString alloc] initWithContentsOfFile:[MQLSignalHandler instance].logPath encoding:NSUTF8StringEncoding error:nil];
+        
+        [controller setMessageBody:str isHTML:NO];
+        [self presentModalViewController:controller animated:YES];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error;
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -141,6 +163,12 @@
             [[QSMusicSearch sharedQSMusicSearch] initViewWithSuperVC:self];
         }
             break;
+        case 10: {
+            NSString *ss = nil;
+            NSDictionary *dic = @{@"1": @"1", @"2": @"2", @"3": ss};
+            NSLog(@"%@", dic);
+        }
+            break;
         default:
             _bottomScrollView.contentOffset = CGPointMake(sender.tag * ScreenWidth, 0);
             break;
@@ -156,7 +184,10 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat x = scrollView.contentOffset.x;
     //控制moveView的移动
-    _indexView.center = CGPointMake((((ScreenWidth / 10) * 9) - (ScreenWidth / 10)) * (x / (ScreenWidth * 4)) + (ScreenWidth / 10), _indexView.center.y);//这么长的公式, 实在不想解释了
+    _indexView.center = CGPointMake((ScreenWidth / 10.0) *
+                                    ((x / ScreenWidth) * 2 + 1),
+                                    _indexView.center.y);
+    
     
     //更新分类button的颜色
     [_album setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

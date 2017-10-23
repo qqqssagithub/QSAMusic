@@ -50,6 +50,8 @@
 		895BC7E61EDE7F0700A523E7 /* wl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 895BC7DF1EDE7F0700A523E7 /* wl.jpg */; };
 		8969ACDA1EC5812A009418E7 /* QSAAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8969ACD91EC5812A009418E7 /* QSAAudioPlayer.swift */; };
 		8969ACDD1EC582ED009418E7 /* QSAHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8969ACDC1EC582ED009418E7 /* QSAHelpers.swift */; };
+		8970B3691F4308240084FEA5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8970B3671F42FC7D0084FEA5 /* MessageUI.framework */; };
+		8970B36C1F438CFC0084FEA5 /* MQLSignalHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8970B36B1F438CFC0084FEA5 /* MQLSignalHandler.m */; };
 		8970E75A1ED53556005B7578 /* TopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8970E7581ED53555005B7578 /* TopTableViewCell.swift */; };
 		8970E75B1ED53556005B7578 /* TopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8970E7591ED53556005B7578 /* TopTableViewCell.xib */; };
 		8970E75E1ED53583005B7578 /* SingerClassTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8970E75C1ED53583005B7578 /* SingerClassTableViewCell.swift */; };
@@ -93,6 +95,7 @@
 		89C8C63A1ED421250062BD31 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C8C6381ED421250062BD31 /* ListCell.xib */; };
 		89C8C63D1ED421490062BD31 /* SingerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8C63B1ED421490062BD31 /* SingerCell.swift */; };
 		89C8C63E1ED421490062BD31 /* SingerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C8C63C1ED421490062BD31 /* SingerCell.xib */; };
+		89CE93101F421DA000F01D3C /* CrashLogManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 89CE930F1F421DA000F01D3C /* CrashLogManage.m */; };
 		89D31F851EB9772D000F9FD9 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D31F841EB9772D000F9FD9 /* MusicManager.swift */; };
 		89D31F871EB9BA40000F9FD9 /* ArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D31F861EB9BA40000F9FD9 /* ArchiveManager.swift */; };
 		89D531491EC068A800B4ADB3 /* eq.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D531481EC068A800B4ADB3 /* eq.png */; };
@@ -199,6 +202,9 @@
 		895BC7DF1EDE7F0700A523E7 /* wl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wl.jpg; sourceTree = "<group>"; };
 		8969ACD91EC5812A009418E7 /* QSAAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSAAudioPlayer.swift; sourceTree = "<group>"; };
 		8969ACDC1EC582ED009418E7 /* QSAHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSAHelpers.swift; sourceTree = "<group>"; };
+		8970B3671F42FC7D0084FEA5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		8970B36A1F438CFC0084FEA5 /* MQLSignalHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQLSignalHandler.h; sourceTree = "<group>"; };
+		8970B36B1F438CFC0084FEA5 /* MQLSignalHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQLSignalHandler.m; sourceTree = "<group>"; };
 		8970E7581ED53555005B7578 /* TopTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopTableViewCell.swift; sourceTree = "<group>"; };
 		8970E7591ED53556005B7578 /* TopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopTableViewCell.xib; sourceTree = "<group>"; };
 		8970E75C1ED53583005B7578 /* SingerClassTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingerClassTableViewCell.swift; sourceTree = "<group>"; };
@@ -249,6 +255,8 @@
 		89C8C6381ED421250062BD31 /* ListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 		89C8C63B1ED421490062BD31 /* SingerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingerCell.swift; sourceTree = "<group>"; };
 		89C8C63C1ED421490062BD31 /* SingerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingerCell.xib; sourceTree = "<group>"; };
+		89CE930E1F421DA000F01D3C /* CrashLogManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashLogManage.h; sourceTree = "<group>"; };
+		89CE930F1F421DA000F01D3C /* CrashLogManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashLogManage.m; sourceTree = "<group>"; };
 		89D31F841EB9772D000F9FD9 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		89D31F861EB9BA40000F9FD9 /* ArchiveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveManager.swift; sourceTree = "<group>"; };
 		89D531481EC068A800B4ADB3 /* eq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eq.png; sourceTree = "<group>"; };
@@ -291,6 +299,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8970B3691F4308240084FEA5 /* MessageUI.framework in Frameworks */,
 				89FA9B5B1EEBA3FB00059E8F /* libicucore.tbd in Frameworks */,
 				89FA9B591EEBA3E600059E8F /* libc++.tbd in Frameworks */,
 				89FA9B531EEB952400059E8F /* AudioToolbox.framework in Frameworks */,
@@ -324,6 +333,7 @@
 		79E64A744849A21DCFC4F44D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8970B3671F42FC7D0084FEA5 /* MessageUI.framework */,
 				89017E6E1F1F815C00A42047 /* libc++abi.tbd */,
 				89FA9B5A1EEBA3FB00059E8F /* libicucore.tbd */,
 				89FA9B581EEBA3E600059E8F /* libc++.tbd */,
@@ -443,6 +453,10 @@
 				89B573661EB044C200209030 /* SwiftMacro.swift */,
 				89AC9CDD1EADFB7800873FDB /* AppDelegate.h */,
 				89AC9CDE1EADFB7800873FDB /* AppDelegate.m */,
+				89CE930E1F421DA000F01D3C /* CrashLogManage.h */,
+				89CE930F1F421DA000F01D3C /* CrashLogManage.m */,
+				8970B36A1F438CFC0084FEA5 /* MQLSignalHandler.h */,
+				8970B36B1F438CFC0084FEA5 /* MQLSignalHandler.m */,
 				89DDEE0B1EAF21E90018292D /* RootViewController.h */,
 				89DDEE0C1EAF21E90018292D /* RootViewController.m */,
 				89DDEE0E1EAF21F50018292D /* RootViewController.storyboard */,
@@ -831,6 +845,7 @@
 				89F5235C1EB1BDD800DC4279 /* RadioView.swift in Sources */,
 				892BB3011EE1687F0046BABC /* SingerDetailCell.swift in Sources */,
 				891911061EBC6CB100F61D0A /* PlayButtonView.m in Sources */,
+				89CE93101F421DA000F01D3C /* CrashLogManage.m in Sources */,
 				89AC9CDC1EADFB7800873FDB /* main.m in Sources */,
 				89F5235A1EB1B38E00DC4279 /* ListView.swift in Sources */,
 				89C8C6391ED421250062BD31 /* ListCell.swift in Sources */,
@@ -858,6 +873,7 @@
 				89F5235E1EB1BDE600DC4279 /* SingerView.swift in Sources */,
 				8969ACDA1EC5812A009418E7 /* QSAAudioPlayer.swift in Sources */,
 				8919111E1EBC6D1200F61D0A /* QSMusicRemoteEvent.m in Sources */,
+				8970B36C1F438CFC0084FEA5 /* MQLSignalHandler.m in Sources */,
 				8974898E1ECEB8A10068EBAE /* SongListCollectionViewCell.swift in Sources */,
 				89DDEE0D1EAF21E90018292D /* RootViewController.m in Sources */,
 			);

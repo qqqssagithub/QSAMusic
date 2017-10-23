@@ -13,7 +13,7 @@
         <scene sceneID="xRj-IZ-GkU">
             <objects>
                 <navigationController id="cOJ-0d-SoI" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Jjq-1l-XNS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jjq-1l-XNS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -67,6 +67,20 @@
                                                     <action selector="btnsAction:" destination="rJI-fF-ryM" eventType="touchUpInside" id="epl-g1-Y1R"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyM-Tz-YiG">
+                                                <rect key="frame" x="264" y="27" width="46" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="M6C-P0-Df0"/>
+                                                    <constraint firstAttribute="width" constant="46" id="azQ-aa-oCz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <state key="normal" title="崩溃">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnsAction:" destination="rJI-fF-ryM" eventType="touchUpInside" id="s89-FR-KKv"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ENc-tf-YNA">
                                                 <rect key="frame" x="8" y="27" width="46" height="30"/>
                                                 <constraints>
@@ -90,7 +104,9 @@
                                             <constraint firstItem="XG8-Sg-UHg" firstAttribute="centerY" secondItem="6la-5W-WIH" secondAttribute="centerY" id="U6X-Ya-fv5"/>
                                             <constraint firstAttribute="bottom" secondItem="6la-5W-WIH" secondAttribute="bottom" constant="12" id="WAk-je-Lfd"/>
                                             <constraint firstAttribute="height" constant="64" id="Yce-et-RC6"/>
+                                            <constraint firstItem="XG8-Sg-UHg" firstAttribute="leading" secondItem="lyM-Tz-YiG" secondAttribute="trailing" constant="11" id="Zky-wn-WD4"/>
                                             <constraint firstItem="6la-5W-WIH" firstAttribute="centerX" secondItem="dzN-rL-viM" secondAttribute="centerX" id="jWB-nj-oko"/>
+                                            <constraint firstItem="lyM-Tz-YiG" firstAttribute="centerY" secondItem="XG8-Sg-UHg" secondAttribute="centerY" id="lAf-mU-xFc"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1b-Eb-Wnd">
