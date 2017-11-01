@@ -1,5 +1,4 @@
 //
-//  UIImage+QSAKitBlur.h 图片模糊, 使用是要在工程中添加 Accelerate.frameworks 这个库,否则嘿嘿.....
 //  QSAKit
 //
 //  Created by 陈少文 on 17/2/3.
@@ -9,6 +8,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (QSAKitBlur)
+
+//  UIImage+QSAKitBlur.h 图片模糊, 使用时要在工程中添加 Accelerate.frameworks,否则vImageBoxConvolve_ARGB8888报错
 
 /**
  图片模糊

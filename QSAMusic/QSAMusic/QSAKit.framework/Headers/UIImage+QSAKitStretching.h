@@ -16,6 +16,14 @@
  @param imageName 图片名称
  @return          拉伸后的图片
  */
-+ (UIImage *)resizableImage:(NSString *)imageName;
++ (UIImage *)resizableImage0:(NSString *)imageName;
+
+/**
+ 取图片中心点的1个像素进行拉伸
+ 
+ @param image 源图片
+ @return      拉伸后的图片
+ */
++ (UIImage *)resizableImage1:(UIImage *)image;
 
 @end

@@ -22,7 +22,7 @@ typedef enum : NSUInteger {
 
 @interface QSAKitPromptView : UIView
 
-@property (nonatomic) CGFloat                    defaultMaxWidth;                   //最大宽度, 默认: 200.0f
+@property (nonatomic) CGFloat                    defaultMaxWidth;                   //最大宽度, 默认: 100.0f
 @property (nonatomic) UIFont                     *defaultFont;                      //字体, 默认: [UIFont systemFontOfSize:14.0f]
 @property (nonatomic) CGFloat                    defaultBackgroundTransparency;     //背景透明度系数, 默认: 0.0f
 @property (nonatomic) BlurEffectStyle            defaultBlurEffectStyle;            //模糊风格, 默认: BlurEffectStyleDark
@@ -31,7 +31,7 @@ typedef enum : NSUInteger {
 + (instancetype)sharedInstance;
 
 /**
- 默认风格展示(默认提示语: 数据加载中..., 宽度: 224.0, 文字字体大小: 14.0)
+ 默认风格展示(默认提示语: 数据加载中..., 宽度: 100.0, 文字字体大小: 14.0)
  */
 + (void)show;
 
