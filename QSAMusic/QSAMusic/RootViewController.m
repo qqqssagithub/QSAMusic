@@ -55,18 +55,18 @@
     [[PlayerController shared] prepareList];
     
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isCrash"] isEqualToString:@"1"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isCrash"];
-        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-        controller.mailComposeDelegate = self;
-        [controller setToRecipients:@[@"qqqssa@126.com"]];
-        [controller setSubject:@"crash"];
-        
-        NSString *str = [[NSString alloc] initWithContentsOfFile:[MQLSignalHandler instance].logPath encoding:NSUTF8StringEncoding error:nil];
-        
-        [controller setMessageBody:str isHTML:NO];
-        [self presentModalViewController:controller animated:YES];
-    }
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isCrash"] isEqualToString:@"1"]) {
+//        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"isCrash"];
+//        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+//        controller.mailComposeDelegate = self;
+//        [controller setToRecipients:@[@"qqqssa@126.com"]];
+//        [controller setSubject:@"crash"];
+//        
+//        NSString *str = [[NSString alloc] initWithContentsOfFile:[MQLSignalHandler instance].logPath encoding:NSUTF8StringEncoding error:nil];
+//        
+//        [controller setMessageBody:str isHTML:NO];
+//        [self presentModalViewController:controller animated:YES];
+//    }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller

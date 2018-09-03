@@ -35,9 +35,9 @@ public class NetworkEngine: NSObject {
     }
     
     private class func getData(url: String, responseBlock: @escaping (_ data: DataResponse<Any>) -> Void) {
-        QSAKitPromptView.show()
+        QSAKitPromptView1.show()
         Alamofire.request(url).validate().responseJSON { response in
-            QSAKitPromptView.disappear()
+            QSAKitPromptView1.disappear()
             responseBlock(response)
         }
     }

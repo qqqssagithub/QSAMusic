@@ -39,6 +39,7 @@
 		89199F431ECAA6D700BD4022 /* QSAMusic_pc.png in Resources */ = {isa = PBXBuildFile; fileRef = 89199F421ECAA6D700BD4022 /* QSAMusic_pc.png */; };
 		892BB3011EE1687F0046BABC /* SingerDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892BB2FF1EE1687F0046BABC /* SingerDetailCell.swift */; };
 		892BB3021EE1687F0046BABC /* SingerDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892BB3001EE1687F0046BABC /* SingerDetailCell.xib */; };
+		8940FA36205A57B5006EC3E3 /* QSAKitPromptView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8940FA35205A57B5006EC3E3 /* QSAKitPromptView1.m */; };
 		894844061ED6DBDC005639B0 /* SingerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894844041ED6DBDC005639B0 /* SingerDetail.swift */; };
 		894844071ED6DBDC005639B0 /* SingerDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 894844051ED6DBDC005639B0 /* SingerDetail.xib */; };
 		895BC7E01EDE7F0700A523E7 /* cmq.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 895BC7D91EDE7F0700A523E7 /* cmq.jpg */; };
@@ -191,6 +192,8 @@
 		89199F421ECAA6D700BD4022 /* QSAMusic_pc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QSAMusic_pc.png; sourceTree = "<group>"; };
 		892BB2FF1EE1687F0046BABC /* SingerDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingerDetailCell.swift; sourceTree = "<group>"; };
 		892BB3001EE1687F0046BABC /* SingerDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingerDetailCell.xib; sourceTree = "<group>"; };
+		8940FA34205A57B5006EC3E3 /* QSAKitPromptView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSAKitPromptView1.h; sourceTree = "<group>"; };
+		8940FA35205A57B5006EC3E3 /* QSAKitPromptView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSAKitPromptView1.m; sourceTree = "<group>"; };
 		894844041ED6DBDC005639B0 /* SingerDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingerDetail.swift; sourceTree = "<group>"; };
 		894844051ED6DBDC005639B0 /* SingerDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingerDetail.xib; sourceTree = "<group>"; };
 		895BC7D91EDE7F0700A523E7 /* cmq.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cmq.jpg; sourceTree = "<group>"; };
@@ -451,6 +454,8 @@
 				89DDEDD71EAEE3380018292D /* PrefixHeader.pch */,
 				89B573681EB04B9200209030 /* QSAMusic-Bridging-Header.h */,
 				89B573661EB044C200209030 /* SwiftMacro.swift */,
+				8940FA34205A57B5006EC3E3 /* QSAKitPromptView1.h */,
+				8940FA35205A57B5006EC3E3 /* QSAKitPromptView1.m */,
 				89AC9CDD1EADFB7800873FDB /* AppDelegate.h */,
 				89AC9CDE1EADFB7800873FDB /* AppDelegate.m */,
 				89CE930E1F421DA000F01D3C /* CrashLogManage.h */,
@@ -852,6 +857,7 @@
 				89AC9CDF1EADFB7800873FDB /* AppDelegate.m in Sources */,
 				8970E75A1ED53556005B7578 /* TopTableViewCell.swift in Sources */,
 				897489921ECEB8B90068EBAE /* SongListClassCollectionViewCell.swift in Sources */,
+				8940FA36205A57B5006EC3E3 /* QSAKitPromptView1.m in Sources */,
 				897500EF1ECEF95500EC8720 /* SongListDetail.swift in Sources */,
 				894844061ED6DBDC005639B0 /* SingerDetail.swift in Sources */,
 				8919112E1EBC6FE600F61D0A /* PlayerController.swift in Sources */,
@@ -1015,7 +1021,7 @@
 				INFOPLIST_FILE = QSAMusic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qqqssa.QSAMusic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ufun.QSAMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "QSAMusic/QSAMusic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1041,7 +1047,7 @@
 				INFOPLIST_FILE = QSAMusic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qqqssa.QSAMusic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ufun.QSAMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "QSAMusic/QSAMusic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

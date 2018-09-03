@@ -12,6 +12,8 @@
 #import "LrcTableView.h"
 #import "QSMusicRemoteEvent.h"
 #import "QSMusicGeDanCVFlowLayout.h"
+#import "PlayView.h"
+#import "QSAKitPromptView1.h"
 
 
 #import "CrashLogManage.h"
